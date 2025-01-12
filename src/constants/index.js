@@ -1,6 +1,7 @@
 import project1 from "../assets/projects/project_1.jpeg";
 import project2 from "../assets/projects/project_2.jpeg";
 import project3 from "../assets/projects/project_3.jpeg";
+import project4 from "../assets/projects/project_4.jpg";
 
 export const NAV_LINK = {
     instagram: "https://www.instagram.com/",
@@ -43,6 +44,13 @@ export const PROJECTS = [
         description: `Developed a deep learning model that generates descriptive captions for images using the Flickr30k dataset. The model employs a CNN for feature extraction and an LSTM for sequence generation, effectively bridging the gap between visual data and textual representation. Fine-tuned pre-trained CNN models by removing the last two layers and adapting them to the dataset. Achieved a BLEU-1 score of 0.48, demonstrating the model’s ability to produce contextually relevant captions. This project highlights my proficiency in TensorFlow, computer vision, and natural language processing.`,
         technologies: ["Python", "Tensorflow", "CNN", "LSTM", "Keras", "Deep Learning"],
         githubLink: "https://github.com/GautamaShastry/Image-captioning",
+    },
+    {
+        title: "Cross-lingual-Transferability",
+        image: project4,
+        description: `Analysed how well a model trained in one language, can evaluate another language. Used two models: Bloom-560m model and Multilingual-Cased to fine-tune high resource language like English and performed zero-shot evaluation on low resource languages like Arabic and Swahili. Bloom-560m outperformed Multilingual-Cased model in terms of accuracy and F1 score, whereas Multilingual-Cased model has slightly better transfer efficiency(performance on low resource language / performance on high resource language). Transfer efficiency for Swahili is lower compared to Arabic, indicating room for improvement in handling very low-resource languages.`,
+        technologies: ["Python", "NLP", "LLM", "Deep Learning", "Transformers"],
+        githubLink: "https://github.com/GautamaShastry/Cross-lingual-Transferability",
     },
 ];
 
