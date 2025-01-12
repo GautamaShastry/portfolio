@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const Projects = () => {
     return (
-        <div className='border-b border-neutral-900'>
+        <div id='projects' className='border-b border-neutral-900'>
             <h1 className='my-20 text-center text-4xl'>
                 Projects
             </h1>

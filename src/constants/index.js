@@ -2,6 +2,12 @@ import project1 from "../assets/projects/project_1.jpeg";
 import project2 from "../assets/projects/project_2.jpeg";
 import project3 from "../assets/projects/project_3.jpeg";
 
+export const NAV_LINK = {
+    instagram: "https://www.instagram.com/",
+    github: "https://github.com/GautamaShastry/",
+    linkedin: "https://www.linkedin.com/in/satya2603/",
+}
+
 export const HERO_CONTENT = `I am a Full-Stack Developer and Machine Learning Enthusiast with a passion for transforming ideas into impactful solutions. Whether it’s designing user-friendly web applications or developing intelligent models, I thrive at the intersection of innovation and technology.`
 
 export const ABOUT_TEXT = `I am a dedicated and versatile Full-Stack Developer with a passion for creating efficient, scalable, and user-friendly web applications. With hands-on experience in React, Node.js, and MongoDB, I have developed dynamic and responsive applications that deliver seamless user experiences. During my tenure as an Associate Software Engineer Intern, I collaborated with cross-functional teams to build intuitive interfaces and enhance application performance. My portfolio includes projects like a full-stack chat application, where I implemented features such as user authentication and API integration`
