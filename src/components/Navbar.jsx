@@ -42,13 +42,13 @@ const Navbar = () => {
             {/* SOCIAL MEDIA LINKS */}
             <div className="m-8 flex items-center justify-center gap-10 text-2xl">
                 <Link to={NAV_LINK.linkedin}>
-                    <FaLinkedin className="text-gray-100"/>
+                    <FaLinkedin className="text-gray-100 hover:text-purple-400"/>
                 </Link>
                 <Link to={NAV_LINK.github}>
-                    <FaGithub className="text-gray-100"/>
+                    <FaGithub className="text-gray-100 hover:text-purple-400"/>
                 </Link>
                 <Link to={NAV_LINK.instagram}>
-                    <FaInstagram className="text-gray-100" />
+                    <FaInstagram className="text-gray-100 hover:text-purple-400" />
                 </Link>
             </div>
 
