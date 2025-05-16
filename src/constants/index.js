@@ -39,6 +39,7 @@ export const PROJECTS = [
         description: `A Personal website designed to showcase my skills, experience, and projects in web development and machine learning. Built using modern web technologies like ReactJS, it features an elegant, responsive design, intuitive navigation, and highlights my technical skills through interactive project demonstrations and concise summaries.`,
         technologies: ["ReactJS", "Tailwind CSS", "JavaScript"],
         githubLink: "https://github.com/GautamaShastry/portfolio",
+        link: "https://gautam-portfolio-sable.vercel.app/"
     },
     {
         title: "Image Captioning",
