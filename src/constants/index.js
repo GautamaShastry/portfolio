@@ -2,6 +2,8 @@ import project1 from "../assets/projects/project_1.jpeg";
 import project2 from "../assets/projects/project_2.jpeg";
 import project3 from "../assets/projects/project_3.jpeg";
 import project4 from "../assets/projects/project_4.jpg";
+import project5 from "../assets/projects/project5.png";
+import Projects from './../components/Projects';
 
 export const NAV_LINK = {
     instagram: "https://www.instagram.com/",
@@ -52,6 +54,14 @@ export const PROJECTS = [
         technologies: ["Python", "NLP", "LLM", "Deep Learning", "Transformers"],
         githubLink: "https://github.com/GautamaShastry/Cross-lingual-Transferability",
     },
+    {
+        title: "Resume Analyzer",
+        image: project5,
+        description: `Engineered a full-stack resume-screening platform (React + Axios, Spring Boot/Spring Security, Python spaCy microservice) with JWT-secured routes, PostgreSQL persistence, 87 %-accurate sub-1.5 s inference, orchestrating zero-error cross-service flows that cut recruiter clicks by 70 % and processed 50+ resumes in a 2-week pilot.`,
+        technologies: ["Java", "Spring Boot", "ReactJS", "PostgreSQL", "Python", "NLP"],
+        githubLink: "https://github.com/GautamaShastry/resume_screener",
+        link: "https://resume-screener-chi.vercel.app/login"
+    }
 ];
 
 export const CONTACT = {
