@@ -5,6 +5,13 @@ import project4 from "../assets/projects/project_4.jpg";
 import project5 from "../assets/projects/project5.png";
 import Projects from './../components/Projects';
 
+import React from "react";
+import { DiPython } from 'react-icons/di'
+import { FaJava, FaNodeJs } from 'react-icons/fa6'
+import { FaAws } from 'react-icons/fa'
+import { RiReactjsLine } from 'react-icons/ri'
+import { SiMongodb, SiPandas, SiSpringboot, SiDocker, SiKubernetes, SiJenkins, SiGithub, SiScikitlearn, SiTensorflow, SiMysql, SiPostgresql, SiHtml5, SiCss3, SiJavascript } from 'react-icons/si'
+
 export const NAV_LINK = {
     instagram: "https://www.instagram.com/",
     github: "https://github.com/GautamaShastry/",
@@ -70,3 +77,139 @@ export const CONTACT = {
     phoneNo: "+1 571-653-0056",
     email: "gautamashastry@gmail.com",
 };
+
+export const TECH_LINKS = [
+    {
+        name: 'React.js',
+        Icon: RiReactjsLine,
+        link: 'https://reactjs.org/',
+        duration: 2.5,
+        colorClass: 'text-cyan-400',
+    },
+    {
+        name: 'Node.js',
+        Icon: FaNodeJs,
+        link: 'https://nodejs.org/',
+        duration: 3,
+        colorClass: 'text-green-500',
+    },
+    {
+        name: 'MongoDB',
+        Icon: SiMongodb,
+        link: 'https://www.mongodb.com/',
+        duration: 5,
+        colorClass: 'text-green-600',
+    },
+    {
+        name: 'Pandas',
+        Icon: SiPandas,
+        link: 'https://pandas.pydata.org/',
+        duration: 2,
+        colorClass: 'text-blue-500',
+    },
+    {
+        name: 'Java',
+        Icon: FaJava,
+        link: 'https://www.oracle.com/java/',
+        duration: 6,
+        colorClass: 'text-red-500',
+    },
+    {
+        name: 'Spring Boot',
+        Icon: SiSpringboot,
+        link: 'https://spring.io/projects/spring-boot',
+        duration: 3.5,
+        colorClass: 'text-green-700',
+    },
+    {
+        name: 'Python',
+        Icon: DiPython,
+        link: 'https://www.python.org/',
+        duration: 4,
+        colorClass: 'text-yellow-500',
+    },
+    {
+        name: 'Docker',
+        Icon: SiDocker,
+        link: 'https://www.docker.com/',
+        duration: 2,
+        colorClass: 'text-blue-400',
+    },
+    {
+        name: 'AWS',
+        Icon: FaAws,
+        link: 'https://aws.amazon.com/',
+        duration: 3,
+        colorClass: 'text-orange-500',
+    },
+    {
+        name: 'Kubernetes',
+        Icon: SiKubernetes,
+        link: 'https://kubernetes.io/',
+        duration: 2.5,
+        colorClass: 'text-blue-600',
+    },
+    {
+        name: 'Jenkins',
+        Icon: SiJenkins,
+        link: 'https://www.jenkins.io/',
+        duration: 1.5,
+        colorClass: 'text-red-700',
+    },
+    {
+        name: 'GitHub',
+        Icon: SiGithub,
+        link: 'https://www.github.com/',
+        duration: 1,
+        colorClass: 'text-gray-700',
+    },
+    {
+        name: 'Scikit-learn',
+        Icon: SiScikitlearn,
+        link: 'https://scikit-learn.org/',
+        duration: 2,
+        colorClass: 'text-green-500',
+    },
+    {
+        name: 'TensorFlow',
+        Icon: SiTensorflow,
+        link: 'https://www.tensorflow.org/',
+        duration: 3,
+        colorClass: 'text-blue-600',
+    },
+    {
+        name: 'MySQL',
+        Icon: SiMysql,
+        link: 'https://www.mysql.com/',
+        duration: 2,
+        colorClass: 'text-blue-700',
+    },
+    {
+        name: 'PostgreSQL',
+        Icon: SiPostgresql,
+        link: 'https://www.postgresql.org/',
+        duration: 2.5,
+        colorClass: 'text-blue-800',
+    },
+    {
+        name: 'HTML5',
+        Icon: SiHtml5,
+        link: 'http://w3schools.com/html/',
+        duration: 1,
+        colorClass: 'text-orange-500',
+    },
+    {
+        name: 'CSS3',
+        Icon: SiCss3,
+        link: 'https://www.w3schools.com/css/',
+        duration: 1,
+        colorClass: 'text-blue-500',
+    },
+    {
+        name: 'JavaScript',
+        Icon: SiJavascript,
+        link: 'https://www.javascript.com/',
+        duration: 2,
+        colorClass: 'text-yellow-500',
+    },
+]

@@ -7,9 +7,8 @@ import { motion } from 'framer-motion'
 const About = () => {
     return (
         <div id='about' className='border-b border-neutral-900 pb-4'>
-            <motion.h1 whileInView={{ opacity: 1, y: 0 }} initial={{ opacity: 0, y: -100 }} transition={{ duration: 0.5 }} className='my-20 text-center text-4xl text-purple-300'>
-                About
-                <span className='text-neutral-500'> Me</span>
+            <motion.h1 whileInView={{ opacity: 1, y: 0 }} initial={{ opacity: 0, y: -100 }} transition={{ duration: 0.5 }} className='my-20 text-center text-4xl '>
+                About Me
             </motion.h1>
             <div className='flex flex-wrap'>
                 <motion.div whileInView={{ opacity: 1, x: 0 }} initial={{ opacity: 0, x: -100 }} transition={{ duration: 1 }} className='w-full lg:w-1/2 lg:p-8'>
@@ -22,7 +21,7 @@ const About = () => {
                         <p className='my-2 max-w-xl '>{ABOUT_TEXT}</p>
                     </div>
                     <div className='items-center justify-start flex'>
-                        <a href={resume} download="gautam_resume.pdf" className='inline-block mt-6 px-6 py-3 text-white bg-purple-600 rounded-lg hover:bg-purple-500 transition-colors duration-300'>
+                        <a href={resume} download="gautam_resume.pdf" className='inline-block border mt-6 px-6 py-3 text-white bg-purple-600 rounded-lg transition-colors duration-300 hover:bg-transparent hover:border-purple-500'>
                             Download CV
                         </a>
                     </div>
