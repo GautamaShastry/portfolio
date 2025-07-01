@@ -13,7 +13,7 @@ import { RiReactjsLine } from 'react-icons/ri'
 import { SiMongodb, SiPandas, SiSpringboot, SiDocker, SiKubernetes, SiJenkins, SiGithub, SiScikitlearn, SiTensorflow, SiMysql, SiPostgresql, SiHtml5, SiCss3, SiJavascript } from 'react-icons/si'
 
 export const NAV_LINK = {
-    instagram: "https://www.instagram.com/",
+    instagram: "https://www.instagram.com/gautam_718/",
     github: "https://github.com/GautamaShastry/",
     linkedin: "https://www.linkedin.com/in/satya2603/",
 }
