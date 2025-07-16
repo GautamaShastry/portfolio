@@ -2,6 +2,7 @@ import React from 'react'
 import { HERO_CONTENT } from '../constants'
 import profilePic from "../assets/projects/gautam_profile.png"
 import { delay, motion } from "framer-motion"
+import Navbar from './Navbar';
 
 const container = (delay) => ({
     hidden: {x: -100, opacity: 0},

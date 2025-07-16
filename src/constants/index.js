@@ -3,6 +3,8 @@ import project2 from "../assets/projects/project_2.jpeg";
 import project3 from "../assets/projects/project_3.jpeg";
 import project4 from "../assets/projects/project_4.jpg";
 import project5 from "../assets/projects/project5.png";
+import project6 from "../assets/projects/student-survey.jpg";
+import project7 from "../assets/projects/taskimage.webp";
 import Projects from './../components/Projects';
 
 import React from "react";
@@ -10,7 +12,7 @@ import { DiPython } from 'react-icons/di'
 import { FaJava, FaNodeJs } from 'react-icons/fa6'
 import { FaAws } from 'react-icons/fa'
 import { RiReactjsLine } from 'react-icons/ri'
-import { SiMongodb, SiPandas, SiSpringboot, SiDocker, SiKubernetes, SiJenkins, SiGithub, SiScikitlearn, SiTensorflow, SiMysql, SiPostgresql, SiHtml5, SiCss3, SiJavascript } from 'react-icons/si'
+import { SiMongodb, SiPandas, SiSpringboot, SiDocker, SiKubernetes, SiJenkins, SiGithub, SiScikitlearn, SiTensorflow, SiMysql, SiPostgresql, SiHtml5, SiCss3, SiJavascript, SiC, SiGit, SiRancher } from 'react-icons/si'
 
 export const NAV_LINK = {
     instagram: "https://www.instagram.com/gautam_718/",
@@ -69,11 +71,25 @@ export const PROJECTS = [
         technologies: ["Java", "Spring Boot", "ReactJS", "PostgreSQL", "Python", "NLP"],
         githubLink: "https://github.com/GautamaShastry/resume_screener",
         link: "https://resume-screener-chi.vercel.app/login"
+    },
+    {
+        title: "Student Survey Application",
+        image: project6,
+        description: `Designed a Spring Boot REST API for a 13-field Survey entity with five CRUD endpoints using Spring Data JPA and Bean Validation (@NotBlank, @Email, @NotNull), verified all routes in Postman and processed 60+ live submissions with zero validation errors; provisioned an Amazon RDS MySQL 8 database and tuned HikariCP (max pool size 20, min idle 5) for consistent throughput and low latency; containerized the service into an optimized single-stage OpenJDK 23-slim Docker image, pushed version‑tagged images to Docker Hub via CLI, and deployed a 3‑replica Kubernetes Deployment on three EC2 nodes managed by Rancher, exposed via a NodePort Service—maintaining 99.9 % uptime; created a Git‑triggered Jenkins pipeline (Maven tests, build and push Docker image, kubectl rollout) that rebuilds and redeploys in ~5 minutes, enabling zero‑downtime releases under Git/GitHub version control.`,
+        technologies: ["Spring Boot", "MySQL", "Docker", "Kubernetes", "Rancher", "Jenkins", "AWS"],
+        githubLink: "https://github.com/GautamaShastry/SWE645_assign3",
+    },
+    {
+        title: "Taskify-Task Management Application",
+        image: project7,
+        description: `Developed a full‑stack task‑management app with React.js, Node.js, and MongoDB that lets users create, update, delete, and manage tasks—including profile edits and deletions; integrated JWT authentication in Express.js with bcrypt‑hashed passwords, boosting security and cutting login‑related issues by 25 %; implemented 20+ real‑time filtering, sorting, and search features that improved data accessibility and reduced search response time by 15 %.`,
+        technologies: ["ReactJS", "NodeJS", "ExpressJS", "MongoDB", "JWT", "Bcrypt", "Docker"],
+        githubLink: "https://github.com/GautamaShastry/task-manager",
     }
 ];
 
 export const CONTACT = {
-    address: "4673 Forestdale Drive, Fairfax, VA 22032",
+    address: "Fairfax, VA 22032",
     phoneNo: "+1 571-653-0056",
     email: "gautamashastry@gmail.com",
 };
@@ -129,6 +145,13 @@ export const TECH_LINKS = [
         colorClass: 'text-yellow-500',
     },
     {
+        name: 'C',
+        Icon: SiC,
+        link: 'https://en.wikipedia.org/wiki/C_(programming_language)',
+        duration: 2,
+        colorClass: 'text-blue-800',
+    },
+    {
         name: 'Docker',
         Icon: SiDocker,
         link: 'https://www.docker.com/',
@@ -155,6 +178,20 @@ export const TECH_LINKS = [
         link: 'https://www.jenkins.io/',
         duration: 1.5,
         colorClass: 'text-red-700',
+    },
+    {
+        name: 'Rancher',
+        Icon: SiRancher,
+        link: 'https://rancher.com/',
+        duration: 1.5,
+        colorClass: 'text-blue-700',
+    },
+    {
+        name: 'Git',
+        Icon: SiGit,
+        link: 'https://git-scm.com/',
+        duration: 4,
+        colorClass: 'text-red-600',
     },
     {
         name: 'GitHub',
@@ -212,4 +249,16 @@ export const TECH_LINKS = [
         duration: 2,
         colorClass: 'text-yellow-500',
     },
+]
+
+export const CERTIFICATIONS = [
+    {
+        title: "AWS Certified Cloud Practitioner",
+        issuer: "Amazon Web Services",
+        issueDate: "July 2025",
+        expiryDate: "July 2028",
+        URL: "https://www.credly.com/badges/22bb5f28-bedf-4478-9ead-179bee16ceff/linked_in?t=sz292g",
+        prepareURL: "https://www.udemy.com/course/aws-certified-cloud-practitioner-new/",
+        description: "Validates foundational AWS cloud knowledge—including core services, architectural best practices, billing and pricing models, and the shared‑responsibility security framework—so you can confidently articulate the AWS value proposition to technical and non‑technical stakeholders."
+    }
 ]
