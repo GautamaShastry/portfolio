@@ -48,7 +48,7 @@ export const PROJECTS = [
         description: `A Personal website designed to showcase my skills, experience, and projects in web development and machine learning. Built using modern web technologies like ReactJS, it features an elegant, responsive design, intuitive navigation, and highlights my technical skills through interactive project demonstrations and concise summaries.`,
         technologies: ["ReactJS", "Tailwind CSS", "JavaScript"],
         githubLink: "https://github.com/GautamaShastry/portfolio",
-        link: "https://gautam-portfolio-sable.vercel.app/"
+        link: "https://gautamportfolio.com/"
     },
     {
         title: "Image Captioning",
@@ -260,5 +260,13 @@ export const CERTIFICATIONS = [
         URL: "https://www.credly.com/badges/22bb5f28-bedf-4478-9ead-179bee16ceff/linked_in?t=sz292g",
         prepareURL: "https://www.udemy.com/course/aws-certified-cloud-practitioner-new/",
         description: "Validates foundational AWS cloud knowledge—including core services, architectural best practices, billing and pricing models, and the shared‑responsibility security framework—so you can confidently articulate the AWS value proposition to technical and non‑technical stakeholders."
+    },
+    {
+        title: "Deep Learning.ai Specialization",
+        issuer: "Coursera",
+        issueDate: "September 2023",
+        URL: "https://www.coursera.org/account/accomplishments/specialization/4E4PZL7XCSC8?utm_source=link&utm_medium=certificate&utm_content=cert_image&utm_campaign=pdf_header_button&utm_product=s12n",
+        prepareURL: "https://www.coursera.org/specializations/deep-learning",
+        description: "Completed the Deep Learning Specialization by DeepLearning.AI on Coursera, mastering neural networks, deep learning techniques, and practical applications using TensorFlow and Keras."
     }
 ]

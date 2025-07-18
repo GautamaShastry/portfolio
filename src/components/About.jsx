@@ -3,6 +3,7 @@ import aboutPic from "../assets/projects/gautam-logo.png"
 import { ABOUT_TEXT } from '../constants'
 import resume from "../assets/projects/Satya_SDE_Amazon.pdf"
 import { motion } from 'framer-motion'
+import Navbar from './Navbar'
 
 const About = () => {
     return (
