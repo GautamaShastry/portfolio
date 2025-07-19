@@ -79,6 +79,7 @@ Use **AWS CloudWatch** for health checks and availability monitoring.
 
 **Gautama Shastry**  
 📧 [Contact via Portfolio](https://gautamportfolio.com/#contact)  
+📧 [Contact via Linkedin](https://linkedin.com/in/satya2603)  
 🌐 [gautamportfolio.com](https://gautamportfolio.com/)
 
 ---
