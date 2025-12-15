@@ -1,23 +1,31 @@
-import React, { useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import { CONTACT, NAV_LINK } from '../constants'
 import { motion } from 'framer-motion'
-import { CiLocationOn } from 'react-icons/ci'
-import { FaInstagram, FaPhone } from 'react-icons/fa6'
+import { FaLocationDot, FaPhone, FaLinkedin, FaInstagram, FaGithub, FaPaperPlane } from 'react-icons/fa6'
 import { MdEmail } from 'react-icons/md'
-import { Link } from 'react-router-dom'
-import { FaLinkedin } from 'react-icons/fa'
 import emailjs from '@emailjs/browser'
 import { toast } from 'react-toastify'
 
-const Contact = () => {
-    const formRef = useRef(null);
-    const [isSending, setIsSending] = useState(false); // default loading state
+const contactInfo = [
+    { icon: FaLocationDot, label: "Location", value: CONTACT.address },
+    { icon: FaPhone, label: "Phone", value: CONTACT.phoneNo },
+    { icon: MdEmail, label: "Email", value: CONTACT.email, href: `mailto:${CONTACT.email}` },
+]
 
-    /* Send email via emailjs */
+const socialLinks = [
+    { icon: FaLinkedin, href: NAV_LINK.linkedin, label: "LinkedIn" },
+    { icon: FaGithub, href: NAV_LINK.github, label: "GitHub" },
+    { icon: FaInstagram, href: NAV_LINK.instagram, label: "Instagram" },
+]
+
+const Contact = () => {
+    const formRef = useRef(null)
+    const [isSending, setIsSending] = useState(false)
+
     const handleSubmit = async (e) => {
-        e.preventDefault();
-        if(isSending) return; // prevent multiple submissions
-        setIsSending(true);
+        e.preventDefault()
+        if (isSending) return
+        setIsSending(true)
 
         try {
             await emailjs.sendForm(
@@ -25,52 +33,185 @@ const Contact = () => {
                 import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
                 formRef.current,
                 import.meta.env.VITE_EMAILJS_PUBLIC_KEY
-            );
-            // alert("Message sent successfully!");
-            toast.success("Message sent successfully!");
-            formRef.current.reset();
+            )
+            toast.success("Message sent successfully!")
+            formRef.current.reset()
         } catch (error) {
-            console.error("Failed to send message:", error);
-            // alert("Failed to send message. Please try again later.");
-            toast.error("Failed to send message. Please try again!");
+            console.error("Failed to send message:", error)
+            toast.error("Failed to send message. Please try again!")
         } finally {
-            setIsSending(false); // re-enable on success or failure
+            setIsSending(false)
         }
     }
+
     return (
-        <div id='contact' className='border-b border-neutral-900 pb-20 mb-5'>
-            <motion.h1 whileInView={{ opacity: 1, y: 0 }} initial={{ opacity: 0, y: -100 }} transition={{ duration: 0.5 }} className='my-12 text-center text-4xl'>
-                Get in Touch
-            </motion.h1>
-            <div className='mx-auto flex max-w-5xl flex-col gap-10 md:flex-row md:gap-20'>
-                <div className='flex-1 text-center md:text-left'>
-                    <motion.p whileInView={{ opacity: 1, x: 0 }} initial={{ opacity: 0, x: -100}} transition={{ duration: 1 }} className='my-4 flex items-center justify-center gap-2 md:justify-start'><CiLocationOn />{CONTACT.address}</motion.p>
-                    <motion.p whileInView={{ opacity: 1, x: 0 }} initial={{ opacity: 0, x: 100}} transition={{ duration: 1 }} className='my-4 flex items-center justify-center gap-2 md:justify-start'><FaPhone />{CONTACT.phoneNo}</motion.p>
-                    <a href={`mailto:${CONTACT.email}`} className='my-4 flex items-center justify-center gap-2 md:justify-start underline transition-colors hover:text-purple-700'><MdEmail />{CONTACT.email}</a>
-                    <div className='mt-6 flex justify-center gap-6 md:justify-start'>
-                        <a href={NAV_LINK.linkedin} target='_blank' rel="noopener noreferrer" className='transition-colors hover:text-purple-700'><FaLinkedin size={28} /></a>
-                        <a href={NAV_LINK.instagram} target='_blank' rel="noopener noreferrer" className='transition-colors hover:text-purple-700'><FaInstagram size={28} /></a>
+        <section id='contact' className='py-20'>
+            <motion.div
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                className="text-center mb-16"
+            >
+                <span className="px-4 py-2 rounded-full bg-purple-500/10 text-purple-600 dark:text-purple-400 text-sm font-medium">
+                    Contact
+                </span>
+                <h2 className='mt-4 text-3xl md:text-4xl font-bold text-gray-900 dark:text-white'>
+                    Get In Touch
+                </h2>
+                <p className="mt-4 text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                    Have a project in mind or want to collaborate? Feel free to reach out!
+                </p>
+            </motion.div>
+
+            <div className='max-w-6xl mx-auto grid md:grid-cols-2 gap-12'>
+                {/* Contact Info */}
+                <motion.div
+                    initial={{ opacity: 0, x: -50 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6 }}
+                    className="space-y-8"
+                >
+                    <div>
+                        <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+                            Let's talk about everything!
+                        </h3>
+                        <p className="text-gray-600 dark:text-gray-400">
+                            Don't like forms? Send me an email directly or connect with me on social media.
+                        </p>
                     </div>
-                </div>
-                <div className='flex-1 bg-transparent hover:border-purple-700 hover:border-2 rounded-md'>
-                    <form ref={formRef} onSubmit={handleSubmit} className='space-y-4 rounded-lg bg-neutral-800/60 p-6 backdrop-blur'>
-                        <div>
-                            <label className='mb-2 block text-sm'>Your Name <span className='text-red-700'>*</span></label>
-                            <input type="text" name='name' required className='w-full rounded bg-neutral-900 p-2 outline-none focus:ring-2 focus:ring-purple-700' />
+
+                    {/* Contact details */}
+                    <div className="space-y-4">
+                        {contactInfo.map((item, idx) => (
+                            <motion.div
+                                key={item.label}
+                                initial={{ opacity: 0, x: -20 }}
+                                whileInView={{ opacity: 1, x: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: idx * 0.1 }}
+                                className="flex items-center gap-4"
+                            >
+                                <div className="p-3 bg-purple-500/10 rounded-xl">
+                                    <item.icon className="text-purple-500 text-xl" />
+                                </div>
+                                <div>
+                                    <p className="text-sm text-gray-500 dark:text-gray-400">{item.label}</p>
+                                    {item.href ? (
+                                        <a href={item.href} className="text-gray-900 dark:text-white hover:text-purple-500 transition-colors">
+                                            {item.value}
+                                        </a>
+                                    ) : (
+                                        <p className="text-gray-900 dark:text-white">{item.value}</p>
+                                    )}
+                                </div>
+                            </motion.div>
+                        ))}
+                    </div>
+
+                    {/* Social links */}
+                    <div>
+                        <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">Find me on</p>
+                        <div className="flex gap-4">
+                            {socialLinks.map((social, idx) => (
+                                <motion.a
+                                    key={social.label}
+                                    href={social.href}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    initial={{ opacity: 0, y: 20 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: idx * 0.1 }}
+                                    whileHover={{ scale: 1.1, y: -3 }}
+                                    whileTap={{ scale: 0.9 }}
+                                    className="p-3 bg-white dark:bg-neutral-800 rounded-xl border border-gray-100 dark:border-neutral-700 text-gray-600 dark:text-gray-400 hover:text-purple-500 hover:border-purple-500/50 transition-all shadow-sm"
+                                >
+                                    <social.icon size={24} />
+                                </motion.a>
+                            ))}
                         </div>
-                        <div>
-                            <label className='mb-2 block text-sm'>Your Email <span className='text-red-700'>*</span></label>
-                            <input type="text" name='email' required className='w-full rounded bg-neutral-900 p-2 outline-none focus:ring-2 focus:ring-purple-700' />
+                    </div>
+                </motion.div>
+
+                {/* Contact Form */}
+                <motion.div
+                    initial={{ opacity: 0, x: 50 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6 }}
+                >
+                    <form
+                        ref={formRef}
+                        onSubmit={handleSubmit}
+                        className='p-8 bg-white dark:bg-neutral-800/50 rounded-2xl border border-gray-100 dark:border-neutral-700 shadow-xl'
+                    >
+                        <div className="space-y-6">
+                            <div>
+                                <label className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2'>
+                                    Your Name <span className='text-red-500'>*</span>
+                                </label>
+                                <input
+                                    type="text"
+                                    name='name'
+                                    required
+                                    className='w-full px-4 py-3 bg-gray-50 dark:bg-neutral-900 border border-gray-200 dark:border-neutral-700 rounded-xl text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all'
+                                    placeholder="John Doe"
+                                />
+                            </div>
+                            <div>
+                                <label className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2'>
+                                    Your Email <span className='text-red-500'>*</span>
+                                </label>
+                                <input
+                                    type="email"
+                                    name='email'
+                                    required
+                                    className='w-full px-4 py-3 bg-gray-50 dark:bg-neutral-900 border border-gray-200 dark:border-neutral-700 rounded-xl text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all'
+                                    placeholder="john@example.com"
+                                />
+                            </div>
+                            <div>
+                                <label className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2'>
+                                    Message <span className='text-red-500'>*</span>
+                                </label>
+                                <textarea
+                                    name="message"
+                                    rows='5'
+                                    required
+                                    className='w-full px-4 py-3 bg-gray-50 dark:bg-neutral-900 border border-gray-200 dark:border-neutral-700 rounded-xl text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all resize-none'
+                                    placeholder="Your message here..."
+                                />
+                            </div>
+                            <motion.button
+                                type='submit'
+                                disabled={isSending}
+                                whileHover={{ scale: 1.02, boxShadow: "0 10px 30px rgba(168, 85, 247, 0.3)" }}
+                                whileTap={{ scale: 0.98 }}
+                                className={`w-full py-4 rounded-xl font-semibold flex items-center justify-center gap-2 transition-all ${
+                                    isSending
+                                        ? 'bg-purple-400 cursor-not-allowed'
+                                        : 'bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700'
+                                } text-white shadow-lg shadow-purple-500/25`}
+                            >
+                                {isSending ? (
+                                    <>
+                                        <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                                        Sending...
+                                    </>
+                                ) : (
+                                    <>
+                                        <FaPaperPlane />
+                                        Send Message
+                                    </>
+                                )}
+                            </motion.button>
                         </div>
-                        <div>
-                            <label className='mb-2 block text-sm'>Your Message <span className='text-red-700'>*</span></label>
-                            <textarea name="message" rows='7' required className='w-full rounded bg-neutral-900 p-2 outline-none focus:ring-2 focus:ring-purple-700' />
-                        </div>
-                        <button type='submit' disabled={isSending} className={`w-full py-2 font-semibold rounded transition-colors ${isSending ? 'bg-purple-700 cursor-not-allowed' : 'bg-purple-700 hover:bg-transparent border-2 border-purple-700'}`}>{isSending ? 'Loading...' : 'Submit'}</button>
                     </form>
-                </div>
+                </motion.div>
             </div>
-        </div>
+        </section>
     )
 }
 

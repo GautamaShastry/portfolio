@@ -1,37 +1,100 @@
-import React from 'react'
 import { motion } from 'framer-motion'
 import { CERTIFICATIONS } from '../constants'
-import { FaArrowRight } from 'react-icons/fa6'
+import { FaAward, FaExternalLinkAlt, FaBookOpen } from 'react-icons/fa'
 
 const Certification = () => {
     return (
-        <div id='certification' className='border-b border-neutral-900 pb-4'>
-            <motion.h1 whileInView={{ opacity: 1, y: 0 }} initial={{ opacity: 0, y: -100 }} transition={{ duration: 0.5 }} className='my-20 text-center text-4xl'>
-                Certifications  
-            </motion.h1>
-            <div>
-                {CERTIFICATIONS.map((certification, index) => (
-                    <div key={index} className='mb-8 flex flex-wrap lg:justify-center'>
-                        <motion.div className="w-full lg:w-1/4" whileInView={{opacity: 1, x: 0}} initial={{opacity: 0, x: -100}} transition={{duration: 1}}>
-                            <p className='mb-2 text-sm text-neutral-400'>{certification.issueDate} - {certification.expiryDate}</p>
-                        </motion.div>
-                        <motion.div className="w-full max-w-xl lg:w-3/4" whileInView={{opacity: 1, x: 0}} initial={{opacity: 0, x: 100}} transition={{duration: 1}}>
-                            <h6 className='mb-2 font-semibold'>
-                                {certification.title} - {" "}
-                                <span className='text-sm text-purple-100'>
-                                    {certification.issuer}
-                                </span>
-                            </h6>
-                            {certification.description && <p className='mb-4 text-neutral-400'>{certification.description}</p>}
-                            <div className='flex gap-4'>
-                                <a href={certification.URL} target='_blank' rel='noopener noreferrer' className='inline-flex items-center gap-2 rounded border border-purple-700 px-3 py-1 text-sm font-medium text-purple-700 hover:bg-purple-700 hover:text-white transition-colors'>View <FaArrowRight size={12} /></a>
-                                <a href={certification.prepareURL} target='_blank' rel='noopener noreferrer' className='inline-flex items-center gap-2 rounded border border-purple-700 px-3 py-1 text-sm font-medium text-purple-700 hover:bg-purple-700 hover:text-white transition-colors'>Prepare <FaArrowRight size={12} /></a>
+        <section id='certification' className='py-20'>
+            <motion.div
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                className="text-center mb-16"
+            >
+                <span className="px-4 py-2 rounded-full bg-purple-500/10 text-purple-600 dark:text-purple-400 text-sm font-medium">
+                    Achievements
+                </span>
+                <h2 className='mt-4 text-3xl md:text-4xl font-bold text-gray-900 dark:text-white'>
+                    Certifications
+                </h2>
+            </motion.div>
+
+            <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+                {CERTIFICATIONS.map((cert, index) => (
+                    <motion.div
+                        key={index}
+                        initial={{ opacity: 0, y: 50 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5, delay: index * 0.1 }}
+                        whileHover={{ y: -5, boxShadow: "0 20px 40px rgba(168, 85, 247, 0.15)" }}
+                        className="relative p-6 bg-white dark:bg-neutral-800/50 rounded-2xl border border-gray-100 dark:border-neutral-700 overflow-hidden"
+                    >
+                        {/* Decorative gradient */}
+                        <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-purple-500/10 to-indigo-500/10 rounded-full blur-2xl" />
+                        
+                        <div className="relative">
+                            {/* Header */}
+                            <div className="flex items-start gap-4 mb-4">
+                                <div className="p-3 bg-gradient-to-br from-purple-500 to-indigo-500 rounded-xl text-white">
+                                    <FaAward size={24} />
+                                </div>
+                                <div className="flex-1">
+                                    <h3 className='font-bold text-gray-900 dark:text-white'>
+                                        {cert.title}
+                                    </h3>
+                                    <p className='text-sm text-purple-500'>
+                                        {cert.issuer}
+                                    </p>
+                                </div>
                             </div>
-                        </motion.div>
-                    </div>
+
+                            {/* Date */}
+                            <div className="mb-4">
+                                <span className="text-xs text-gray-500 dark:text-gray-400">
+                                    Issued: {cert.issueDate}
+                                    {cert.expiryDate && ` • Expires: ${cert.expiryDate}`}
+                                </span>
+                            </div>
+
+                            {/* Description */}
+                            {cert.description && (
+                                <p className='text-gray-600 dark:text-gray-400 text-sm leading-relaxed mb-6 line-clamp-3'>
+                                    {cert.description}
+                                </p>
+                            )}
+
+                            {/* Actions */}
+                            <div className='flex gap-3'>
+                                <motion.a
+                                    href={cert.URL}
+                                    target='_blank'
+                                    rel='noopener noreferrer'
+                                    whileHover={{ scale: 1.05 }}
+                                    whileTap={{ scale: 0.95 }}
+                                    className='inline-flex items-center gap-2 px-4 py-2 bg-purple-500 text-white rounded-xl text-sm font-medium hover:bg-purple-600 transition-colors'
+                                >
+                                    <FaExternalLinkAlt size={12} />
+                                    View Certificate
+                                </motion.a>
+                                <motion.a
+                                    href={cert.prepareURL}
+                                    target='_blank'
+                                    rel='noopener noreferrer'
+                                    whileHover={{ scale: 1.05 }}
+                                    whileTap={{ scale: 0.95 }}
+                                    className='inline-flex items-center gap-2 px-4 py-2 border border-purple-500 text-purple-600 dark:text-purple-400 rounded-xl text-sm font-medium hover:bg-purple-500/10 transition-colors'
+                                >
+                                    <FaBookOpen size={12} />
+                                    Prepare
+                                </motion.a>
+                            </div>
+                        </div>
+                    </motion.div>
                 ))}
             </div>
-        </div>
+        </section>
     )
 }
 
