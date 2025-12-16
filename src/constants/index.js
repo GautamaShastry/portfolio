@@ -282,10 +282,10 @@ export const TECH_LINKS = [
 
 export const CERTIFICATIONS = [
     {
-        title: "AWS Certified AI Practitioner",
+        title: "AWS Certified Cloud Practitioner",
         issuer: "Amazon Web Services",
-        issueDate: "Dec 2025",
-        expiryDate: "Dec 2028",
+        issueDate: "July 2025",
+        expiryDate: "July 2028",
         URL: "https://www.credly.com/badges/22bb5f28-bedf-4478-9ead-179bee16ceff/linked_in?t=sz292g",
         prepareURL: "https://www.udemy.com/course/aws-certified-cloud-practitioner-new/",
         description: "Validates foundational AWS cloud knowledge—including core services, architectural best practices, billing and pricing models, and the shared‑responsibility security framework—so you can confidently articulate the AWS value proposition to technical and non‑technical stakeholders."
