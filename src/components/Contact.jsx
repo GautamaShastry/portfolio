@@ -26,7 +26,6 @@ const Contact = () => {
         e.preventDefault()
         if (isSending) return
         setIsSending(true)
-
         try {
             await emailjs.sendForm(
                 import.meta.env.VITE_EMAILJS_SERVICE_ID,
@@ -63,9 +62,7 @@ const Contact = () => {
                     Have a project in mind or want to collaborate? Feel free to reach out!
                 </p>
             </motion.div>
-
             <div className='max-w-6xl mx-auto grid md:grid-cols-2 gap-12'>
-                {/* Contact Info */}
                 <motion.div
                     initial={{ opacity: 0, x: -50 }}
                     whileInView={{ opacity: 1, x: 0 }}
@@ -74,15 +71,9 @@ const Contact = () => {
                     className="space-y-8"
                 >
                     <div>
-                        <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-                            Let's talk about everything!
-                        </h3>
-                        <p className="text-gray-600 dark:text-gray-400">
-                            Don't like forms? Send me an email directly or connect with me on social media.
-                        </p>
+                        <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Let's talk about everything!</h3>
+                        <p className="text-gray-600 dark:text-gray-400">Don't like forms? Send me an email directly or connect with me on social media.</p>
                     </div>
-
-                    {/* Contact details */}
                     <div className="space-y-4">
                         {contactInfo.map((item, idx) => (
                             <motion.div
@@ -99,9 +90,7 @@ const Contact = () => {
                                 <div>
                                     <p className="text-sm text-gray-500 dark:text-gray-400">{item.label}</p>
                                     {item.href ? (
-                                        <a href={item.href} className="text-gray-900 dark:text-white hover:text-purple-500 transition-colors">
-                                            {item.value}
-                                        </a>
+                                        <a href={item.href} className="text-gray-900 dark:text-white hover:text-purple-500 transition-colors">{item.value}</a>
                                     ) : (
                                         <p className="text-gray-900 dark:text-white">{item.value}</p>
                                     )}
@@ -109,8 +98,6 @@ const Contact = () => {
                             </motion.div>
                         ))}
                     </div>
-
-                    {/* Social links */}
                     <div>
                         <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">Find me on</p>
                         <div className="flex gap-4">
@@ -134,77 +121,37 @@ const Contact = () => {
                         </div>
                     </div>
                 </motion.div>
-
-                {/* Contact Form */}
                 <motion.div
                     initial={{ opacity: 0, x: 50 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6 }}
                 >
-                    <form
-                        ref={formRef}
-                        onSubmit={handleSubmit}
-                        className='p-8 bg-white dark:bg-neutral-800/50 rounded-2xl border border-gray-100 dark:border-neutral-700 shadow-xl'
-                    >
+                    <form ref={formRef} onSubmit={handleSubmit} className='p-8 bg-white dark:bg-neutral-800/50 rounded-2xl border border-gray-100 dark:border-neutral-700 shadow-xl'>
                         <div className="space-y-6">
                             <div>
-                                <label className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2'>
-                                    Your Name <span className='text-red-500'>*</span>
-                                </label>
-                                <input
-                                    type="text"
-                                    name='name'
-                                    required
-                                    className='w-full px-4 py-3 bg-gray-50 dark:bg-neutral-900 border border-gray-200 dark:border-neutral-700 rounded-xl text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all'
-                                    placeholder="John Doe"
-                                />
+                                <label className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2'>Your Name <span className='text-red-500'>*</span></label>
+                                <input type="text" name='name' required className='w-full px-4 py-3 bg-gray-50 dark:bg-neutral-900 border border-gray-200 dark:border-neutral-700 rounded-xl text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all' placeholder="John Doe" />
                             </div>
                             <div>
-                                <label className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2'>
-                                    Your Email <span className='text-red-500'>*</span>
-                                </label>
-                                <input
-                                    type="email"
-                                    name='email'
-                                    required
-                                    className='w-full px-4 py-3 bg-gray-50 dark:bg-neutral-900 border border-gray-200 dark:border-neutral-700 rounded-xl text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all'
-                                    placeholder="john@example.com"
-                                />
+                                <label className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2'>Your Email <span className='text-red-500'>*</span></label>
+                                <input type="email" name='email' required className='w-full px-4 py-3 bg-gray-50 dark:bg-neutral-900 border border-gray-200 dark:border-neutral-700 rounded-xl text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all' placeholder="john@example.com" />
                             </div>
                             <div>
-                                <label className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2'>
-                                    Message <span className='text-red-500'>*</span>
-                                </label>
-                                <textarea
-                                    name="message"
-                                    rows='5'
-                                    required
-                                    className='w-full px-4 py-3 bg-gray-50 dark:bg-neutral-900 border border-gray-200 dark:border-neutral-700 rounded-xl text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all resize-none'
-                                    placeholder="Your message here..."
-                                />
+                                <label className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2'>Message <span className='text-red-500'>*</span></label>
+                                <textarea name="message" rows='5' required className='w-full px-4 py-3 bg-gray-50 dark:bg-neutral-900 border border-gray-200 dark:border-neutral-700 rounded-xl text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all resize-none' placeholder="Your message here..." />
                             </div>
                             <motion.button
                                 type='submit'
                                 disabled={isSending}
                                 whileHover={{ scale: 1.02, boxShadow: "0 10px 30px rgba(168, 85, 247, 0.3)" }}
                                 whileTap={{ scale: 0.98 }}
-                                className={`w-full py-4 rounded-xl font-semibold flex items-center justify-center gap-2 transition-all ${
-                                    isSending
-                                        ? 'bg-purple-400 cursor-not-allowed'
-                                        : 'bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700'
-                                } text-white shadow-lg shadow-purple-500/25`}
+                                className={`w-full py-4 rounded-xl font-semibold flex items-center justify-center gap-2 transition-all ${isSending ? 'bg-purple-400 cursor-not-allowed' : 'bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700'} text-white shadow-lg shadow-purple-500/25`}
                             >
                                 {isSending ? (
-                                    <>
-                                        <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                                        Sending...
-                                    </>
+                                    <><div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />Sending...</>
                                 ) : (
-                                    <>
-                                        <FaPaperPlane />
-                                        Send Message
-                                    </>
+                                    <><FaPaperPlane />Send Message</>
                                 )}
                             </motion.button>
                         </div>

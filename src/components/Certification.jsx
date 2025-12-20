@@ -19,7 +19,6 @@ const Certification = () => {
                     Certifications
                 </h2>
             </motion.div>
-
             <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
                 {CERTIFICATIONS.map((cert, index) => (
                     <motion.div
@@ -31,41 +30,28 @@ const Certification = () => {
                         whileHover={{ y: -5, boxShadow: "0 20px 40px rgba(168, 85, 247, 0.15)" }}
                         className="relative p-6 bg-white dark:bg-neutral-800/50 rounded-2xl border border-gray-100 dark:border-neutral-700 overflow-hidden"
                     >
-                        {/* Decorative gradient */}
                         <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-purple-500/10 to-indigo-500/10 rounded-full blur-2xl" />
-                        
                         <div className="relative">
-                            {/* Header */}
                             <div className="flex items-start gap-4 mb-4">
                                 <div className="p-3 bg-gradient-to-br from-purple-500 to-indigo-500 rounded-xl text-white">
                                     <FaAward size={24} />
                                 </div>
                                 <div className="flex-1">
-                                    <h3 className='font-bold text-gray-900 dark:text-white'>
-                                        {cert.title}
-                                    </h3>
-                                    <p className='text-sm text-purple-500'>
-                                        {cert.issuer}
-                                    </p>
+                                    <h3 className='font-bold text-gray-900 dark:text-white'>{cert.title}</h3>
+                                    <p className='text-sm text-purple-500'>{cert.issuer}</p>
                                 </div>
                             </div>
-
-                            {/* Date */}
                             <div className="mb-4">
                                 <span className="text-xs text-gray-500 dark:text-gray-400">
                                     Issued: {cert.issueDate}
                                     {cert.expiryDate && ` • Expires: ${cert.expiryDate}`}
                                 </span>
                             </div>
-
-                            {/* Description */}
                             {cert.description && (
                                 <p className='text-gray-600 dark:text-gray-400 text-sm leading-relaxed mb-6 line-clamp-3'>
                                     {cert.description}
                                 </p>
                             )}
-
-                            {/* Actions */}
                             <div className='flex gap-3'>
                                 <motion.a
                                     href={cert.URL}

@@ -5,9 +5,9 @@ import { motion } from 'framer-motion'
 import { FaDownload, FaCode, FaServer, FaBrain } from 'react-icons/fa6'
 
 const stats = [
-    { icon: FaCode, label: "Frontend", value: "React, Tailwind" },
+    { icon: FaCode, label: "Frontend", value: "React, JS" },
     { icon: FaServer, label: "Backend", value: "Node, Java" },
-    { icon: FaBrain, label: "ML/AI", value: "LLM, RAG" },
+    { icon: FaBrain, label: "ML/AI", value: "Python, TF" },
 ]
 
 const About = () => {
@@ -27,9 +27,7 @@ const About = () => {
                     Get to know me better
                 </h2>
             </motion.div>
-
             <div className='flex flex-wrap items-center gap-12'>
-                {/* Image Section */}
                 <motion.div
                     initial={{ opacity: 0, x: -50 }}
                     whileInView={{ opacity: 1, x: 0 }}
@@ -38,21 +36,10 @@ const About = () => {
                     className='w-full lg:w-5/12'
                 >
                     <div className="relative">
-                        {/* Background decoration */}
                         <div className="absolute -inset-4 bg-gradient-to-r from-purple-500 to-indigo-500 rounded-2xl opacity-20 blur-xl" />
-                        
-                        <motion.div
-                            whileHover={{ scale: 1.02 }}
-                            className="relative"
-                        >
-                            <img
-                                src={aboutPic}
-                                alt="about"
-                                className='rounded-2xl w-full max-w-md mx-auto shadow-2xl'
-                            />
+                        <motion.div whileHover={{ scale: 1.02 }} className="relative">
+                            <img src={aboutPic} alt="about" className='rounded-2xl w-full max-w-md mx-auto shadow-2xl' />
                         </motion.div>
-
-                        {/* Floating stats cards */}
                         {stats.map((stat, idx) => (
                             <motion.div
                                 key={stat.label}
@@ -62,9 +49,7 @@ const About = () => {
                                 transition={{ delay: 0.3 + idx * 0.1, type: "spring" }}
                                 whileHover={{ scale: 1.1 }}
                                 className={`absolute ${
-                                    idx === 0 ? "-top-4 -right-4" :
-                                    idx === 1 ? "top-1/2 -left-4" :
-                                    "-bottom-4 right-8"
+                                    idx === 0 ? "-top-4 -right-4" : idx === 1 ? "top-1/2 -left-4" : "-bottom-4 right-8"
                                 } px-4 py-3 bg-white dark:bg-neutral-800 rounded-xl shadow-lg border border-gray-100 dark:border-neutral-700`}
                             >
                                 <stat.icon className="text-purple-500 text-xl mb-1" />
@@ -74,8 +59,6 @@ const About = () => {
                         ))}
                     </div>
                 </motion.div>
-
-                {/* Content Section */}
                 <motion.div
                     initial={{ opacity: 0, x: 50 }}
                     whileInView={{ opacity: 1, x: 0 }}
@@ -86,22 +69,14 @@ const About = () => {
                     <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
                         Passionate about building great software
                     </h3>
-                    <p className='text-gray-600 dark:text-gray-400 leading-relaxed mb-6'>
-                        {ABOUT_TEXT}
-                    </p>
-
-                    {/* Skills highlight */}
+                    <p className='text-gray-600 dark:text-gray-400 leading-relaxed mb-6'>{ABOUT_TEXT}</p>
                     <div className="flex flex-wrap gap-2 mb-8">
                         {["Problem Solving", "Team Collaboration", "Agile", "Clean Code"].map((skill) => (
-                            <span
-                                key={skill}
-                                className="px-3 py-1 bg-gray-100 dark:bg-neutral-800 text-gray-700 dark:text-gray-300 rounded-lg text-sm"
-                            >
+                            <span key={skill} className="px-3 py-1 bg-gray-100 dark:bg-neutral-800 text-gray-700 dark:text-gray-300 rounded-lg text-sm">
                                 {skill}
                             </span>
                         ))}
                     </div>
-
                     <motion.a
                         href={resume}
                         download="gautam_resume.pdf"

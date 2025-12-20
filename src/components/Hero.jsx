@@ -13,7 +13,6 @@ const Hero = () => {
             <div className="flex flex-wrap items-center">
                 <div className="w-full lg:w-1/2 px-4">
                     <div className="flex flex-col items-center lg:items-start">
-                        {/* Greeting */}
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
@@ -24,19 +23,14 @@ const Hero = () => {
                                 👋 Welcome to my portfolio
                             </span>
                         </motion.div>
-
-                        {/* Name */}
                         <motion.h1
                             initial={{ opacity: 0, y: 30 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.6, delay: 0.1 }}
                             className='text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-4'
                         >
-                            Hi, I'm{" "}
-                            <span className="gradient-text">Gautama Shastry</span>
+                            Hi, I'm <span className="gradient-text">Gautama Shastry</span>
                         </motion.h1>
-
-                        {/* Role */}
                         <motion.div
                             initial={{ opacity: 0, y: 30 }}
                             animate={{ opacity: 1, y: 0 }}
@@ -52,8 +46,6 @@ const Hero = () => {
                                 className="inline-block w-1 h-8 bg-purple-500 ml-2 align-middle"
                             />
                         </motion.div>
-
-                        {/* Description */}
                         <motion.p
                             initial={{ opacity: 0, y: 30 }}
                             animate={{ opacity: 1, y: 0 }}
@@ -62,8 +54,6 @@ const Hero = () => {
                         >
                             {HERO_CONTENT}
                         </motion.p>
-
-                        {/* CTA Buttons */}
                         <motion.div
                             initial={{ opacity: 0, y: 30 }}
                             animate={{ opacity: 1, y: 0 }}
@@ -74,7 +64,7 @@ const Hero = () => {
                                 whileHover={{ scale: 1.05, boxShadow: "0 10px 30px rgba(168, 85, 247, 0.3)" }}
                                 whileTap={{ scale: 0.95 }}
                                 onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
-                                className="px-8 py-3 bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-xl font-medium shadow-lg shadow-purple-500/25 hover:shadow-purple-500/40 transition-shadow"
+                                className="px-8 py-3 bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-xl font-medium shadow-lg shadow-purple-500/25"
                             >
                                 Get in Touch
                             </motion.button>
@@ -89,8 +79,6 @@ const Hero = () => {
                         </motion.div>
                     </div>
                 </div>
-
-                {/* Profile Image */}
                 <div className='w-full lg:w-1/2 mt-12 lg:mt-0 px-4'>
                     <motion.div
                         initial={{ opacity: 0, scale: 0.8 }}
@@ -98,7 +86,6 @@ const Hero = () => {
                         transition={{ duration: 0.8, delay: 0.3 }}
                         className="relative flex justify-center"
                     >
-                        {/* Decorative elements */}
                         <motion.div
                             animate={{ rotate: 360 }}
                             transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
@@ -106,27 +93,10 @@ const Hero = () => {
                         >
                             <div className="w-72 h-72 md:w-80 md:h-80 rounded-full border-2 border-dashed border-purple-500/30" />
                         </motion.div>
-                        <motion.div
-                            animate={{ rotate: -360 }}
-                            transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-                            className="absolute inset-0 flex items-center justify-center"
-                        >
-                            <div className="w-80 h-80 md:w-96 md:h-96 rounded-full border-2 border-dashed border-indigo-500/20" />
-                        </motion.div>
-
-                        {/* Image */}
-                        <motion.div
-                            whileHover={{ scale: 1.02 }}
-                            className="relative z-10"
-                        >
+                        <motion.div whileHover={{ scale: 1.02 }} className="relative z-10">
                             <div className="w-64 h-64 md:w-72 md:h-72 rounded-full overflow-hidden ring-4 ring-purple-500/50 shadow-2xl shadow-purple-500/20">
-                                <img
-                                    src={profilePic}
-                                    alt="Gautam"
-                                    className='w-full h-full object-cover'
-                                />
+                                <img src={profilePic} alt="Gautam" className='w-full h-full object-cover' />
                             </div>
-                            {/* Status badge */}
                             <motion.div
                                 initial={{ scale: 0 }}
                                 animate={{ scale: 1 }}
@@ -140,8 +110,6 @@ const Hero = () => {
                     </motion.div>
                 </div>
             </div>
-
-            {/* Scroll indicator */}
             <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}

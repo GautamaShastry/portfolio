@@ -23,3 +23,8 @@ dist-ssr
 *.sln
 *.sw?
 .env
+
+# Backend
+chatbot-backend/.env
+chatbot-backend/__pycache__/
+*.pyc
