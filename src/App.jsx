@@ -3,6 +3,7 @@ import Hero from './components/Hero'
 import About from './components/About'
 import Technologies from './components/Technologies'
 import Experience from './components/Experience'
+import Education from './components/Education'
 import Projects from './components/Projects'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
@@ -29,6 +30,7 @@ const App = () => {
                 <main className='container mx-auto px-4 md:px-8 pt-20'>
                     <Hero />
                     <About />
+                    <Education />
                     <Technologies />
                     <Certification />
                     <Experience />

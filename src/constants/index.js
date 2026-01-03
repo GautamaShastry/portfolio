@@ -30,10 +30,29 @@ export const ABOUT_TEXT = `I am a dedicated Software Engineer and AI Engineer sp
 export const EXPERIENCES = [
     {
         period: "Jan 2023 - Dec 2023",
-        role: "Associate Software Engineer Intern",
+        role: "Associate Software Engineer",
         company: "Backflipt",
         description: `Developed visually appealing and responsive user interfaces using React.js, ensuring optimal performance across diverse devices and platforms. Collaborated with cross-functional teams to translate complex requirements into intuitive, user-friendly web applications. Improved application performance and reliability by diagnosing and fixing critical issues, enhancing the overall user experience.`,
         technologies: ["JavaScript", "ReactJS", "SpringBoot", "Java"],
+    },
+];
+
+export const EDUCATION = [
+    {
+        degree: "Master of Science in Computer Science",
+        school: "George Mason University",
+        location: "Fairfax, VA",
+        period: "Jan 2024 - Dec 2025",
+        gpa: "3.87/4.0",
+        coursework: ["Machine Learning", "Deep Learning", "Advanced NLP", "DevOps", "Data Mining", "Artificial Intelligence", "Systems Programming", "Mathematical Foundations of CS", "Cryptography", "Analysis of Algorithms"],
+    },
+    {
+        degree: "Bachelor of Technology in Computer Science",
+        school: "Andhra University",
+        location: "Visakhapatnam, India",
+        period: "Aug 2019 - May 2023",
+        gpa: "3.3/4.0",
+        coursework: ["Data Structures", "Algorithms", "Database Systems", "Operating Systems", "Web Development", "Artificial Intelligence", "Machine Learning", "Embedded Systems", "Cloud Computing", "Object oriented programming", "Data mining", "Computer Networks"],
     },
 ];
 
