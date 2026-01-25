@@ -13,7 +13,7 @@ import { FaAws } from "react-icons/fa";
 import { RiReactjsLine } from "react-icons/ri";
 import {
     SiMongodb, SiPandas, SiSpringboot, SiDocker, SiKubernetes, SiJenkins,
-    SiGithub, SiScikitlearn, SiTensorflow, SiMysql, SiPostgresql, SiHtml5,
+    SiGithub, SiAnsible, SiTensorflow, SiMysql, SiPostgresql, SiHtml5,
     SiCss3, SiJavascript, SiC, SiGit, SiRancher, SiLangchain, SiFastapi
 } from "react-icons/si";
 
@@ -32,8 +32,8 @@ export const EXPERIENCES = [
         period: "Jan 2023 - Dec 2023",
         role: "Associate Software Engineer",
         company: "Backflipt",
-        description: `Developed visually appealing and responsive user interfaces using React.js, ensuring optimal performance across diverse devices and platforms. Collaborated with cross-functional teams to translate complex requirements into intuitive, user-friendly web applications. Improved application performance and reliability by diagnosing and fixing critical issues, enhancing the overall user experience.`,
-        technologies: ["JavaScript", "ReactJS", "SpringBoot", "Java"],
+        description: `Owned delivery of React/Redux customer workflows (forms, tables, filters) and collaborated cross-functionally in Agile sprints. Designed cloud-native Spring WebFlux microservices with validation and consistent error mapping; optimized AWS DocumentDB queries, trimming p95 API latency by ~35ms. Fixed async race conditions and dispatch loops, reducing redundant traffic. Built CI-ready API regression automation with Newman, reducing pre-release verification from ~15 min manual to ~6 min automated.`,
+        technologies: ["React", "Redux", "Spring WebFlux", "AWS DocumentDB", "Newman", "CI/CD"],
     },
 ];
 
@@ -57,6 +57,13 @@ export const EDUCATION = [
 ];
 
 export const PROJECTS = [
+    {
+        title: "AutoE2E Testing Framework",
+        image: agent,
+        description: `Infrastructure-as-code orchestration using Ansible playbooks with community.docker collection to orchestrate containerized multi-service stacks (FastAPI, PostgreSQL, Redis). Built a CLI-based E2E testing framework reducing manual QA setup time by 80%. Features YAML-driven configuration with parallel test execution via pytest-xdist and CI-ready automation with GitHub Actions.`,
+        technologies: ["Python", "Ansible", "Docker Compose", "pytest-xdist", "GitHub Actions", "YAML"],
+        githubLink: "https://github.com/GautamaShastry/autoe2e",
+    },
     {
         title: "Support Sage - AI Customer Support Agent",
         image: agent,
@@ -103,8 +110,8 @@ export const PROJECTS = [
     {
         title: "Resume Analyzer - Multi-Agent AI System",
         image: project5,
-        description: `Architected a multi-agent AI workflow using LangGraph to coordinate 6 specialized autonomous agents. Engineered a hybrid scoring algorithm combining Semantic Similarity and Rule-Based NER. Achieved <1.5s p95 latency.`,
-        technologies: ["React", "Spring Boot", "Python", "Flask", "PostgreSQL", "GPT-4", "LangGraph"],
+        description: `Architected a 9-agent LangGraph pipeline with parallel DAG execution, processing 200+ sequential analyses with 0% error rate. Implemented hybrid scoring (semantic similarity + NER skill extraction), Redis caching layer, and Resilience4j circuit breakers. Load-tested at 100 concurrent users with 100% success rate. Features include company intel scraping, interview prep generation, resume coaching, and automated PDF/HTML reports.`,
+        technologies: ["Java", "Spring Boot", "Flask", "LangGraph", "PostgreSQL", "Redis", "React", "Resilience4j"],
         githubLink: "https://github.com/GautamaShastry/resume_screener",
         link: "https://resume-screener-chi.vercel.app/login",
     },
@@ -148,7 +155,7 @@ export const TECH_LINKS = [
     { name: "Rancher", Icon: SiRancher, link: "https://rancher.com/", duration: 1.5, colorClass: "text-blue-700" },
     { name: "Git", Icon: SiGit, link: "https://git-scm.com/", duration: 4, colorClass: "text-red-600" },
     { name: "GitHub", Icon: SiGithub, link: "https://www.github.com/", duration: 1, colorClass: "text-gray-700" },
-    { name: "Scikit-learn", Icon: SiScikitlearn, link: "https://scikit-learn.org/", duration: 2, colorClass: "text-green-500" },
+    { name: "Ansible", Icon: SiAnsible, link: "https://www.ansible.com/", duration: 2, colorClass: "text-red-500" },
     { name: "TensorFlow", Icon: SiTensorflow, link: "https://www.tensorflow.org/", duration: 3, colorClass: "text-orange-600" },
     { name: "MySQL", Icon: SiMysql, link: "https://www.mysql.com/", duration: 2, colorClass: "text-blue-700" },
     { name: "PostgreSQL", Icon: SiPostgresql, link: "https://www.postgresql.org/", duration: 2.5, colorClass: "text-blue-800" },

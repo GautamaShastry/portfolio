@@ -2,9 +2,11 @@ import { FaHeart } from 'react-icons/fa'
 import { FaLinkedin, FaGithub, FaInstagram } from 'react-icons/fa6'
 import { motion } from 'framer-motion'
 import { NAV_LINK } from '../constants'
+import { useTranslation } from 'react-i18next'
 
 const Footer = () => {
     const currentYear = new Date().getFullYear()
+    const { t } = useTranslation()
 
     const scrollToTop = () => {
         window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -37,9 +39,9 @@ const Footer = () => {
                         ))}
                     </div>
                     <div className='text-center md:text-right'>
-                        <p className='text-sm text-gray-500 dark:text-gray-400'>© {currentYear} Gautam. All rights reserved.</p>
+                        <p className='text-sm text-gray-500 dark:text-gray-400'>© {currentYear} Gautam. {t('footer.rights')}</p>
                         <p className='mt-1 text-xs text-gray-400 dark:text-gray-500 flex items-center justify-center md:justify-end gap-1'>
-                            Built with <FaHeart className='text-red-500' /> using React & Tailwind
+                            {t('footer.built_with')} <FaHeart className='text-red-500' /> React & Tailwind
                         </p>
                     </div>
                 </div>

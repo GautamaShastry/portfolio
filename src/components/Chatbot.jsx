@@ -1,29 +1,34 @@
 import { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { FaRobot, FaPaperPlane, FaTimes, FaUser } from 'react-icons/fa'
+import { useTranslation } from 'react-i18next'
 
 const PORTFOLIO_CONTEXT = `You are Gautam's (Satya's) AI assistant on his portfolio website. Answer questions about his background, skills, and projects concisely.
 
 ABOUT:
-- Software Engineer & AI Engineer, MS in Computer Science at George Mason University
-- Specializes in AI agents, LangChain, LangGraph, RAG architectures
-- Full-stack: React, Node.js, Spring Boot, Python, FastAPI
-- Cloud: AWS, Docker, Kubernetes, Jenkins
+- Software Engineer & AI Engineer specializing in intelligent autonomous systems
+- MS in Computer Science at George Mason University (GPA: 3.87/4.0, Jan 2024 - Dec 2025)
+- BTech in Computer Science from Andhra University (2019-2023)
+- Expertise: LangChain, LangGraph, RAG architectures, AI agents
+- Full-stack: React, Node.js, Spring Boot, Python, FastAPI, Django
+- Cloud/DevOps: AWS, Docker, Kubernetes, Jenkins, Ansible
 
 CERTIFICATIONS:
 - AWS Certified Cloud Practitioner (July 2025)
 - AWS Certified AI Practitioner (Dec 2025)
-- Deep Learning.ai Specialization (Coursera)
+- Deep Learning.ai Specialization (Coursera, Sep 2023)
 
 KEY PROJECTS:
-1. Support Sage - AI customer support agent using LangGraph & RAG
-2. TRUST Agents - Multi-agent fact-checking with 4 LLM agents, 65% accuracy on LIAR dataset
-3. Resume Analyzer - 6 autonomous agents, hybrid scoring, <1.5s latency
-4. ChatBook - Real-time chat app (React, Node, MongoDB, Socket.io)
-5. Image Captioning - CNN+LSTM model, BLEU-1 score 0.48
+1. AutoE2E Testing Framework - Ansible-based infrastructure-as-code, CLI E2E testing, reduced QA setup by 80%
+2. Support Sage - AI customer support agent using LangGraph & RAG for order management and ticket escalation
+3. TRUST Agents - Multi-agent fact-checking with 4 LLM agents, 65.2% accuracy on LIAR dataset
+4. Resume Analyzer - 9-agent LangGraph pipeline, Redis caching, Resilience4j circuit breakers, 100 concurrent users
+5. ChatBook - Real-time chat app (React, Node, MongoDB, Socket.io)
+6. Image Captioning - CNN+LSTM model, BLEU-1 score 0.48
+7. Student Survey App - Spring Boot, Kubernetes, Jenkins CI/CD, 99.9% uptime
 
 EXPERIENCE:
-- Associate Software Engineer Intern at Backflipt (Jan-Dec 2023)
+- Associate Software Engineer at Backflipt (Jan-Dec 2023) - React.js, Spring Boot
 
 CONTACT:
 - Email: gautamashastry@gmail.com
@@ -32,13 +37,17 @@ CONTACT:
 - LinkedIn: linkedin.com/in/satya2603`
 
 const Chatbot = () => {
+    const { t } = useTranslation()
     const [isOpen, setIsOpen] = useState(false)
-    const [messages, setMessages] = useState([
-        { role: 'assistant', content: "Hi! I'm Gautam's AI assistant. Ask me anything about his skills, projects, or experience!" }
-    ])
+    const [messages, setMessages] = useState([])
     const [input, setInput] = useState('')
     const [isLoading, setIsLoading] = useState(false)
     const messagesEndRef = useRef(null)
+
+    // Initialize greeting message and update when language changes
+    useEffect(() => {
+        setMessages([{ role: 'assistant', content: t('chatbot.greeting') }])
+    }, [t])
 
     const scrollToBottom = () => {
         messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
@@ -69,7 +78,7 @@ const Chatbot = () => {
         } catch (error) {
             setMessages(prev => [...prev, { 
                 role: 'assistant', 
-                content: "I'm having trouble connecting right now. Please email Gautam directly at gautamashastry@gmail.com or check out his projects on GitHub!" 
+                content: t('chatbot.error')
             }])
         } finally {
             setIsLoading(false)
@@ -98,8 +107,8 @@ const Chatbot = () => {
                             <div className="flex items-center gap-3">
                                 <div className="p-2 bg-white/20 rounded-full"><FaRobot size={18} /></div>
                                 <div>
-                                    <h3 className="font-semibold">Gautam's AI Assistant</h3>
-                                    <p className="text-xs text-white/80">Ask me anything!</p>
+                                    <h3 className="font-semibold">{t('chatbot.title')}</h3>
+                                    <p className="text-xs text-white/80">{t('chatbot.subtitle')}</p>
                                 </div>
                             </div>
                             <button onClick={() => setIsOpen(false)} className="p-2 hover:bg-white/20 rounded-full transition-colors">
@@ -139,7 +148,7 @@ const Chatbot = () => {
                                     type="text"
                                     value={input}
                                     onChange={(e) => setInput(e.target.value)}
-                                    placeholder="Ask about skills, projects..."
+                                    placeholder={t('chatbot.placeholder')}
                                     className="flex-1 px-4 py-2 bg-gray-100 dark:bg-neutral-800 border border-gray-200 dark:border-neutral-700 rounded-xl text-gray-800 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 text-sm"
                                 />
                                 <motion.button

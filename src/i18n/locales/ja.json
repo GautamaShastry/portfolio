@@ -1,0 +1,92 @@
+{
+    "nav": {
+        "home": "ホーム",
+        "about": "自己紹介",
+        "skills": "スキル",
+        "education": "学歴",
+        "projects": "プロジェクト",
+        "experience": "経験",
+        "contact": "お問い合わせ"
+    },
+    "hero": {
+        "welcome": "ポートフォリオへようこそ",
+        "greeting": "こんにちは、",
+        "role": "フルスタック開発者 & AIエンジニア",
+        "description": "私は優れたデジタル体験の構築を専門とする情熱的なソフトウェアエンジニアです。現在、最新のウェブ技術とAIを使用して、アクセシブルで人間中心の製品の作成に注力しています。",
+        "cta_contact": "お問い合わせ",
+        "cta_projects": "プロジェクトを見る",
+        "available": "対応可能"
+    },
+    "about": {
+        "title": "自己紹介",
+        "subtitle": "私についてもっと知る",
+        "passionate": "優れたソフトウェア構築への情熱",
+        "description": "私はReact、Node.js、クラウド技術に精通したフルスタック開発者です。複雑な問題を解決し、スケーラブルなアプリケーションを構築することが大好きです。AI/MLとDevOpsの経験を活かし、ソフトウェア開発に包括的なアプローチをもたらします。",
+        "download_cv": "履歴書をダウンロード",
+        "stat_frontend": "フロントエンド",
+        "stat_backend": "バックエンド",
+        "stat_ai": "ML/AI",
+        "skill_problem": "問題解決",
+        "skill_team": "チームワーク",
+        "skill_agile": "アジャイル",
+        "skill_clean": "クリーンコード"
+    },
+    "skills": {
+        "title": "私のスキル",
+        "subtitle": "使用している技術",
+        "description": "アイデアを形にするために使用するツールと技術のコレクション",
+        "proficiency": "習熟度"
+    },
+    "education": {
+        "title": "学歴",
+        "subtitle": "学術的背景",
+        "gpa": "GPA",
+        "coursework": "関連科目"
+    },
+    "projects": {
+        "title": "ポートフォリオ",
+        "subtitle": "注目のプロジェクト",
+        "description": "私の仕事、サイドプロジェクト、実験のショーケース",
+        "filter_all": "すべて",
+        "filter_ai": "AI/ML",
+        "filter_fullstack": "フルスタック",
+        "filter_devops": "DevOps"
+    },
+    "experience": {
+        "title": "キャリア",
+        "subtitle": "職務経験"
+    },
+    "certifications": {
+        "title": "実績",
+        "subtitle": "資格",
+        "view": "証明書を見る",
+        "prepare": "準備"
+    },
+    "contact": {
+        "title": "お問い合わせ",
+        "subtitle": "連絡を取る",
+        "description": "プロジェクトのアイデアやコラボレーションをお考えですか？お気軽にご連絡ください！",
+        "talk": "何でも話しましょう！",
+        "form_hint": "フォームが苦手ですか？直接メールを送るか、SNSでつながりましょう。",
+        "name": "お名前",
+        "email": "メールアドレス",
+        "message": "メッセージ",
+        "send": "メッセージを送信",
+        "sending": "送信中...",
+        "schedule": "ミーティングを予約",
+        "find_me": "SNSで見つける",
+        "location": "所在地",
+        "phone": "電話"
+    },
+    "footer": {
+        "rights": "全著作権所有",
+        "built_with": "で構築"
+    },
+    "chatbot": {
+        "title": "GautamのAIアシスタント",
+        "subtitle": "何でも聞いてください！",
+        "greeting": "こんにちは！私はGautamのAIアシスタントです。彼のスキル、プロジェクト、経験について何でも聞いてください！",
+        "placeholder": "スキル、プロジェクトについて質問...",
+        "error": "現在接続に問題があります。Gautamに直接メールするか、GitHubでプロジェクトをご覧ください！"
+    }
+}

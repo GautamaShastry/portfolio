@@ -1,0 +1,92 @@
+{
+    "nav": {
+        "home": "首页",
+        "about": "关于",
+        "skills": "技能",
+        "education": "教育",
+        "projects": "项目",
+        "experience": "经验",
+        "contact": "联系"
+    },
+    "hero": {
+        "welcome": "欢迎来到我的作品集",
+        "greeting": "你好，我是",
+        "role": "全栈开发工程师 & AI工程师",
+        "description": "我是一名热衷于构建卓越数字体验的软件工程师。目前专注于使用现代网络技术和人工智能创建可访问的、以人为本的产品。",
+        "cta_contact": "联系我",
+        "cta_projects": "查看项目",
+        "available": "可接项目"
+    },
+    "about": {
+        "title": "关于我",
+        "subtitle": "更好地了解我",
+        "passionate": "热衷于构建优秀软件",
+        "description": "我是一名精通React、Node.js和云技术的全栈开发工程师。我喜欢解决复杂问题和构建可扩展的应用程序。凭借在AI/ML和DevOps方面的经验，我为软件开发带来全面的方法。",
+        "download_cv": "下载简历",
+        "stat_frontend": "前端",
+        "stat_backend": "后端",
+        "stat_ai": "机器学习/AI",
+        "skill_problem": "问题解决",
+        "skill_team": "团队协作",
+        "skill_agile": "敏捷开发",
+        "skill_clean": "代码整洁"
+    },
+    "skills": {
+        "title": "我的技能",
+        "subtitle": "我使用的技术",
+        "description": "我用来将想法变为现实的工具和技术集合",
+        "proficiency": "熟练程度"
+    },
+    "education": {
+        "title": "教育",
+        "subtitle": "学术背景",
+        "gpa": "GPA",
+        "coursework": "相关课程"
+    },
+    "projects": {
+        "title": "作品集",
+        "subtitle": "精选项目",
+        "description": "我的工作、副项目和实验展示",
+        "filter_all": "全部",
+        "filter_ai": "AI/ML",
+        "filter_fullstack": "全栈",
+        "filter_devops": "DevOps"
+    },
+    "experience": {
+        "title": "职业",
+        "subtitle": "工作经验"
+    },
+    "certifications": {
+        "title": "成就",
+        "subtitle": "证书",
+        "view": "查看证书",
+        "prepare": "准备"
+    },
+    "contact": {
+        "title": "联系",
+        "subtitle": "保持联系",
+        "description": "有项目想法或想要合作？随时联系我！",
+        "talk": "让我们聊聊一切！",
+        "form_hint": "不喜欢表单？直接给我发邮件或在社交媒体上联系我。",
+        "name": "您的姓名",
+        "email": "您的邮箱",
+        "message": "留言",
+        "send": "发送消息",
+        "sending": "发送中...",
+        "schedule": "预约会议",
+        "find_me": "在这里找到我",
+        "location": "位置",
+        "phone": "电话"
+    },
+    "footer": {
+        "rights": "版权所有",
+        "built_with": "使用以下技术构建"
+    },
+    "chatbot": {
+        "title": "Gautam的AI助手",
+        "subtitle": "随便问！",
+        "greeting": "你好！我是Gautam的AI助手。随时询问他的技能、项目或经验！",
+        "placeholder": "询问技能、项目...",
+        "error": "我现在连接有问题。请直接给Gautam发邮件或在GitHub上查看他的项目！"
+    }
+}

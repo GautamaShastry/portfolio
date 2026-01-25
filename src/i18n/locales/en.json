@@ -1,0 +1,92 @@
+{
+    "nav": {
+        "home": "Home",
+        "about": "About",
+        "skills": "Skills",
+        "education": "Education",
+        "projects": "Projects",
+        "experience": "Experience",
+        "contact": "Contact"
+    },
+    "hero": {
+        "welcome": "Welcome to my portfolio",
+        "greeting": "Hi, I'm",
+        "role": "Full Stack Developer & AI Engineer",
+        "description": "I'm a passionate software engineer specializing in building exceptional digital experiences. Currently focused on creating accessible, human-centered products using modern web technologies and AI.",
+        "cta_contact": "Get in Touch",
+        "cta_projects": "View Projects",
+        "available": "Available"
+    },
+    "about": {
+        "title": "About Me",
+        "subtitle": "Get to know me better",
+        "passionate": "Passionate about building great software",
+        "description": "I'm a Full Stack Developer with expertise in React, Node.js, and cloud technologies. I love solving complex problems and building scalable applications. With experience in AI/ML and DevOps, I bring a holistic approach to software development.",
+        "download_cv": "Download Resume",
+        "stat_frontend": "Frontend",
+        "stat_backend": "Backend",
+        "stat_ai": "ML/AI",
+        "skill_problem": "Problem Solving",
+        "skill_team": "Team Collaboration",
+        "skill_agile": "Agile",
+        "skill_clean": "Clean Code"
+    },
+    "skills": {
+        "title": "My Skills",
+        "subtitle": "Technologies I Work With",
+        "description": "A collection of tools and technologies I use to bring ideas to life",
+        "proficiency": "Proficiency Level"
+    },
+    "education": {
+        "title": "Education",
+        "subtitle": "Academic Background",
+        "gpa": "GPA",
+        "coursework": "Relevant Coursework"
+    },
+    "projects": {
+        "title": "Portfolio",
+        "subtitle": "Featured Projects",
+        "description": "A showcase of my work, side projects, and experiments",
+        "filter_all": "All",
+        "filter_ai": "AI/ML",
+        "filter_fullstack": "Full Stack",
+        "filter_devops": "DevOps"
+    },
+    "experience": {
+        "title": "Career",
+        "subtitle": "Work Experience"
+    },
+    "certifications": {
+        "title": "Achievements",
+        "subtitle": "Certifications",
+        "view": "View Certificate",
+        "prepare": "Prepare"
+    },
+    "contact": {
+        "title": "Contact",
+        "subtitle": "Get In Touch",
+        "description": "Have a project in mind or want to collaborate? Feel free to reach out!",
+        "talk": "Let's talk about everything!",
+        "form_hint": "Don't like forms? Send me an email directly or connect with me on social media.",
+        "name": "Your Name",
+        "email": "Your Email",
+        "message": "Message",
+        "send": "Send Message",
+        "sending": "Sending...",
+        "schedule": "Schedule a Meeting",
+        "find_me": "Find me on",
+        "location": "Location",
+        "phone": "Phone"
+    },
+    "footer": {
+        "rights": "All rights reserved",
+        "built_with": "Built with"
+    },
+    "chatbot": {
+        "title": "Gautam's AI Assistant",
+        "subtitle": "Ask me anything!",
+        "greeting": "Hi! I'm Gautam's AI assistant. Ask me anything about his skills, projects, or experience!",
+        "placeholder": "Ask about skills, projects...",
+        "error": "I'm having trouble connecting right now. Please email Gautam directly or check out his projects on GitHub!"
+    }
+}

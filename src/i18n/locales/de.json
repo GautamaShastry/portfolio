@@ -1,0 +1,92 @@
+{
+    "nav": {
+        "home": "Startseite",
+        "about": "Über mich",
+        "skills": "Fähigkeiten",
+        "education": "Bildung",
+        "projects": "Projekte",
+        "experience": "Erfahrung",
+        "contact": "Kontakt"
+    },
+    "hero": {
+        "welcome": "Willkommen in meinem Portfolio",
+        "greeting": "Hallo, ich bin",
+        "role": "Full Stack Entwickler & KI-Ingenieur",
+        "description": "Ich bin ein leidenschaftlicher Software-Ingenieur, der sich auf die Entwicklung außergewöhnlicher digitaler Erlebnisse spezialisiert hat. Derzeit konzentriere ich mich auf die Erstellung zugänglicher, menschenzentrierter Produkte mit modernen Webtechnologien und KI.",
+        "cta_contact": "Kontakt aufnehmen",
+        "cta_projects": "Projekte ansehen",
+        "available": "Verfügbar"
+    },
+    "about": {
+        "title": "Über mich",
+        "subtitle": "Lernen Sie mich besser kennen",
+        "passionate": "Leidenschaft für großartige Software",
+        "description": "Ich bin ein Full Stack Entwickler mit Expertise in React, Node.js und Cloud-Technologien. Ich liebe es, komplexe Probleme zu lösen und skalierbare Anwendungen zu entwickeln. Mit Erfahrung in KI/ML und DevOps bringe ich einen ganzheitlichen Ansatz in die Softwareentwicklung.",
+        "download_cv": "Lebenslauf herunterladen",
+        "stat_frontend": "Frontend",
+        "stat_backend": "Backend",
+        "stat_ai": "ML/KI",
+        "skill_problem": "Problemlösung",
+        "skill_team": "Teamarbeit",
+        "skill_agile": "Agil",
+        "skill_clean": "Sauberer Code"
+    },
+    "skills": {
+        "title": "Meine Fähigkeiten",
+        "subtitle": "Technologien, mit denen ich arbeite",
+        "description": "Eine Sammlung von Tools und Technologien, die ich verwende, um Ideen zum Leben zu erwecken",
+        "proficiency": "Kompetenzniveau"
+    },
+    "education": {
+        "title": "Bildung",
+        "subtitle": "Akademischer Hintergrund",
+        "gpa": "Notendurchschnitt",
+        "coursework": "Relevante Kurse"
+    },
+    "projects": {
+        "title": "Portfolio",
+        "subtitle": "Ausgewählte Projekte",
+        "description": "Eine Präsentation meiner Arbeit, Nebenprojekte und Experimente",
+        "filter_all": "Alle",
+        "filter_ai": "KI/ML",
+        "filter_fullstack": "Full Stack",
+        "filter_devops": "DevOps"
+    },
+    "experience": {
+        "title": "Karriere",
+        "subtitle": "Berufserfahrung"
+    },
+    "certifications": {
+        "title": "Erfolge",
+        "subtitle": "Zertifizierungen",
+        "view": "Zertifikat ansehen",
+        "prepare": "Vorbereiten"
+    },
+    "contact": {
+        "title": "Kontakt",
+        "subtitle": "In Kontakt treten",
+        "description": "Haben Sie ein Projekt im Sinn oder möchten Sie zusammenarbeiten? Kontaktieren Sie mich gerne!",
+        "talk": "Lassen Sie uns über alles reden!",
+        "form_hint": "Keine Lust auf Formulare? Schreiben Sie mir direkt eine E-Mail oder verbinden Sie sich über Social Media.",
+        "name": "Ihr Name",
+        "email": "Ihre E-Mail",
+        "message": "Nachricht",
+        "send": "Nachricht senden",
+        "sending": "Wird gesendet...",
+        "schedule": "Meeting planen",
+        "find_me": "Finden Sie mich auf",
+        "location": "Standort",
+        "phone": "Telefon"
+    },
+    "footer": {
+        "rights": "Alle Rechte vorbehalten",
+        "built_with": "Erstellt mit"
+    },
+    "chatbot": {
+        "title": "Gautams KI-Assistent",
+        "subtitle": "Fragen Sie mich alles!",
+        "greeting": "Hallo! Ich bin Gautams KI-Assistent. Fragen Sie mich alles über seine Fähigkeiten, Projekte oder Erfahrungen!",
+        "placeholder": "Fragen zu Fähigkeiten, Projekten...",
+        "error": "Ich habe gerade Verbindungsprobleme. Bitte schreiben Sie Gautam direkt eine E-Mail oder schauen Sie sich seine Projekte auf GitHub an!"
+    }
+}
