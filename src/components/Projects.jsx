@@ -109,6 +109,9 @@ const ProjectCard = ({ project, index }) => {
                         src={project.image} 
                         alt={project.title} 
                         className='w-full h-full object-cover'
+                        width="400"
+                        height="192"
+                        loading="lazy"
                         style={{
                             scale: isHovered ? 1.1 : 1,
                             transition: "scale 0.5s ease-out",

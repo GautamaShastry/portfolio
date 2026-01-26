@@ -1,15 +1,23 @@
+import { lazy, Suspense } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
-import Chatbot from './components/Chatbot'
 import AnimatedBackground from './components/AnimatedBackground'
 import { useTheme } from './context/ThemeContext'
 
-// Pages
-import Home from './pages/Home'
-import Projects from './pages/Projects'
-import Experience from './pages/Experience'
-import Contact from './pages/Contact'
+// Lazy load pages for better performance
+const Home = lazy(() => import('./pages/Home'))
+const Projects = lazy(() => import('./pages/Projects'))
+const Experience = lazy(() => import('./pages/Experience'))
+const Contact = lazy(() => import('./pages/Contact'))
+const Chatbot = lazy(() => import('./components/Chatbot'))
+
+// Loading spinner
+const PageLoader = () => (
+    <div className="flex items-center justify-center min-h-[50vh]">
+        <div className="w-8 h-8 border-4 border-purple-500/30 border-t-purple-500 rounded-full animate-spin" />
+    </div>
+)
 
 const App = () => {
     const { isDark } = useTheme()
@@ -27,15 +35,19 @@ const App = () => {
             <div className='relative'>
                 <Navbar />
                 <main className='container mx-auto px-4 md:px-8 pt-20 min-h-[calc(100vh-200px)]'>
-                    <Routes>
-                        <Route path="/" element={<Home />} />
-                        <Route path="/projects" element={<Projects />} />
-                        <Route path="/experience" element={<Experience />} />
-                        <Route path="/contact" element={<Contact />} />
-                    </Routes>
+                    <Suspense fallback={<PageLoader />}>
+                        <Routes>
+                            <Route path="/" element={<Home />} />
+                            <Route path="/projects" element={<Projects />} />
+                            <Route path="/experience" element={<Experience />} />
+                            <Route path="/contact" element={<Contact />} />
+                        </Routes>
+                    </Suspense>
                 </main>
                 <Footer />
-                <Chatbot />
+                <Suspense fallback={null}>
+                    <Chatbot />
+                </Suspense>
             </div>
         </div>
     )

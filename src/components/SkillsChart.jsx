@@ -4,23 +4,23 @@ import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 const skillsData = [
-    { skill: 'Frontend', level: 90, fullMark: 100 },
-    { skill: 'Backend', level: 85, fullMark: 100 },
-    { skill: 'AI/ML', level: 88, fullMark: 100 },
-    { skill: 'DevOps', level: 80, fullMark: 100 },
-    { skill: 'Databases', level: 85, fullMark: 100 },
-    { skill: 'Cloud', level: 82, fullMark: 100 },
+    { skill: 'Frontend', level: 75, fullMark: 100 },
+    { skill: 'Backend', level: 72, fullMark: 100 },
+    { skill: 'AI/ML', level: 70, fullMark: 100 },
+    { skill: 'DevOps', level: 65, fullMark: 100 },
+    { skill: 'Databases', level: 70, fullMark: 100 },
+    { skill: 'Cloud', level: 68, fullMark: 100 },
 ]
 
 const detailedSkills = [
-    { name: 'React', level: 92 },
-    { name: 'Python', level: 90 },
-    { name: 'LangChain', level: 88 },
-    { name: 'Spring Boot', level: 85 },
-    { name: 'Node.js', level: 87 },
-    { name: 'AWS', level: 82 },
-    { name: 'Docker', level: 85 },
-    { name: 'PostgreSQL', level: 83 },
+    { name: 'React', level: 75 },
+    { name: 'Python', level: 78 },
+    { name: 'LangChain', level: 65 },
+    { name: 'Spring Boot', level: 70 },
+    { name: 'Node.js', level: 72 },
+    { name: 'AWS', level: 68 },
+    { name: 'Docker', level: 65 },
+    { name: 'PostgreSQL', level: 68 },
 ]
 
 const SkillsChart = () => {

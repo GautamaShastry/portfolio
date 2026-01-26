@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import aboutPic from "../assets/projects/gautam-logo.png"
+import aboutPic from "../assets/projects/image_1.webp"
 import resume from "../assets/projects/Satya_SDE_Amazon.pdf"
 import { motion, useScroll, useTransform, useInView } from 'framer-motion'
 import { FaDownload, FaCode, FaServer, FaBrain, FaStar } from 'react-icons/fa6'
@@ -154,7 +154,10 @@ const About = () => {
                             <img 
                                 src={aboutPic} 
                                 alt="about" 
-                                className='rounded-2xl w-full max-w-md mx-auto shadow-2xl relative z-10' 
+                                className='rounded-2xl w-full max-w-md mx-auto shadow-2xl relative z-10'
+                                width="400"
+                                height="400"
+                                loading="lazy" 
                             />
                             
                             {/* Reflection effect */}

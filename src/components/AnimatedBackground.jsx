@@ -1,101 +1,37 @@
-import { useEffect, useRef } from 'react'
 import { useTheme } from '../context/ThemeContext'
 
+// Simplified static background - no animation loop for better performance
 const AnimatedBackground = () => {
-    const canvasRef = useRef(null)
     const { isDark } = useTheme()
 
-    useEffect(() => {
-        const canvas = canvasRef.current
-        const ctx = canvas.getContext('2d')
-        let animationFrameId
-        let particles = []
-
-        const resizeCanvas = () => {
-            canvas.width = window.innerWidth
-            canvas.height = window.innerHeight
-        }
-
-        const createParticles = () => {
-            particles = []
-            const particleCount = Math.floor((canvas.width * canvas.height) / 15000)
-            
-            for (let i = 0; i < particleCount; i++) {
-                particles.push({
-                    x: Math.random() * canvas.width,
-                    y: Math.random() * canvas.height,
-                    radius: Math.random() * 2 + 1,
-                    vx: (Math.random() - 0.5) * 0.5,
-                    vy: (Math.random() - 0.5) * 0.5,
-                    opacity: Math.random() * 0.5 + 0.2,
-                })
-            }
-        }
-
-        const drawParticles = () => {
-            ctx.clearRect(0, 0, canvas.width, canvas.height)
-
-            particles.forEach((particle, i) => {
-                // Update position
-                particle.x += particle.vx
-                particle.y += particle.vy
-
-                // Wrap around edges
-                if (particle.x < 0) particle.x = canvas.width
-                if (particle.x > canvas.width) particle.x = 0
-                if (particle.y < 0) particle.y = canvas.height
-                if (particle.y > canvas.height) particle.y = 0
-
-                // Draw particle
-                ctx.beginPath()
-                ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2)
-                ctx.fillStyle = isDark 
-                    ? `rgba(168, 85, 247, ${particle.opacity})` 
-                    : `rgba(124, 58, 237, ${particle.opacity * 0.5})`
-                ctx.fill()
-
-                // Draw connections
-                particles.slice(i + 1).forEach(otherParticle => {
-                    const dx = particle.x - otherParticle.x
-                    const dy = particle.y - otherParticle.y
-                    const distance = Math.sqrt(dx * dx + dy * dy)
-
-                    if (distance < 150) {
-                        ctx.beginPath()
-                        ctx.moveTo(particle.x, particle.y)
-                        ctx.lineTo(otherParticle.x, otherParticle.y)
-                        ctx.strokeStyle = isDark
-                            ? `rgba(168, 85, 247, ${0.1 * (1 - distance / 150)})`
-                            : `rgba(124, 58, 237, ${0.05 * (1 - distance / 150)})`
-                        ctx.stroke()
-                    }
-                })
-            })
-
-            animationFrameId = requestAnimationFrame(drawParticles)
-        }
-
-        resizeCanvas()
-        createParticles()
-        drawParticles()
-
-        window.addEventListener('resize', () => {
-            resizeCanvas()
-            createParticles()
-        })
-
-        return () => {
-            cancelAnimationFrame(animationFrameId)
-            window.removeEventListener('resize', resizeCanvas)
-        }
-    }, [isDark])
-
     return (
-        <canvas
-            ref={canvasRef}
-            className="fixed inset-0 -z-10 pointer-events-none"
-            style={{ opacity: 0.6 }}
-        />
+        <div className="fixed inset-0 -z-10 pointer-events-none overflow-hidden">
+            {/* Static gradient orbs with CSS animation */}
+            <div 
+                className={`absolute w-96 h-96 rounded-full blur-3xl ${isDark ? 'opacity-20' : 'opacity-10'}`}
+                style={{
+                    background: 'radial-gradient(circle, rgba(168, 85, 247, 0.4), transparent)',
+                    top: '10%',
+                    left: '10%',
+                    animation: 'float 20s ease-in-out infinite',
+                }}
+            />
+            <div 
+                className={`absolute w-80 h-80 rounded-full blur-3xl ${isDark ? 'opacity-15' : 'opacity-8'}`}
+                style={{
+                    background: 'radial-gradient(circle, rgba(99, 102, 241, 0.4), transparent)',
+                    bottom: '20%',
+                    right: '15%',
+                    animation: 'float 25s ease-in-out infinite reverse',
+                }}
+            />
+            <style>{`
+                @keyframes float {
+                    0%, 100% { transform: translate(0, 0); }
+                    50% { transform: translate(30px, -30px); }
+                }
+            `}</style>
+        </div>
     )
 }
 

@@ -1,11 +1,12 @@
-import project1 from "../assets/projects/project_1.jpeg";
-import project2 from "../assets/projects/project_2.jpeg";
-import project3 from "../assets/projects/project_3.jpeg";
-import project4 from "../assets/projects/project_4.jpg";
-import project5 from "../assets/projects/project5.png";
-import project6 from "../assets/projects/student-survey.jpg";
-import project7 from "../assets/projects/taskimage.webp";
-import agent from "../assets/projects/agent.jpg";
+// Using optimized web images for better performance
+const project1 = "https://images.unsplash.com/photo-1611746872915-64382b5c76da?w=400&q=75&auto=format"; // chat app
+const project2 = "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=400&q=75&auto=format"; // portfolio
+const project3 = "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=400&q=75&auto=format"; // AI/ML
+const project4 = "https://images.unsplash.com/photo-1546410531-bb4caa6b424d?w=400&q=75&auto=format"; // NLP
+const project5 = "https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=400&q=75&auto=format"; // resume
+const project6 = "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=400&q=75&auto=format"; // server/cloud
+const project7 = "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=400&q=75&auto=format"; // task management
+const agent = "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400&q=75&auto=format"; // AI agent
 
 import { DiPython } from "react-icons/di";
 import { FaJava, FaNodeJs } from "react-icons/fa6";
@@ -25,7 +26,7 @@ export const NAV_LINK = {
 
 export const HERO_CONTENT = `I am a Full-Stack Developer and Machine Learning Enthusiast with a passion for transforming ideas into impactful solutions. Whether it's designing user-friendly web applications or developing intelligent models, I thrive at the intersection of innovation and technology.`;
 
-export const ABOUT_TEXT = `I am a dedicated Software Engineer and AI Engineer specializing in building intelligent, autonomous systems. With expertise in LangChain, LangGraph, and RAG architectures, I design and develop AI agents that automate complex workflows and deliver real-world business value. My experience spans full-stack development with React, Node.js, and cloud platforms, combined with deep knowledge of LLMs, prompt engineering, and agentic AI patterns. From building customer support agents with multi-step reasoning to developing ML pipelines, I thrive at the intersection of software engineering and artificial intelligence.`;
+export const ABOUT_TEXT = `I'm Satya, a Software Engineer who genuinely loves turning complex problems into elegant, working solutions. Fresh out of my Master's at George Mason University, I bring a unique blend of full-stack development and AI engineering that lets me build end-to-end products from scratch. What sets me apart? I don't just write code that works—I build systems designed for real-world chaos: fault-tolerant microservices, cloud-native architectures, and AI agents that actually deliver business value. From optimizing API latency at Backflipt to architecting multi-agent LangGraph pipelines, I've consistently shipped production-ready code that teams can rely on. I thrive in collaborative environments where I can own problems end-to-end, debug the tricky stuff others avoid, and mentor teammates along the way.`;
 
 export const EXPERIENCES = [
     {
@@ -138,30 +139,30 @@ export const CONTACT = {
 };
 
 export const TECH_LINKS = [
-    { name: "LangChain", Icon: SiLangchain, link: "https://langchain.com/", duration: 2.5, colorClass: "text-emerald-500" },
-    { name: "FastAPI", Icon: SiFastapi, link: "https://fastapi.tiangolo.com/", duration: 2.5, colorClass: "text-teal-500" },
-    { name: "React.js", Icon: RiReactjsLine, link: "https://reactjs.org/", duration: 2.5, colorClass: "text-cyan-400" },
-    { name: "Node.js", Icon: FaNodeJs, link: "https://nodejs.org/", duration: 3, colorClass: "text-green-500" },
-    { name: "MongoDB", Icon: SiMongodb, link: "https://www.mongodb.com/", duration: 5, colorClass: "text-green-600" },
+    { name: "LangChain", Icon: SiLangchain, link: "https://langchain.com/", duration: 1, colorClass: "text-emerald-500" },
+    { name: "FastAPI", Icon: SiFastapi, link: "https://fastapi.tiangolo.com/", duration: 1, colorClass: "text-teal-500" },
+    { name: "React.js", Icon: RiReactjsLine, link: "https://reactjs.org/", duration: 2, colorClass: "text-cyan-400" },
+    { name: "Node.js", Icon: FaNodeJs, link: "https://nodejs.org/", duration: 2, colorClass: "text-green-500" },
+    { name: "MongoDB", Icon: SiMongodb, link: "https://www.mongodb.com/", duration: 2, colorClass: "text-green-600" },
     { name: "Pandas", Icon: SiPandas, link: "https://pandas.pydata.org/", duration: 2, colorClass: "text-blue-500" },
-    { name: "Java", Icon: FaJava, link: "https://www.oracle.com/java/", duration: 6, colorClass: "text-red-500" },
-    { name: "Spring Boot", Icon: SiSpringboot, link: "https://spring.io/projects/spring-boot", duration: 3.5, colorClass: "text-green-700" },
+    { name: "Java", Icon: FaJava, link: "https://www.oracle.com/java/", duration: 4, colorClass: "text-red-500" },
+    { name: "Spring Boot", Icon: SiSpringboot, link: "https://spring.io/projects/spring-boot", duration: 2, colorClass: "text-green-700" },
     { name: "Python", Icon: DiPython, link: "https://www.python.org/", duration: 4, colorClass: "text-yellow-500" },
-    { name: "C", Icon: SiC, link: "https://en.wikipedia.org/wiki/C_(programming_language)", duration: 2, colorClass: "text-blue-800" },
-    { name: "Docker", Icon: SiDocker, link: "https://www.docker.com/", duration: 2, colorClass: "text-blue-400" },
-    { name: "AWS", Icon: FaAws, link: "https://aws.amazon.com/", duration: 3, colorClass: "text-orange-500" },
-    { name: "Kubernetes", Icon: SiKubernetes, link: "https://kubernetes.io/", duration: 2.5, colorClass: "text-blue-600" },
-    { name: "Jenkins", Icon: SiJenkins, link: "https://www.jenkins.io/", duration: 1.5, colorClass: "text-red-700" },
-    { name: "Rancher", Icon: SiRancher, link: "https://rancher.com/", duration: 1.5, colorClass: "text-blue-700" },
+    { name: "C", Icon: SiC, link: "https://en.wikipedia.org/wiki/C_(programming_language)", duration: 3, colorClass: "text-blue-800" },
+    { name: "Docker", Icon: SiDocker, link: "https://www.docker.com/", duration: 1.5, colorClass: "text-blue-400" },
+    { name: "AWS", Icon: FaAws, link: "https://aws.amazon.com/", duration: 2, colorClass: "text-orange-500" },
+    { name: "Kubernetes", Icon: SiKubernetes, link: "https://kubernetes.io/", duration: 1, colorClass: "text-blue-600" },
+    { name: "Jenkins", Icon: SiJenkins, link: "https://www.jenkins.io/", duration: 1, colorClass: "text-red-700" },
+    { name: "Rancher", Icon: SiRancher, link: "https://rancher.com/", duration: 0.5, colorClass: "text-blue-700" },
     { name: "Git", Icon: SiGit, link: "https://git-scm.com/", duration: 4, colorClass: "text-red-600" },
-    { name: "GitHub", Icon: SiGithub, link: "https://www.github.com/", duration: 1, colorClass: "text-gray-700" },
-    { name: "Ansible", Icon: SiAnsible, link: "https://www.ansible.com/", duration: 2, colorClass: "text-red-500" },
-    { name: "TensorFlow", Icon: SiTensorflow, link: "https://www.tensorflow.org/", duration: 3, colorClass: "text-orange-600" },
-    { name: "MySQL", Icon: SiMysql, link: "https://www.mysql.com/", duration: 2, colorClass: "text-blue-700" },
-    { name: "PostgreSQL", Icon: SiPostgresql, link: "https://www.postgresql.org/", duration: 2.5, colorClass: "text-blue-800" },
-    { name: "HTML5", Icon: SiHtml5, link: "https://w3schools.com/html/", duration: 1, colorClass: "text-orange-500" },
-    { name: "CSS3", Icon: SiCss3, link: "https://www.w3schools.com/css/", duration: 1, colorClass: "text-blue-500" },
-    { name: "JavaScript", Icon: SiJavascript, link: "https://www.javascript.com/", duration: 2, colorClass: "text-yellow-500" },
+    { name: "GitHub", Icon: SiGithub, link: "https://www.github.com/", duration: 4, colorClass: "text-gray-700" },
+    { name: "Ansible", Icon: SiAnsible, link: "https://www.ansible.com/", duration: 1, colorClass: "text-red-500" },
+    { name: "TensorFlow", Icon: SiTensorflow, link: "https://www.tensorflow.org/", duration: 2, colorClass: "text-orange-600" },
+    { name: "MySQL", Icon: SiMysql, link: "https://www.mysql.com/", duration: 3, colorClass: "text-blue-700" },
+    { name: "PostgreSQL", Icon: SiPostgresql, link: "https://www.postgresql.org/", duration: 1.5, colorClass: "text-blue-800" },
+    { name: "HTML5", Icon: SiHtml5, link: "https://w3schools.com/html/", duration: 4, colorClass: "text-orange-500" },
+    { name: "CSS3", Icon: SiCss3, link: "https://www.w3schools.com/css/", duration: 4, colorClass: "text-blue-500" },
+    { name: "JavaScript", Icon: SiJavascript, link: "https://www.javascript.com/", duration: 3, colorClass: "text-yellow-500" },
 ];
 
 export const CERTIFICATIONS = [

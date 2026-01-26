@@ -19,17 +19,17 @@
     },
     "about": {
         "title": "Über mich",
-        "subtitle": "Lernen Sie mich besser kennen",
-        "passionate": "Leidenschaft für großartige Software",
-        "description": "Ich bin ein Full Stack Entwickler mit Expertise in React, Node.js und Cloud-Technologien. Ich liebe es, komplexe Probleme zu lösen und skalierbare Anwendungen zu entwickeln. Mit Erfahrung in KI/ML und DevOps bringe ich einen ganzheitlichen Ansatz in die Softwareentwicklung.",
+        "subtitle": "Der Entwickler hinter dem Code",
+        "passionate": "Systeme bauen, die skalieren – Lösungen, die zählen",
+        "description": "Ich bin Satya, ein Software-Ingenieur, der es liebt, komplexe Probleme in elegante, funktionierende Lösungen zu verwandeln. Frisch von meinem Master an der George Mason University bringe ich eine einzigartige Kombination aus Full-Stack-Entwicklung und KI-Engineering mit, die es mir ermöglicht, End-to-End-Produkte von Grund auf zu entwickeln. Was mich auszeichnet? Ich schreibe nicht nur Code, der funktioniert – ich baue Systeme, die für das echte Chaos der Praxis konzipiert sind: fehlertolerante Microservices, Cloud-native Architekturen und KI-Agenten, die echten Geschäftswert liefern. Von der Optimierung der API-Latenz bei Backflipt bis zur Architektur von Multi-Agenten-LangGraph-Pipelines habe ich stets produktionsreifen Code geliefert, auf den Teams sich verlassen können. Ich gedeihe in kollaborativen Umgebungen, in denen ich Probleme End-to-End übernehmen, die kniffligen Dinge debuggen kann, die andere meiden, und Teammitglieder unterstützen kann.",
         "download_cv": "Lebenslauf herunterladen",
         "stat_frontend": "Frontend",
         "stat_backend": "Backend",
         "stat_ai": "ML/KI",
-        "skill_problem": "Problemlösung",
-        "skill_team": "Teamarbeit",
-        "skill_agile": "Agil",
-        "skill_clean": "Sauberer Code"
+        "skill_problem": "Problemlöser",
+        "skill_team": "Teamplayer",
+        "skill_agile": "Agiles Denken",
+        "skill_clean": "Clean Code Verfechter"
     },
     "skills": {
         "title": "Meine Fähigkeiten",

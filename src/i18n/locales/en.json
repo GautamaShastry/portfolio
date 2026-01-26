@@ -19,17 +19,17 @@
     },
     "about": {
         "title": "About Me",
-        "subtitle": "Get to know me better",
-        "passionate": "Passionate about building great software",
-        "description": "I'm a Full Stack Developer with expertise in React, Node.js, and cloud technologies. I love solving complex problems and building scalable applications. With experience in AI/ML and DevOps, I bring a holistic approach to software development.",
+        "subtitle": "The Developer Behind the Code",
+        "passionate": "Building Systems That Scale, Solutions That Matter",
+        "description": "I'm Satya, a Software Engineer who genuinely loves turning complex problems into elegant, working solutions. Fresh out of my Master's at George Mason University, I bring a unique blend of full-stack development and AI engineering that lets me build end-to-end products from scratch. What sets me apart? I don't just write code that works—I build systems designed for real-world chaos: fault-tolerant microservices, cloud-native architectures, and AI agents that actually deliver business value. From optimizing API latency at Backflipt to architecting multi-agent LangGraph pipelines, I've consistently shipped production-ready code that teams can rely on. I thrive in collaborative environments where I can own problems end-to-end, debug the tricky stuff others avoid, and mentor teammates along the way. If you're looking for someone who combines strong CS fundamentals with hands-on experience in React, Spring Boot, AWS, and cutting-edge AI—let's talk.",
         "download_cv": "Download Resume",
         "stat_frontend": "Frontend",
         "stat_backend": "Backend",
-        "stat_ai": "ML/AI",
-        "skill_problem": "Problem Solving",
-        "skill_team": "Team Collaboration",
-        "skill_agile": "Agile",
-        "skill_clean": "Clean Code"
+        "stat_ai": "AI/ML",
+        "skill_problem": "Problem Solver",
+        "skill_team": "Team Player",
+        "skill_agile": "Agile Mindset",
+        "skill_clean": "Clean Code Advocate"
     },
     "skills": {
         "title": "My Skills",

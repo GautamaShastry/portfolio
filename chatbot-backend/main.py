@@ -3,9 +3,13 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import openai
 import os
-from dotenv import load_dotenv
 
-load_dotenv()
+# Only load dotenv for local development
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass  # dotenv not needed in Lambda
 
 app = FastAPI(title="Portfolio Chatbot API")
 
@@ -18,8 +22,11 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# OpenAI client
-client = openai.OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+# OpenAI client - get API key from environment
+api_key = os.getenv("OPENAI_API_KEY")
+if not api_key:
+    print("WARNING: OPENAI_API_KEY environment variable not set")
+client = openai.OpenAI(api_key=api_key)
 
 class ChatRequest(BaseModel):
     message: str

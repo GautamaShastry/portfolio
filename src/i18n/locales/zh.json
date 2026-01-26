@@ -19,17 +19,17 @@
     },
     "about": {
         "title": "关于我",
-        "subtitle": "更好地了解我",
-        "passionate": "热衷于构建优秀软件",
-        "description": "我是一名精通React、Node.js和云技术的全栈开发工程师。我喜欢解决复杂问题和构建可扩展的应用程序。凭借在AI/ML和DevOps方面的经验，我为软件开发带来全面的方法。",
+        "subtitle": "代码背后的开发者",
+        "passionate": "构建可扩展的系统，创造有价值的解决方案",
+        "description": "我是Satya，一名热爱将复杂问题转化为优雅、可行解决方案的软件工程师。刚从George Mason University获得硕士学位，我带来了全栈开发和AI工程的独特组合。我的优势是什么？我不仅仅编写能运行的代码——我构建为现实世界混乱而设计的系统：容错微服务、云原生架构，以及能够提供真正商业价值的AI代理。从在Backflipt优化API延迟到架构多代理LangGraph管道，我始终交付团队可以信赖的生产就绪代码。",
         "download_cv": "下载简历",
         "stat_frontend": "前端",
         "stat_backend": "后端",
         "stat_ai": "机器学习/AI",
-        "skill_problem": "问题解决",
-        "skill_team": "团队协作",
-        "skill_agile": "敏捷开发",
-        "skill_clean": "代码整洁"
+        "skill_problem": "问题解决者",
+        "skill_team": "团队合作者",
+        "skill_agile": "敏捷思维",
+        "skill_clean": "整洁代码倡导者"
     },
     "skills": {
         "title": "我的技能",

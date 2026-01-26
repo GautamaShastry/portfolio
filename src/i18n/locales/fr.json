@@ -19,17 +19,17 @@
     },
     "about": {
         "title": "À propos de moi",
-        "subtitle": "Apprenez à mieux me connaître",
-        "passionate": "Passionné par la création de logiciels exceptionnels",
-        "description": "Je suis un développeur Full Stack avec une expertise en React, Node.js et technologies cloud. J'aime résoudre des problèmes complexes et créer des applications évolutives. Avec une expérience en IA/ML et DevOps, j'apporte une approche holistique au développement logiciel.",
+        "subtitle": "Le développeur derrière le code",
+        "passionate": "Construire des systèmes qui évoluent, des solutions qui comptent",
+        "description": "Je suis Satya, un ingénieur logiciel qui aime transformer des problèmes complexes en solutions élégantes et fonctionnelles. Fraîchement diplômé de mon Master à George Mason University, j'apporte un mélange unique de développement full-stack et d'ingénierie IA qui me permet de créer des produits de bout en bout. Ce qui me distingue ? Je n'écris pas seulement du code qui fonctionne — je construis des systèmes conçus pour le chaos du monde réel : microservices tolérants aux pannes, architectures cloud-native et agents IA qui apportent une vraie valeur commerciale. De l'optimisation de la latence API chez Backflipt à l'architecture de pipelines multi-agents LangGraph, j'ai constamment livré du code prêt pour la production sur lequel les équipes peuvent compter.",
         "download_cv": "Télécharger le CV",
         "stat_frontend": "Frontend",
         "stat_backend": "Backend",
         "stat_ai": "ML/IA",
-        "skill_problem": "Résolution de problèmes",
-        "skill_team": "Travail d'équipe",
-        "skill_agile": "Agile",
-        "skill_clean": "Code propre"
+        "skill_problem": "Résolveur de problèmes",
+        "skill_team": "Esprit d'équipe",
+        "skill_agile": "Mentalité Agile",
+        "skill_clean": "Défenseur du Clean Code"
     },
     "skills": {
         "title": "Mes compétences",
