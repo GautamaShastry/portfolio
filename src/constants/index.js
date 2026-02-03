@@ -112,7 +112,7 @@ export const PROJECTS = [
         title: "Portfolio Website",
         image: project2,
         description: `A Personal website designed to showcase my skills, experience, and projects in web development and machine learning. Built using modern web technologies like ReactJS with elegant, responsive design.`,
-        technologies: ["ReactJS", "Tailwind CSS", "JavaScript"],
+        technologies: ["ReactJS", "Tailwind CSS", "JavaScript", "AWS"],
         githubLink: "https://github.com/GautamaShastry/portfolio",
         link: "https://gautamportfolio.com/",
     },
