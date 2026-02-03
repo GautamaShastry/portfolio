@@ -22,11 +22,18 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# OpenAI client - get API key from environment
-api_key = os.getenv("OPENAI_API_KEY")
-if not api_key:
-    print("WARNING: OPENAI_API_KEY environment variable not set")
-client = openai.OpenAI(api_key=api_key)
+# OpenAI client - get API key from environment (lazy initialization)
+client = None
+
+def get_openai_client():
+    global client
+    if client is None:
+        api_key = os.getenv("OPENAI_API_KEY")
+        if not api_key:
+            print("WARNING: OPENAI_API_KEY environment variable not set")
+            raise HTTPException(status_code=500, detail="OpenAI API key not configured")
+        client = openai.OpenAI(api_key=api_key)
+    return client
 
 class ChatRequest(BaseModel):
     message: str
@@ -42,7 +49,8 @@ async def root():
 @app.post("/api/chat", response_model=ChatResponse)
 async def chat(request: ChatRequest):
     try:
-        response = client.chat.completions.create(
+        openai_client = get_openai_client()
+        response = openai_client.chat.completions.create(
             model="gpt-4o-mini",
             messages=[
                 {
@@ -55,13 +63,15 @@ async def chat(request: ChatRequest):
             temperature=0.7
         )
         return ChatResponse(response=response.choices[0].message.content)
+    except HTTPException:
+        raise
     except Exception as e:
-        print(f"Error: {e}")  # Log error to terminal
+        print(f"Error: {e}")  # Log error to CloudWatch
         raise HTTPException(status_code=500, detail=str(e))
 
-# AWS Lambda handler
+# AWS Lambda handler with Function URL support
 from mangum import Mangum
-handler = Mangum(app)
+handler = Mangum(app, lifespan="off")
 
 if __name__ == "__main__":
     import uvicorn

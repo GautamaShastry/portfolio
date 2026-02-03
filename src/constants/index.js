@@ -24,16 +24,16 @@ export const NAV_LINK = {
     linkedin: "https://www.linkedin.com/in/satya2603/",
 };
 
-export const HERO_CONTENT = `I am a Full-Stack Developer and Machine Learning Enthusiast with a passion for transforming ideas into impactful solutions. Whether it's designing user-friendly web applications or developing intelligent models, I thrive at the intersection of innovation and technology.`;
+export const HERO_CONTENT = `I build cloud-native services and distributed systems with a strong focus on reliability, observability, and measurable performance. I've shipped full-stack workflows in React/Redux, designed reactive microservices in Spring WebFlux, and built distributed AI inference pipelines. I like clean APIs, solid testing, and CI/CD that makes releases boring.`;
 
-export const ABOUT_TEXT = `I'm Satya, a Software Engineer who genuinely loves turning complex problems into elegant, working solutions. Fresh out of my Master's at George Mason University, I bring a unique blend of full-stack development and AI engineering that lets me build end-to-end products from scratch. What sets me apart? I don't just write code that works—I build systems designed for real-world chaos: fault-tolerant microservices, cloud-native architectures, and AI agents that actually deliver business value. From optimizing API latency at Backflipt to architecting multi-agent LangGraph pipelines, I've consistently shipped production-ready code that teams can rely on. I thrive in collaborative environments where I can own problems end-to-end, debug the tricky stuff others avoid, and mentor teammates along the way.`;
+export const ABOUT_TEXT = `I'm Satya, a Software Engineer who genuinely loves turning complex problems into elegant, working solutions. Fresh out of my Master's at George Mason University, I bring a unique blend of full-stack development and AI engineering that lets me build end-to-end products from scratch. What sets me apart? I don't just write code that works—I build systems designed for real-world chaos: fault-tolerant microservices, cloud-native architectures, and AI agents that actually deliver business value. Currently exploring RAG, vector search, and tool-calling workflows with LangGraph/LangChain. I thrive in collaborative environments where I can own problems end-to-end, debug the tricky stuff others avoid, and mentor teammates along the way. Fun fact: I optimize for reproducibility, logs, and artifacts before "cool demos".`;
 
 export const EXPERIENCES = [
     {
         period: "Jan 2023 - Dec 2023",
         role: "Associate Software Engineer",
         company: "Backflipt",
-        description: `Owned delivery of React/Redux customer workflows (forms, tables, filters) and collaborated cross-functionally in Agile sprints. Designed cloud-native Spring WebFlux microservices with validation and consistent error mapping; optimized AWS DocumentDB queries, trimming p95 API latency by ~35ms. Fixed async race conditions and dispatch loops, reducing redundant traffic. Built CI-ready API regression automation with Newman, reducing pre-release verification from ~15 min manual to ~6 min automated.`,
+        description: `Built and shipped React/Redux workflows; improved debugging and triage by standardizing error contracts and correlation IDs (20% reduction in debugging time). Designed Spring WebFlux microservices with validation and consistent error mapping; optimized DocumentDB queries and reduced p95 API latency by ~35ms. Automated API regression using Postman → Newman with JUnit XML + artifacts (payloads/logs) for reproducible failures and faster verification. Reduced pre-release verification from ~15 min manual to ~6 min automated via smoke/regression gates.`,
         technologies: ["React", "Redux", "Spring WebFlux", "AWS DocumentDB", "Newman", "CI/CD"],
     },
 ];
@@ -48,16 +48,38 @@ export const EDUCATION = [
         coursework: ["Machine Learning", "Deep Learning", "Advanced NLP", "DevOps", "Data Mining", "Artificial Intelligence", "Systems Programming", "Mathematical Foundations of CS", "Cryptography", "Analysis of Algorithms"],
     },
     {
-        degree: "Bachelor of Technology in Computer Science",
+        degree: "Bachelor of Science in Computer Science",
         school: "Andhra University",
         location: "Visakhapatnam, India",
         period: "Aug 2019 - May 2023",
-        gpa: "3.3/4.0",
+        gpa: "8.15/10",
         coursework: ["Data Structures", "Algorithms", "Database Systems", "Operating Systems", "Web Development", "Artificial Intelligence", "Machine Learning", "Embedded Systems", "Cloud Computing", "Object oriented programming", "Data mining", "Computer Networks"],
     },
 ];
 
 export const PROJECTS = [
+    {
+        title: "Sentinel AI",
+        image: agent,
+        description: `Built distributed inference pipeline (gRPC ingestion → Kafka → GPU workers); achieved 30x speedup (500ms → 16.1ms) using GPU batching; sustained 24.3 FPS at 1080p with sub-second alerts. Delivered React UI + FastAPI + PostgreSQL; processed 293 frames in 12.1s with 117 detections; added Prometheus/Grafana dashboards and auto-cleanup policies.`,
+        technologies: ["Go", "gRPC", "Kafka", "Python", "YOLOv8", "SLURM/A100", "FastAPI", "React", "PostgreSQL"],
+        githubLink: "https://github.com/GautamaShastry/sentinel-ai",
+    },
+    {
+        title: "SurveyOps",
+        image: project6,
+        description: `Deployed Spring Boot to a 3-replica Kubernetes cluster on AWS EC2 with rolling updates and liveness/readiness probes; validated fault tolerance and rollback scenarios. Built Jenkins CI/CD to publish versioned Docker images and deploy in <5 min across 6 releases; tuned RDS(MySQL) HikariCP and validated APIs with 10+ Postman regression cases.`,
+        technologies: ["Java", "Spring Boot", "Kubernetes", "Jenkins", "AWS", "MySQL"],
+        githubLink: "https://github.com/GautamaShastry/SWE645_assign3",
+    },
+    {
+        title: "HireReady",
+        image: project5,
+        description: `Built a 9-agent LangGraph pipeline with evaluation harness and automated PDF/HTML reports; ran 200 E2E analyses with 0 failed runs and deterministic outputs; tracked drift via hybrid scoring. Hardened services with Resilience4j + Redis; sustained 100-concurrent load tests with 0 failed requests under injected 5xx and rate-limit faults using bulkheads/fallbacks.`,
+        technologies: ["Java", "Spring Boot", "Flask", "LangGraph", "PostgreSQL", "Redis", "React", "Resilience4j"],
+        githubLink: "https://github.com/GautamaShastry/resume_screener",
+        link: "https://resume-screener-chi.vercel.app/login",
+    },
     {
         title: "AutoE2E Testing Framework",
         image: agent,
@@ -107,21 +129,6 @@ export const PROJECTS = [
         description: `Analysed how well a model trained in one language can evaluate another language. Used Bloom-560m and Multilingual-Cased models to fine-tune on English and performed zero-shot evaluation on Arabic and Swahili.`,
         technologies: ["Python", "NLP", "LLM", "Deep Learning", "Transformers"],
         githubLink: "https://github.com/GautamaShastry/Cross-lingual-Transferability",
-    },
-    {
-        title: "Resume Analyzer - Multi-Agent AI System",
-        image: project5,
-        description: `Architected a 9-agent LangGraph pipeline with parallel DAG execution, processing 200+ sequential analyses with 0% error rate. Implemented hybrid scoring (semantic similarity + NER skill extraction), Redis caching layer, and Resilience4j circuit breakers. Load-tested at 100 concurrent users with 100% success rate. Features include company intel scraping, interview prep generation, resume coaching, and automated PDF/HTML reports.`,
-        technologies: ["Java", "Spring Boot", "Flask", "LangGraph", "PostgreSQL", "Redis", "React", "Resilience4j"],
-        githubLink: "https://github.com/GautamaShastry/resume_screener",
-        link: "https://resume-screener-chi.vercel.app/login",
-    },
-    {
-        title: "Student Survey Application",
-        image: project6,
-        description: `Designed a Spring Boot REST API with CRUD endpoints, deployed on Kubernetes with 3 replicas on EC2 nodes managed by Rancher. Created a Git-triggered Jenkins pipeline for zero-downtime releases.`,
-        technologies: ["Spring Boot", "MySQL", "Docker", "Kubernetes", "Rancher", "Jenkins", "AWS"],
-        githubLink: "https://github.com/GautamaShastry/SWE645_assign3",
     },
     {
         title: "Taskify-Task Management Application",
