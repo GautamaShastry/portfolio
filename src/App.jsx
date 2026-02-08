@@ -1,9 +1,10 @@
-import { lazy, Suspense } from 'react'
+import { lazy, Suspense, useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom'
+import { useAppSelector } from './store/hooks'
+import { selectIsDark } from './store/slices/themeSlice'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import AnimatedBackground from './components/AnimatedBackground'
-import { useTheme } from './context/ThemeContext'
 
 // Lazy load pages for better performance
 const Home = lazy(() => import('./pages/Home'))
@@ -20,7 +21,11 @@ const PageLoader = () => (
 )
 
 const App = () => {
-    const { isDark } = useTheme()
+    const isDark = useAppSelector(selectIsDark)
+
+    useEffect(() => {
+        document.documentElement.classList.toggle('dark', isDark)
+    }, [isDark])
 
     return (
         <div className={`min-h-screen transition-colors duration-300 ${isDark ? 'dark' : ''}`}>

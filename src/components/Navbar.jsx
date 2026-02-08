@@ -4,7 +4,8 @@ import { HiMenuAlt3, HiX } from 'react-icons/hi'
 import { BsSun, BsMoon } from 'react-icons/bs'
 import { Link, useLocation } from 'react-router-dom'
 import { NAV_LINK } from '../constants'
-import { useTheme } from '../context/ThemeContext'
+import { useAppDispatch, useAppSelector } from '../store/hooks'
+import { selectIsDark, toggleTheme } from '../store/slices/themeSlice'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useTranslation } from 'react-i18next'
 import LanguageSelector from './LanguageSelector'
@@ -19,7 +20,8 @@ const navItems = [
 const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false)
     const [scrolled, setScrolled] = useState(false)
-    const { isDark, toggleTheme } = useTheme()
+    const dispatch = useAppDispatch()
+    const isDark = useAppSelector(selectIsDark)
     const { t } = useTranslation()
     const location = useLocation()
 
@@ -82,7 +84,7 @@ const Navbar = () => {
 
                     {/* Theme Toggle */}
                     <motion.button
-                        onClick={toggleTheme}
+                        onClick={() => dispatch(toggleTheme())}
                         whileHover={{ scale: 1.1 }}
                         whileTap={{ scale: 0.9, rotate: 180 }}
                         className="p-2 rounded-xl bg-gray-100 dark:bg-neutral-800 text-gray-600 dark:text-gray-400 hover:bg-purple-500/20 hover:text-purple-500 transition-all"

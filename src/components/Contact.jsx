@@ -1,7 +1,7 @@
-import { useRef, useState } from 'react'
+import { useRef, useState, useCallback, useMemo, memo } from 'react'
 import { CONTACT, NAV_LINK } from '../constants'
-import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
-import { FaLocationDot, FaPhone, FaLinkedin, FaInstagram, FaGithub, FaPaperPlane, FaCalendarDays, FaEnvelope, FaRocket } from 'react-icons/fa6'
+import { motion, useScroll, useTransform } from 'framer-motion'
+import { FaLocationDot, FaPhone, FaLinkedin, FaInstagram, FaGithub, FaCalendarDays, FaEnvelope, FaRocket } from 'react-icons/fa6'
 import { MdEmail } from 'react-icons/md'
 import emailjs from '@emailjs/browser'
 import { toast } from 'react-toastify'
@@ -15,8 +15,8 @@ const socialLinks = [
 
 const CALENDLY_URL = "https://calendly.com/gautamashastry"
 
-// Floating envelope animation component
-const FloatingEnvelope = ({ delay, index }) => (
+// Memoized floating envelope animation component
+const FloatingEnvelope = memo(({ delay, index }) => (
     <motion.div
         className="absolute text-purple-500/10 pointer-events-none"
         style={{
@@ -37,7 +37,66 @@ const FloatingEnvelope = ({ delay, index }) => (
     >
         <FaEnvelope size={20 + index * 3} />
     </motion.div>
-)
+))
+
+FloatingEnvelope.displayName = 'FloatingEnvelope'
+
+// Memoized contact info item component
+const ContactInfoItem = memo(({ item, idx, t }) => (
+    <motion.div
+        initial={{ opacity: 0, x: -50, rotateY: -30 }}
+        whileInView={{ opacity: 1, x: 0, rotateY: 0 }}
+        viewport={{ once: true }}
+        transition={{ delay: idx * 0.15, type: "spring" }}
+        whileHover={{ x: 10, scale: 1.02, boxShadow: "0 10px 30px rgba(168, 85, 247, 0.15)" }}
+        className="flex items-center gap-4 p-4 bg-white dark:bg-neutral-800/50 rounded-xl border border-gray-100 dark:border-neutral-700 cursor-pointer group"
+    >
+        <motion.div 
+            className={`p-3 bg-gradient-to-r ${item.color} rounded-xl text-white shadow-lg`}
+            whileHover={{ rotate: [0, -10, 10, 0], scale: 1.1 }}
+            transition={{ duration: 0.5 }}
+        >
+            <item.icon className="text-xl" />
+        </motion.div>
+        <div>
+            <p className="text-sm text-gray-500 dark:text-gray-400">{t(item.labelKey)}</p>
+            {item.href ? (
+                <a href={item.href} className="text-gray-900 dark:text-white hover:text-purple-500 transition-colors font-medium">
+                    {item.value}
+                </a>
+            ) : (
+                <p className="text-gray-900 dark:text-white font-medium">{item.value}</p>
+            )}
+        </div>
+        <motion.div className="ml-auto opacity-0 group-hover:opacity-100 text-purple-500" initial={{ x: -10 }} whileHover={{ x: 0 }}>
+            →
+        </motion.div>
+    </motion.div>
+))
+
+ContactInfoItem.displayName = 'ContactInfoItem'
+
+// Memoized social link component
+const SocialLink = memo(({ social, idx }) => (
+    <motion.a
+        href={social.href}
+        target="_blank"
+        rel="noopener noreferrer"
+        initial={{ opacity: 0, y: 30, rotate: -180 }}
+        whileInView={{ opacity: 1, y: 0, rotate: 0 }}
+        viewport={{ once: true }}
+        transition={{ delay: idx * 0.1 + 0.5, type: "spring" }}
+        whileHover={{ scale: 1.2, y: -8, rotate: 360, boxShadow: `0 15px 30px ${social.color}40` }}
+        whileTap={{ scale: 0.9 }}
+        className="p-4 bg-white dark:bg-neutral-800 rounded-xl border border-gray-100 dark:border-neutral-700 text-gray-600 dark:text-gray-400 hover:text-white transition-all shadow-lg"
+        onMouseEnter={(e) => e.currentTarget.style.backgroundColor = social.color}
+        onMouseLeave={(e) => e.currentTarget.style.backgroundColor = ""}
+    >
+        <social.icon size={24} />
+    </motion.a>
+))
+
+SocialLink.displayName = 'SocialLink'
 
 const Contact = () => {
     const formRef = useRef(null)
@@ -53,13 +112,13 @@ const Contact = () => {
     
     const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"])
 
-    const contactInfo = [
+    const contactInfo = useMemo(() => [
         { icon: FaLocationDot, labelKey: "contact.location", value: CONTACT.address, color: "from-red-500 to-orange-500" },
         { icon: FaPhone, labelKey: "contact.phone", value: CONTACT.phoneNo, color: "from-green-500 to-emerald-500" },
         { icon: MdEmail, labelKey: "contact.email", value: CONTACT.email, href: `mailto:${CONTACT.email}`, color: "from-blue-500 to-cyan-500" },
-    ]
+    ], [])
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = useCallback(async (e) => {
         e.preventDefault()
         if (isSending) return
         setIsSending(true)
@@ -78,16 +137,24 @@ const Contact = () => {
         } finally {
             setIsSending(false)
         }
-    }
+    }, [isSending])
 
-    const inputVariants = {
+    const inputVariants = useMemo(() => ({
         idle: { scale: 1, boxShadow: "0 0 0 0 rgba(168, 85, 247, 0)" },
         focused: { 
             scale: 1.02, 
             boxShadow: "0 0 30px rgba(168, 85, 247, 0.3)",
             transition: { duration: 0.3 }
         }
-    }
+    }), [])
+
+    const handleFocus = useCallback((field) => setFocusedField(field), [])
+    const handleBlur = useCallback(() => setFocusedField(null), [])
+
+    // Memoize envelope array to prevent recreation
+    const envelopes = useMemo(() => [...Array(8)].map((_, i) => (
+        <FloatingEnvelope key={i} delay={i * 0.5} index={i} />
+    )), [])
 
     return (
         <section id='contact' className='py-20 relative overflow-hidden' ref={containerRef}>
@@ -105,9 +172,7 @@ const Contact = () => {
             />
             
             {/* Floating envelopes */}
-            {[...Array(8)].map((_, i) => (
-                <FloatingEnvelope key={i} delay={i * 0.5} index={i} />
-            ))}
+            {envelopes}
 
             <motion.div
                 initial={{ opacity: 0, y: 50 }}
@@ -173,36 +238,7 @@ const Contact = () => {
                     {/* Contact details */}
                     <div className="space-y-4">
                         {contactInfo.map((item, idx) => (
-                            <motion.div
-                                key={item.labelKey}
-                                initial={{ opacity: 0, x: -50, rotateY: -30 }}
-                                whileInView={{ opacity: 1, x: 0, rotateY: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: idx * 0.15, type: "spring" }}
-                                whileHover={{ x: 10, scale: 1.02, boxShadow: "0 10px 30px rgba(168, 85, 247, 0.15)" }}
-                                className="flex items-center gap-4 p-4 bg-white dark:bg-neutral-800/50 rounded-xl border border-gray-100 dark:border-neutral-700 cursor-pointer group"
-                            >
-                                <motion.div 
-                                    className={`p-3 bg-gradient-to-r ${item.color} rounded-xl text-white shadow-lg`}
-                                    whileHover={{ rotate: [0, -10, 10, 0], scale: 1.1 }}
-                                    transition={{ duration: 0.5 }}
-                                >
-                                    <item.icon className="text-xl" />
-                                </motion.div>
-                                <div>
-                                    <p className="text-sm text-gray-500 dark:text-gray-400">{t(item.labelKey)}</p>
-                                    {item.href ? (
-                                        <a href={item.href} className="text-gray-900 dark:text-white hover:text-purple-500 transition-colors font-medium">
-                                            {item.value}
-                                        </a>
-                                    ) : (
-                                        <p className="text-gray-900 dark:text-white font-medium">{item.value}</p>
-                                    )}
-                                </div>
-                                <motion.div className="ml-auto opacity-0 group-hover:opacity-100 text-purple-500" initial={{ x: -10 }} whileHover={{ x: 0 }}>
-                                    →
-                                </motion.div>
-                            </motion.div>
+                            <ContactInfoItem key={item.labelKey} item={item} idx={idx} t={t} />
                         ))}
                     </div>
 
@@ -245,23 +281,7 @@ const Contact = () => {
                         <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">{t('contact.find_me')}</p>
                         <div className="flex gap-4">
                             {socialLinks.map((social, idx) => (
-                                <motion.a
-                                    key={social.label}
-                                    href={social.href}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    initial={{ opacity: 0, y: 30, rotate: -180 }}
-                                    whileInView={{ opacity: 1, y: 0, rotate: 0 }}
-                                    viewport={{ once: true }}
-                                    transition={{ delay: idx * 0.1 + 0.5, type: "spring" }}
-                                    whileHover={{ scale: 1.2, y: -8, rotate: 360, boxShadow: `0 15px 30px ${social.color}40` }}
-                                    whileTap={{ scale: 0.9 }}
-                                    className="p-4 bg-white dark:bg-neutral-800 rounded-xl border border-gray-100 dark:border-neutral-700 text-gray-600 dark:text-gray-400 hover:text-white transition-all shadow-lg"
-                                    onMouseEnter={(e) => e.currentTarget.style.backgroundColor = social.color}
-                                    onMouseLeave={(e) => e.currentTarget.style.backgroundColor = ""}
-                                >
-                                    <social.icon size={24} />
-                                </motion.a>
+                                <SocialLink key={social.label} social={social} idx={idx} />
                             ))}
                         </div>
                     </div>
@@ -303,8 +323,8 @@ const Contact = () => {
                                     type="text" 
                                     name='name' 
                                     required 
-                                    onFocus={() => setFocusedField('name')}
-                                    onBlur={() => setFocusedField(null)}
+                                    onFocus={() => handleFocus('name')}
+                                    onBlur={handleBlur}
                                     className='w-full px-4 py-3 bg-gray-50 dark:bg-neutral-900 border border-gray-200 dark:border-neutral-700 rounded-xl text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all' 
                                     placeholder="John Doe"
                                     whileFocus={{ scale: 1.01 }}
@@ -319,8 +339,8 @@ const Contact = () => {
                                     type="email" 
                                     name='email' 
                                     required 
-                                    onFocus={() => setFocusedField('email')}
-                                    onBlur={() => setFocusedField(null)}
+                                    onFocus={() => handleFocus('email')}
+                                    onBlur={handleBlur}
                                     className='w-full px-4 py-3 bg-gray-50 dark:bg-neutral-900 border border-gray-200 dark:border-neutral-700 rounded-xl text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all' 
                                     placeholder="john@example.com"
                                     whileFocus={{ scale: 1.01 }}
@@ -335,8 +355,8 @@ const Contact = () => {
                                     name="message" 
                                     rows='5' 
                                     required 
-                                    onFocus={() => setFocusedField('message')}
-                                    onBlur={() => setFocusedField(null)}
+                                    onFocus={() => handleFocus('message')}
+                                    onBlur={handleBlur}
                                     className='w-full px-4 py-3 bg-gray-50 dark:bg-neutral-900 border border-gray-200 dark:border-neutral-700 rounded-xl text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all resize-none' 
                                     placeholder="Your message here..."
                                     whileFocus={{ scale: 1.01 }}

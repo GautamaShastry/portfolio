@@ -1,60 +1,30 @@
-import { useState, useRef, useEffect } from 'react'
+import { useRef, useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { FaRobot, FaPaperPlane, FaTimes, FaUser } from 'react-icons/fa'
 import { useTranslation } from 'react-i18next'
-
-const PORTFOLIO_CONTEXT = `You are Gautam's (Satya's) AI assistant on his portfolio website. Answer questions about his background, skills, and projects concisely.
-
-ABOUT:
-- Software Engineer & AI Engineer specializing in intelligent autonomous systems
-- MS in Computer Science at George Mason University (GPA: 3.87/4.0, Jan 2024 - Dec 2025)
-- BTech in Computer Science from Andhra University (2019-2023)
-- Expertise: LangChain, LangGraph, RAG architectures, AI agents
-- Full-stack: React, Node.js, Spring Boot, Python, FastAPI, Django
-- Cloud/DevOps: AWS, Docker, Kubernetes, Jenkins, Ansible
-
-CERTIFICATIONS:
-- AWS Certified Cloud Practitioner (July 2025)
-- AWS Certified AI Practitioner (Dec 2025)
-- Deep Learning.ai Specialization (Coursera, Sep 2023)
-
-KEY PROJECTS:
-1. AutoE2E Testing Framework - Ansible-based infrastructure-as-code, CLI E2E testing, reduced QA setup by 80%
-2. Support Sage - AI customer support agent using LangGraph & RAG for order management and ticket escalation
-3. TRUST Agents - Multi-agent fact-checking with 4 LLM agents, 65.2% accuracy on LIAR dataset
-4. Resume Analyzer - 9-agent LangGraph pipeline, Redis caching, Resilience4j circuit breakers, 100 concurrent users
-5. ChatBook - Real-time chat app (React, Node, MongoDB, Socket.io)
-6. Image Captioning - CNN+LSTM model, BLEU-1 score 0.48
-7. Student Survey App - Spring Boot, Kubernetes, Jenkins CI/CD, 99.9% uptime
-
-EXPERIENCE:
-- Associate Software Engineer at Backflipt (Jan-Dec 2023) - React.js, Spring Boot
-
-CONTACT:
-- Email: gautamashastry@gmail.com
-- Location: Fairfax, VA
-- GitHub: github.com/GautamaShastry
-- LinkedIn: linkedin.com/in/satya2603`
+import { useAppDispatch, useAppSelector } from '../store/hooks'
+import {
+    selectChatbotState,
+    openChatbot,
+    closeChatbot,
+    addUserMessage,
+    sendMessage,
+    setGreeting
+} from '../store/slices/chatbotSlice'
 
 const Chatbot = () => {
     const { t } = useTranslation()
-    const [isOpen, setIsOpen] = useState(false)
-    const [messages, setMessages] = useState([])
+    const dispatch = useAppDispatch()
+    const { isOpen, messages, isLoading } = useAppSelector(selectChatbotState)
     const [input, setInput] = useState('')
-    const [isLoading, setIsLoading] = useState(false)
     const messagesEndRef = useRef(null)
 
-    // Initialize greeting message and update when language changes
     useEffect(() => {
-        setMessages([{ role: 'assistant', content: t('chatbot.greeting') }])
-    }, [t])
+        dispatch(setGreeting(t('chatbot.greeting')))
+    }, [t, dispatch])
 
-    const scrollToBottom = () => {
+    useEffect(() => {
         messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
-    }
-
-    useEffect(() => {
-        scrollToBottom()
     }, [messages])
 
     const handleSubmit = async (e) => {
@@ -63,32 +33,14 @@ const Chatbot = () => {
 
         const userMessage = input.trim()
         setInput('')
-        setMessages(prev => [...prev, { role: 'user', content: userMessage }])
-        setIsLoading(true)
-
-        try {
-            const response = await fetch(import.meta.env.VITE_CHATBOT_API_URL || '/api/chat', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ message: userMessage, context: PORTFOLIO_CONTEXT })
-            })
-            if (!response.ok) throw new Error('API error')
-            const data = await response.json()
-            setMessages(prev => [...prev, { role: 'assistant', content: data.response }])
-        } catch (error) {
-            setMessages(prev => [...prev, { 
-                role: 'assistant', 
-                content: t('chatbot.error')
-            }])
-        } finally {
-            setIsLoading(false)
-        }
+        dispatch(addUserMessage(userMessage))
+        dispatch(sendMessage(userMessage))
     }
 
     return (
         <>
             <motion.button
-                onClick={() => setIsOpen(true)}
+                onClick={() => dispatch(openChatbot())}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
                 className={`fixed bottom-6 right-6 z-50 p-4 bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-full shadow-lg shadow-purple-500/30 ${isOpen ? 'hidden' : ''}`}
@@ -111,7 +63,7 @@ const Chatbot = () => {
                                     <p className="text-xs text-white/80">{t('chatbot.subtitle')}</p>
                                 </div>
                             </div>
-                            <button onClick={() => setIsOpen(false)} className="p-2 hover:bg-white/20 rounded-full transition-colors">
+                            <button onClick={() => dispatch(closeChatbot())} className="p-2 hover:bg-white/20 rounded-full transition-colors">
                                 <FaTimes size={16} />
                             </button>
                         </div>

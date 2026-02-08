@@ -1,8 +1,9 @@
-import { useTheme } from '../context/ThemeContext'
+import { useAppSelector } from '../store/hooks'
+import { selectIsDark } from '../store/slices/themeSlice'
 
 // Simplified static background - no animation loop for better performance
 const AnimatedBackground = () => {
-    const { isDark } = useTheme()
+    const isDark = useAppSelector(selectIsDark)
 
     return (
         <div className="fixed inset-0 -z-10 pointer-events-none overflow-hidden">
