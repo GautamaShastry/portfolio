@@ -1,46 +1,17 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-
-const PORTFOLIO_CONTEXT = `You are Gautam's (Satya's) AI assistant on his portfolio website. Answer questions about his background, skills, and projects concisely.
-
-ABOUT:
-- Software Engineer & AI Engineer specializing in intelligent autonomous systems
-- MS in Computer Science at George Mason University (GPA: 3.87/4.0, Jan 2024 - Dec 2025)
-- BTech in Computer Science from Andhra University (2019-2023)
-- Expertise: LangChain, LangGraph, RAG architectures, AI agents
-- Full-stack: React, Node.js, Spring Boot, Python, FastAPI, Django
-- Cloud/DevOps: AWS, Docker, Kubernetes, Jenkins, Ansible
-
-CERTIFICATIONS:
-- AWS Certified Cloud Practitioner (July 2025)
-- AWS Certified AI Practitioner (Dec 2025)
-- Deep Learning.ai Specialization (Coursera, Sep 2023)
-
-KEY PROJECTS:
-1. AutoE2E Testing Framework - Ansible-based infrastructure-as-code, CLI E2E testing, reduced QA setup by 80%
-2. Support Sage - AI customer support agent using LangGraph & RAG for order management and ticket escalation
-3. TRUST Agents - Multi-agent fact-checking with 4 LLM agents, 65.2% accuracy on LIAR dataset
-4. Resume Analyzer - 9-agent LangGraph pipeline, Redis caching, Resilience4j circuit breakers, 100 concurrent users
-5. ChatBook - Real-time chat app (React, Node, MongoDB, Socket.io)
-6. Image Captioning - CNN+LSTM model, BLEU-1 score 0.48
-7. Student Survey App - Spring Boot, Kubernetes, Jenkins CI/CD, 99.9% uptime
-
-EXPERIENCE:
-- Associate Software Engineer at Backflipt (Jan-Dec 2023) - React.js, Spring Boot
-
-CONTACT:
-- Email: gautamashastry@gmail.com
-- Location: Fairfax, VA
-- GitHub: github.com/GautamaShastry
-- LinkedIn: linkedin.com/in/satya2603`
+import { generatePortfolioContext } from '../../utils/generatePortfolioContext'
 
 export const sendMessage = createAsyncThunk(
     'chatbot/sendMessage',
     async (message, { rejectWithValue }) => {
         try {
+            // Generate context dynamically from portfolio constants
+            const context = generatePortfolioContext()
+            
             const response = await fetch(import.meta.env.VITE_CHATBOT_API_URL || '/api/chat', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ message, context: PORTFOLIO_CONTEXT })
+                body: JSON.stringify({ message, context })
             })
             if (!response.ok) throw new Error('API error')
             const data = await response.json()
