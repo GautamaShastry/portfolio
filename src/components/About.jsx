@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useRef, useMemo, useCallback } from 'react'
 import aboutPic from "../assets/projects/image_1.webp"
 import resume from "../assets/projects/Satya_SDE_Amazon.pdf"
 import { motion, useScroll, useTransform, useInView } from 'framer-motion'
@@ -19,21 +19,21 @@ const About = () => {
     const rotate = useTransform(scrollYProgress, [0, 1], [0, 10])
     const scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.8, 1, 0.8])
     
-    const stats = [
+    const stats = useMemo(() => [
         { icon: FaCode, labelKey: "about.stat_frontend", value: "React, JS", color: "from-blue-500 to-cyan-500" },
         { icon: FaServer, labelKey: "about.stat_backend", value: "Node, Java", color: "from-green-500 to-emerald-500" },
         { icon: FaBrain, labelKey: "about.stat_ai", value: "LLM, RAG", color: "from-purple-500 to-pink-500" },
-    ]
+    ], [])
 
-    const softSkills = [
+    const softSkills = useMemo(() => [
         t('about.skill_problem'),
         t('about.skill_team'),
         t('about.skill_agile'),
         t('about.skill_clean')
-    ]
+    ], [t])
 
-    // Staggered text reveal animation
-    const textReveal = {
+    // Staggered text reveal animation - memoized
+    const textReveal = useMemo(() => ({
         hidden: { opacity: 0 },
         visible: {
             opacity: 1,
@@ -41,9 +41,9 @@ const About = () => {
                 staggerChildren: 0.02,
             }
         }
-    }
+    }), [])
 
-    const letterReveal = {
+    const letterReveal = useMemo(() => ({
         hidden: { opacity: 0, y: 50, rotateX: -90 },
         visible: { 
             opacity: 1, 
@@ -51,7 +51,7 @@ const About = () => {
             rotateX: 0,
             transition: { duration: 0.5, ease: "easeOut" }
         }
-    }
+    }), [])
 
     return (
         <section id='about' className='py-20 relative overflow-hidden' ref={containerRef}>

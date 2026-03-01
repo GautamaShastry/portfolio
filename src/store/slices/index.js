@@ -33,3 +33,13 @@ export {
     setIsScrolled,
     selectUiState 
 } from './uiSlice'
+
+// Game slice
+export {
+    default as gameReducer,
+    openGame,
+    closeGame,
+    submitGuess,
+    resetGame,
+    selectGameState
+} from './gameSlice'

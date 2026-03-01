@@ -1,16 +1,26 @@
-import { FaHeart } from 'react-icons/fa'
+import { useMemo } from 'react'
+import { FaHeart, FaGamepad } from 'react-icons/fa'
 import { FaLinkedin, FaGithub, FaInstagram } from 'react-icons/fa6'
 import { motion } from 'framer-motion'
 import { NAV_LINK } from '../constants'
 import { useTranslation } from 'react-i18next'
+import { useAppDispatch } from '../store/hooks'
+import { openGame } from '../store/slices/gameSlice'
 
 const Footer = () => {
     const currentYear = new Date().getFullYear()
     const { t } = useTranslation()
+    const dispatch = useAppDispatch()
 
-    const scrollToTop = () => {
+    const scrollToTop = useMemo(() => () => {
         window.scrollTo({ top: 0, behavior: 'smooth' })
-    }
+    }, [])
+
+    const socialLinks = useMemo(() => [
+        { Icon: FaLinkedin, href: NAV_LINK.linkedin },
+        { Icon: FaGithub, href: NAV_LINK.github },
+        { Icon: FaInstagram, href: NAV_LINK.instagram },
+    ], [])
 
     return (
         <footer className="py-12 border-t border-gray-200 dark:border-neutral-800">
@@ -19,12 +29,20 @@ const Footer = () => {
                     <motion.div whileHover={{ scale: 1.05 }} onClick={scrollToTop} className="cursor-pointer">
                         <span className="text-2xl font-bold gradient-text">Gautam</span>
                     </motion.div>
+                    
+                    {/* Secret Game Trigger */}
+                    <motion.button
+                        onClick={() => dispatch(openGame())}
+                        whileHover={{ scale: 1.1, rotate: 10 }}
+                        whileTap={{ scale: 0.9 }}
+                        className="p-3 bg-purple-500/10 text-purple-600 dark:text-purple-400 rounded-full hover:bg-purple-500/20 transition-colors"
+                        title="Play a game to unlock secret content!"
+                    >
+                        <FaGamepad size={20} />
+                    </motion.button>
+                    
                     <div className='flex items-center gap-4'>
-                        {[
-                            { Icon: FaLinkedin, href: NAV_LINK.linkedin },
-                            { Icon: FaGithub, href: NAV_LINK.github },
-                            { Icon: FaInstagram, href: NAV_LINK.instagram },
-                        ].map(({ Icon, href }, idx) => (
+                        {socialLinks.map(({ Icon, href }, idx) => (
                             <motion.a
                                 key={idx}
                                 href={href}

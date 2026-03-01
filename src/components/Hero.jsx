@@ -1,18 +1,61 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo, useRef } from 'react'
 import profilePic from '../assets/projects/image_2.webp'
-import { motion } from 'framer-motion'
-import { FaArrowDown } from 'react-icons/fa6'
+import { motion, AnimatePresence, useInView } from 'framer-motion'
+import { FaArrowDown, FaGamepad } from 'react-icons/fa6'
+import { FaTimes } from 'react-icons/fa'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
+import { useAppDispatch } from '../store/hooks'
+import { openGame } from '../store/slices/gameSlice'
 
 const roles = ['Full Stack Developer', 'AI Engineer', 'Cloud Architect', 'Problem Solver']
 
 const Hero = () => {
     const { t } = useTranslation()
     const navigate = useNavigate()
+    const dispatch = useAppDispatch()
+    const heroRef = useRef(null)
+    const isInView = useInView(heroRef, { amount: 0.5 })
     const [roleIndex, setRoleIndex] = useState(0)
     const [displayText, setDisplayText] = useState('')
     const [isDeleting, setIsDeleting] = useState(false)
+    const [showHint, setShowHint] = useState(false)
+
+    // Show hint when hero section is in view, hide after 5 seconds
+    useEffect(() => {
+        if (isInView) {
+            // Show after 0.5 seconds
+            const showTimer = setTimeout(() => {
+                setShowHint(true)
+            }, 500)
+            
+            // Hide after 5.5 seconds (0.5s delay + 5s display)
+            const hideTimer = setTimeout(() => {
+                setShowHint(false)
+            }, 5500)
+            
+            return () => {
+                clearTimeout(showTimer)
+                clearTimeout(hideTimer)
+            }
+        } else {
+            setShowHint(false)
+        }
+    }, [isInView])
+
+    // Memoize handlers
+    const handleContactClick = useMemo(() => () => navigate('/contact'), [navigate])
+    const handleProjectsClick = useMemo(() => () => navigate('/projects'), [navigate])
+    const handleScrollToAbout = useMemo(() => () => {
+        document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })
+    }, [])
+    const handleGameClick = useMemo(() => () => {
+        dispatch(openGame())
+        setShowHint(false)
+    }, [dispatch])
+    const handleCloseHint = useMemo(() => () => {
+        setShowHint(false)
+    }, [])
 
     // Typewriter effect
     useEffect(() => {
@@ -37,7 +80,7 @@ const Hero = () => {
     }, [displayText, isDeleting, roleIndex])
 
     return (
-        <div className="min-h-screen flex items-center justify-center pt-20 pb-10 relative">
+        <div className="min-h-screen flex items-center justify-center pt-20 pb-10 relative" ref={heroRef}>
             {/* Simple CSS background */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
                 <div className="absolute w-96 h-96 left-1/4 top-1/4 opacity-20 rounded-full blur-3xl bg-purple-500/50" />
@@ -101,13 +144,13 @@ const Hero = () => {
                             className="flex flex-wrap gap-4"
                         >
                             <button
-                                onClick={() => navigate('/contact')}
+                                onClick={handleContactClick}
                                 className="px-8 py-3 bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-xl font-medium shadow-lg shadow-purple-500/25 hover:shadow-xl hover:scale-105 transition-all"
                             >
                                 {t('hero.cta_contact')}
                             </button>
                             <button
-                                onClick={() => navigate('/projects')}
+                                onClick={handleProjectsClick}
                                 className="px-8 py-3 border-2 border-purple-500 text-purple-600 dark:text-purple-400 rounded-xl font-medium hover:bg-purple-500/10 hover:scale-105 transition-all"
                             >
                                 {t('hero.cta_projects')}
@@ -151,6 +194,89 @@ const Hero = () => {
                                 {t('hero.available')}
                             </div>
                         </div>
+
+                        {/* Secret Hint Dialog */}
+                        <AnimatePresence>
+                            {showHint && (
+                                <motion.div
+                                    initial={{ opacity: 0, scale: 0, x: -50 }}
+                                    animate={{ opacity: 1, scale: 1, x: 0 }}
+                                    exit={{ opacity: 0, scale: 0, x: -50 }}
+                                    transition={{ delay: 1.5, type: "spring" }}
+                                    className="absolute -right-4 top-1/2 -translate-y-1/2 lg:-right-16 w-64 z-20"
+                                >
+                                    <div className="relative">
+                                        {/* Speech bubble tail */}
+                                        <div className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 w-0 h-0 border-t-8 border-t-transparent border-b-8 border-b-transparent border-r-8 border-r-purple-600" />
+                                        
+                                        <motion.div
+                                            animate={{ 
+                                                boxShadow: [
+                                                    "0 0 0 0 rgba(168, 85, 247, 0.4)",
+                                                    "0 0 0 10px rgba(168, 85, 247, 0)",
+                                                    "0 0 0 0 rgba(168, 85, 247, 0.4)",
+                                                ]
+                                            }}
+                                            transition={{ duration: 2, repeat: Infinity }}
+                                            className="relative bg-gradient-to-br from-purple-600 to-indigo-600 p-4 rounded-xl shadow-2xl"
+                                        >
+                                            <button
+                                                onClick={handleCloseHint}
+                                                className="absolute -top-2 -right-2 p-1.5 bg-white dark:bg-neutral-800 rounded-full text-purple-600 hover:bg-purple-100 transition-colors shadow-lg"
+                                            >
+                                                <FaTimes size={12} />
+                                            </button>
+                                            
+                                            <div className="flex items-start gap-3">
+                                                <motion.div
+                                                    animate={{ rotate: [0, 10, -10, 0] }}
+                                                    transition={{ duration: 2, repeat: Infinity }}
+                                                >
+                                                    <FaGamepad className="text-yellow-300 text-2xl flex-shrink-0" />
+                                                </motion.div>
+                                                <div>
+                                                    <p className="text-white text-sm font-semibold mb-1">
+                                                        🎯 Secret Challenge!
+                                                    </p>
+                                                    <p className="text-white/90 text-xs leading-relaxed mb-3">
+                                                        Think you're detail-oriented? Crack the code to unlock exclusive content for recruiters!
+                                                    </p>
+                                                    <motion.button
+                                                        onClick={handleGameClick}
+                                                        whileHover={{ scale: 1.05 }}
+                                                        whileTap={{ scale: 0.95 }}
+                                                        className="w-full px-3 py-2 bg-white text-purple-600 rounded-lg text-xs font-bold hover:bg-yellow-300 transition-colors shadow-lg"
+                                                    >
+                                                        🎮 Play Now
+                                                    </motion.button>
+                                                </div>
+                                            </div>
+                                            
+                                            {/* Sparkles */}
+                                            {[...Array(3)].map((_, i) => (
+                                                <motion.div
+                                                    key={i}
+                                                    className="absolute w-1 h-1 bg-yellow-300 rounded-full"
+                                                    style={{
+                                                        left: `${20 + i * 30}%`,
+                                                        top: `${10 + i * 20}%`,
+                                                    }}
+                                                    animate={{
+                                                        scale: [0, 1, 0],
+                                                        opacity: [0, 1, 0],
+                                                    }}
+                                                    transition={{
+                                                        duration: 2,
+                                                        repeat: Infinity,
+                                                        delay: i * 0.3,
+                                                    }}
+                                                />
+                                            ))}
+                                        </motion.div>
+                                    </div>
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
                     </motion.div>
                 </div>
             </div>
@@ -160,7 +286,7 @@ const Hero = () => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 1 }}
-                onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
+                onClick={handleScrollToAbout}
                 className="absolute bottom-8 left-1/2 -translate-x-1/2 p-3 rounded-full bg-gray-100 dark:bg-neutral-800 text-gray-600 dark:text-gray-400 hover:bg-purple-500/20 hover:text-purple-500 transition-colors animate-bounce"
             >
                 <FaArrowDown />

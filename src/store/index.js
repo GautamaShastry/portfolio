@@ -3,13 +3,15 @@ import themeReducer from './slices/themeSlice'
 import chatbotReducer from './slices/chatbotSlice'
 import contactReducer from './slices/contactSlice'
 import uiReducer from './slices/uiSlice'
+import gameReducer from './slices/gameSlice'
 
 export const store = configureStore({
     reducer: {
         theme: themeReducer,
         chatbot: chatbotReducer,
         contact: contactReducer,
-        ui: uiReducer
+        ui: uiReducer,
+        game: gameReducer
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({

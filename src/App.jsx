@@ -1,16 +1,18 @@
 import { lazy, Suspense, useEffect } from 'react'
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, useLocation } from 'react-router-dom'
 import { useAppSelector } from './store/hooks'
 import { selectIsDark } from './store/slices/themeSlice'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import AnimatedBackground from './components/AnimatedBackground'
+import CodeBreakerGame from './components/CodeBreakerGame'
 
 // Lazy load pages for better performance
 const Home = lazy(() => import('./pages/Home'))
 const Projects = lazy(() => import('./pages/Projects'))
 const Experience = lazy(() => import('./pages/Experience'))
 const Contact = lazy(() => import('./pages/Contact'))
+const SecretPage = lazy(() => import('./pages/SecretPage'))
 const Chatbot = lazy(() => import('./components/Chatbot'))
 
 // Loading spinner
@@ -22,6 +24,8 @@ const PageLoader = () => (
 
 const App = () => {
     const isDark = useAppSelector(selectIsDark)
+    const location = useLocation()
+    const isSecretPage = location.pathname === '/secret'
 
     useEffect(() => {
         document.documentElement.classList.toggle('dark', isDark)
@@ -38,7 +42,7 @@ const App = () => {
             </div>
 
             <div className='relative'>
-                <Navbar />
+                {!isSecretPage && <Navbar />}
                 <main className='container mx-auto px-4 md:px-8 pt-20 min-h-[calc(100vh-200px)]'>
                     <Suspense fallback={<PageLoader />}>
                         <Routes>
@@ -46,13 +50,15 @@ const App = () => {
                             <Route path="/projects" element={<Projects />} />
                             <Route path="/experience" element={<Experience />} />
                             <Route path="/contact" element={<Contact />} />
+                            <Route path="/secret" element={<SecretPage />} />
                         </Routes>
                     </Suspense>
                 </main>
-                <Footer />
+                {!isSecretPage && <Footer />}
                 <Suspense fallback={null}>
                     <Chatbot />
                 </Suspense>
+                <CodeBreakerGame />
             </div>
         </div>
     )

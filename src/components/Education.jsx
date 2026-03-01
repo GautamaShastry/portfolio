@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useRef, useState, useMemo } from 'react'
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
 import { FaGraduationCap, FaCalendar, FaMapMarkerAlt, FaBook, FaTrophy } from 'react-icons/fa'
 import { EDUCATION } from '../constants'

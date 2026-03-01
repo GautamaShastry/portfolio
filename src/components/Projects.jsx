@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, memo, useMemo, useCallback } from 'react'
 import { PROJECTS } from '../constants'
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from 'framer-motion'
 import { FaGithub, FaExternalLinkAlt, FaExpand } from 'react-icons/fa'
@@ -25,8 +25,8 @@ const taggedProjects = PROJECTS.map(project => {
     return { ...project, category }
 })
 
-// 3D Card component with tilt effect
-const ProjectCard = ({ project, index }) => {
+// 3D Card component with tilt effect - memoized
+const ProjectCard = memo(({ project, index }) => {
     const cardRef = useRef(null)
     const [isHovered, setIsHovered] = useState(false)
     
@@ -213,15 +213,24 @@ const ProjectCard = ({ project, index }) => {
             </div>
         </motion.div>
     )
-}
+})
+
+ProjectCard.displayName = 'ProjectCard'
 
 const Projects = () => {
     const [activeFilter, setActiveFilter] = useState('all')
     const { t } = useTranslation()
 
-    const filteredProjects = activeFilter === 'all' 
-        ? taggedProjects 
-        : taggedProjects.filter(p => p.category === activeFilter)
+    const filteredProjects = useMemo(() => 
+        activeFilter === 'all' 
+            ? taggedProjects 
+            : taggedProjects.filter(p => p.category === activeFilter),
+        [activeFilter]
+    )
+
+    const handleFilterChange = useCallback((filterId) => {
+        setActiveFilter(filterId)
+    }, [])
 
     return (
         <section id='projects' className='py-20 relative overflow-hidden'>
@@ -291,7 +300,7 @@ const Projects = () => {
                 {categories.map((cat, idx) => (
                     <motion.button
                         key={cat.id}
-                        onClick={() => setActiveFilter(cat.id)}
+                        onClick={() => handleFilterChange(cat.id)}
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: idx * 0.1 }}
