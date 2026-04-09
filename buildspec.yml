@@ -6,18 +6,23 @@ phases:
       nodejs: 20
     commands:
       - echo Installing dependencies...
-      - rm -rf node_modules package-lock.json
-      - npm install
+      - npm ci
   build:
     commands:
       - echo Building frontend...
       - npm run build
+      - echo Verifying build output...
+      - ls -la dist/
   post_build:
     commands:
-      - echo Deploying to S3...
-      - aws s3 sync dist/ s3://${S3_BUCKET} --delete
-      - echo Invalidating CloudFront cache...
-      - aws cloudfront create-invalidation --distribution-id ${CLOUDFRONT_DISTRIBUTION_ID} --paths "/*"
-      - echo Deployment completed!
-
-
+      - |
+        if [ -d "dist" ]; then
+          echo Deploying to S3...
+          aws s3 sync dist/ s3://${S3_BUCKET} --delete
+          echo Invalidating CloudFront cache...
+          aws cloudfront create-invalidation --distribution-id ${CLOUDFRONT_DISTRIBUTION_ID} --paths "/*"
+          echo Deployment completed!
+        else
+          echo "ERROR: dist/ directory not found. Build may have failed."
+          exit 1
+        fi
