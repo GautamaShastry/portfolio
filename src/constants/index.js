@@ -30,6 +30,13 @@ export const ABOUT_TEXT = `I'm Satya Subrahmanya Gautama Shastry Bulusu Venkata,
 
 export const EXPERIENCES = [
     {
+        period: "Feb 2026 - Present",
+        role: "Software Developer",
+        company: "KeelWorks Foundation",
+        description: `Customized the Open edX platform across LMS and CMS layers using Django, Mako templates, and frontend UI updates to support tailored learning workflows and improve platform usability. Diagnosed and resolved feature-configuration issues across development and staging environments, reducing environment setup and validation time by ~40%. Redesigned learner navigation flows and surfaced discussion capabilities more prominently, improving content discoverability by ~25%. Implemented repository fixes and container-based validation workflows that strengthened release readiness and improved deployment confidence.`,
+        technologies: ["Django", "Open edX", "Mako", "Docker", "Python", "JavaScript"],
+    },
+    {
         period: "Jan 2023 - Dec 2023",
         role: "Associate Software Engineer",
         company: "Backflipt",
