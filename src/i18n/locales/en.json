@@ -83,10 +83,10 @@
         "built_with": "Built with"
     },
     "chatbot": {
-        "title": "Gautam's AI Assistant",
+        "title": "Satya's AI Assistant",
         "subtitle": "Ask me anything!",
-        "greeting": "Hi! I'm Gautam's AI assistant. Ask me anything about his skills, projects, or experience!",
+        "greeting": "Hi! I'm Satya's AI assistant. Ask me anything about his skills, projects, or experience!",
         "placeholder": "Ask about skills, projects...",
-        "error": "I'm having trouble connecting right now. Please email Gautam directly or check out his projects on GitHub!"
+        "error": "I'm having trouble connecting right now. Please email Satya directly or check out his projects on GitHub!"
     }
 }

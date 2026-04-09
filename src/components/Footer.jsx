@@ -27,7 +27,7 @@ const Footer = () => {
             <div className="max-w-6xl mx-auto px-4">
                 <div className='flex flex-col md:flex-row items-center justify-between gap-6'>
                     <motion.div whileHover={{ scale: 1.05 }} onClick={scrollToTop} className="cursor-pointer">
-                        <span className="text-2xl font-bold gradient-text">Gautam</span>
+                        <span className="text-2xl font-bold gradient-text">Satya</span>
                     </motion.div>
                     
                     {/* Secret Game Trigger */}
@@ -57,7 +57,7 @@ const Footer = () => {
                         ))}
                     </div>
                     <div className='text-center md:text-right'>
-                        <p className='text-sm text-gray-500 dark:text-gray-400'>© {currentYear} Gautam. {t('footer.rights')}</p>
+                        <p className='text-sm text-gray-500 dark:text-gray-400'>© {currentYear} Satya Subrahmanya Gautama Shastry Bulusu Venkata. {t('footer.rights')}</p>
                         <p className='mt-1 text-xs text-gray-400 dark:text-gray-500 flex items-center justify-center md:justify-end gap-1'>
                             {t('footer.built_with')} <FaHeart className='text-red-500' /> React & Tailwind
                         </p>

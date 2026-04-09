@@ -83,10 +83,10 @@
         "built_with": "Construit avec"
     },
     "chatbot": {
-        "title": "Assistant IA de Gautam",
+        "title": "Assistant IA de Satya",
         "subtitle": "Posez-moi n'importe quelle question !",
-        "greeting": "Bonjour ! Je suis l'assistant IA de Gautam. Posez-moi des questions sur ses compétences, projets ou expérience !",
+        "greeting": "Bonjour ! Je suis l'assistant IA de Satya. Posez-moi des questions sur ses compétences, projets ou expérience !",
         "placeholder": "Questions sur les compétences, projets...",
-        "error": "J'ai des difficultés de connexion en ce moment. Veuillez envoyer un email directement à Gautam ou consulter ses projets sur GitHub !"
+        "error": "J'ai des difficultés de connexion en ce moment. Veuillez envoyer un email directement à Satya ou consulter ses projets sur GitHub !"
     }
 }

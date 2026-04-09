@@ -83,10 +83,10 @@
         "built_with": "Erstellt mit"
     },
     "chatbot": {
-        "title": "Gautams KI-Assistent",
+        "title": "Satyas KI-Assistent",
         "subtitle": "Fragen Sie mich alles!",
-        "greeting": "Hallo! Ich bin Gautams KI-Assistent. Fragen Sie mich alles über seine Fähigkeiten, Projekte oder Erfahrungen!",
+        "greeting": "Hallo! Ich bin Satyas KI-Assistent. Fragen Sie mich alles über seine Fähigkeiten, Projekte oder Erfahrungen!",
         "placeholder": "Fragen zu Fähigkeiten, Projekten...",
-        "error": "Ich habe gerade Verbindungsprobleme. Bitte schreiben Sie Gautam direkt eine E-Mail oder schauen Sie sich seine Projekte auf GitHub an!"
+        "error": "Ich habe gerade Verbindungsprobleme. Bitte schreiben Sie Satya direkt eine E-Mail oder schauen Sie sich seine Projekte auf GitHub an!"
     }
 }

@@ -93,7 +93,7 @@ const SecretPage = () => {
                         </p>
                         
                         <p>
-                            I'm <strong>Satya (Gautam)</strong>, and I don't just write code—I build systems that scale, ship features that matter, and solve problems that keep teams up at night.
+                            I'm <strong>Satya Subrahmanya Gautama Shastry Bulusu Venkata</strong>, and I don't just write code—I build systems that scale, ship features that matter, and solve problems that keep teams up at night.
                         </p>
 
                         <div className="my-6 p-4 bg-white dark:bg-neutral-800/50 rounded-xl border-l-4 border-purple-500">

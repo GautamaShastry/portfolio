@@ -224,7 +224,7 @@ Contributions are welcome! Feel free to:
 
 ## 👨‍💻 Original Author
 
-**Satya Bulusu (Gautam)**  
+**Satya Subrahmanya Gautama Shastry Bulusu Venkata**  
 📧 [gautamashastry@gmail.com](mailto:gautamashastry@gmail.com)  
 💼 [LinkedIn](https://linkedin.com/in/satya2603)  
 🌐 [gautamportfolio.com](https://gautamportfolio.com/)

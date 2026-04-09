@@ -287,7 +287,7 @@ const About = () => {
                     {/* Animated download button with particles */}
                     <motion.a
                         href={resume}
-                        download="satya_resume.pdf"
+                        download="Satya_Subrahmanya_BV_Resume.pdf"
                         className='relative inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-xl font-medium shadow-lg shadow-purple-500/25 overflow-hidden group'
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}

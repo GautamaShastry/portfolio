@@ -83,10 +83,10 @@
         "built_with": "使用以下技术构建"
     },
     "chatbot": {
-        "title": "Gautam的AI助手",
+        "title": "Satya的AI助手",
         "subtitle": "随便问！",
-        "greeting": "你好！我是Gautam的AI助手。随时询问他的技能、项目或经验！",
+        "greeting": "你好！我是Satya的AI助手。随时询问他的技能、项目或经验！",
         "placeholder": "询问技能、项目...",
-        "error": "我现在连接有问题。请直接给Gautam发邮件或在GitHub上查看他的项目！"
+        "error": "我现在连接有问题。请直接给Satya发邮件或在GitHub上查看他的项目！"
     }
 }

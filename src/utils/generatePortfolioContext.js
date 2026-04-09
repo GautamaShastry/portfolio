@@ -28,7 +28,7 @@ export const generatePortfolioContext = () => {
         `- ${cert.title} (${cert.issuer}, ${cert.issueDate})`
     ).join('\n')
 
-    return `You are Satya's (Gautam's) AI assistant on his portfolio website. Answer questions about his background, skills, and projects concisely.
+    return `You are Satya Subrahmanya Gautama Shastry Bulusu Venkata's AI assistant on his portfolio website. Answer questions about his background, skills, and projects concisely.
 
 ABOUT:
 ${ABOUT_TEXT.substring(0, 300)}...
