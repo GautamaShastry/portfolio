@@ -29,7 +29,7 @@ phases:
       - aws s3 sync dist/ s3://${S3_BUCKET} --delete
       - echo Invalidating CloudFront cache...
       - aws cloudfront create-invalidation --distribution-id ${CLOUDFRONT_DISTRIBUTION_ID} --paths "/*"
-      - echo Reindexing chatbot content (non-fatal)...
+      - echo "Reindexing chatbot content (non-fatal)..."
       - node scripts/reindex.mjs || echo "Reindex failed, continuing - the site itself is deployed"
       - echo Deployment completed!
 
