@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import { Helmet } from 'react-helmet-async'
 import { FaTrophy, FaRocket, FaHeart, FaCode, FaCoffee, FaGamepad, FaMusic, FaBook, FaGlobe } from 'react-icons/fa'
 
 const SecretPage = () => {
@@ -26,6 +27,9 @@ const SecretPage = () => {
 
     return (
         <div className="min-h-screen pt-24 pb-12">
+            <Helmet>
+                <meta name="robots" content="noindex, nofollow" />
+            </Helmet>
             {/* Confetti Effect */}
             <div className="fixed inset-0 pointer-events-none overflow-hidden">
                 {[...Array(50)].map((_, i) => (
@@ -93,7 +97,7 @@ const SecretPage = () => {
                         </p>
                         
                         <p>
-                            I'm <strong>Satya Subrahmanya Gautama Shastry Bulusu Venkata</strong>, and I don't just write code—I build systems that scale, ship features that matter, and solve problems that keep teams up at night.
+                            I'm <strong>Satya Bulusu</strong>, and I don't just write code—I build systems that scale, ship features that matter, and solve problems that keep teams up at night.
                         </p>
 
                         <div className="my-6 p-4 bg-white dark:bg-neutral-800/50 rounded-xl border-l-4 border-purple-500">

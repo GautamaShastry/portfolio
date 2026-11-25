@@ -1,6 +1,10 @@
 fastapi>=0.109.0
 uvicorn>=0.27.0
-openai>=1.52.0
+anthropic[bedrock]>=0.122.0,<1.0  # 2.x breaks pre-4.7 Claude models on Bedrock; see bedrock_client.py
+boto3>=1.34.0
 python-dotenv>=1.0.0
 pydantic>=2.7.4
 mangum>=0.17.0
+supabase>=2.9.0
+pyjwt>=2.9.0
+bcrypt>=4.1.0

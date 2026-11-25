@@ -1,5 +1,8 @@
 version: 0.2
 
+# Frontend pipeline: install -> build -> browser tests -> deploy to S3/CloudFront -> reindex.
+# CodeBuild runs post_build even when the build phase fails, so the deploy is guarded by
+# CODEBUILD_BUILD_SUCCEEDING: failing tests never reach the live site.
 phases:
   install:
     runtime-versions:
@@ -7,22 +10,31 @@ phases:
     commands:
       - echo Installing dependencies...
       - npm ci
+      - npx playwright install --with-deps chromium
   build:
     commands:
+      - echo Running browser tests against a production build...
+      - CI=1 npm run test:e2e
       - echo Building frontend...
       - npm run build
-      - echo Verifying build output...
       - ls -la dist/
   post_build:
     commands:
       - |
-        if [ -d "dist" ]; then
-          echo Deploying to S3...
-          aws s3 sync dist/ s3://${S3_BUCKET} --delete
-          echo Invalidating CloudFront cache...
-          aws cloudfront create-invalidation --distribution-id ${CLOUDFRONT_DISTRIBUTION_ID} --paths "/*"
-          echo Deployment completed!
-        else
-          echo "ERROR: dist/ directory not found. Build may have failed."
+        if [ "$CODEBUILD_BUILD_SUCCEEDING" != "1" ]; then
+          echo "Build or tests failed - NOT deploying."
           exit 1
         fi
+      - echo Deploying to S3...
+      - aws s3 sync dist/ s3://${S3_BUCKET} --delete
+      - echo Invalidating CloudFront cache...
+      - aws cloudfront create-invalidation --distribution-id ${CLOUDFRONT_DISTRIBUTION_ID} --paths "/*"
+      - echo Reindexing chatbot content (non-fatal)...
+      - node scripts/reindex.mjs || echo "Reindex failed, continuing - the site itself is deployed"
+      - echo Deployment completed!
+
+reports:
+  playwright:
+    files:
+      - "test-results/**/*"
+    discard-paths: no

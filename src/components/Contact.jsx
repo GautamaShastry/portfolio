@@ -3,9 +3,9 @@ import { CONTACT, NAV_LINK } from '../constants'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { FaLocationDot, FaPhone, FaLinkedin, FaInstagram, FaGithub, FaCalendarDays, FaEnvelope, FaRocket } from 'react-icons/fa6'
 import { MdEmail } from 'react-icons/md'
-import emailjs from '@emailjs/browser'
 import { toast } from 'react-toastify'
 import { useTranslation } from 'react-i18next'
+import { trackEvent } from '../lib/analytics'
 
 const socialLinks = [
     { icon: FaLinkedin, href: NAV_LINK.linkedin, label: "LinkedIn", color: "#0077b5" },
@@ -98,6 +98,8 @@ const SocialLink = memo(({ social, idx }) => (
 
 SocialLink.displayName = 'SocialLink'
 
+const CONTACT_API_URL = (import.meta.env.VITE_CHATBOT_API_URL || (import.meta.env.DEV ? 'http://localhost:8000' : '')).replace(/\/$/, '')
+
 const Contact = () => {
     const formRef = useRef(null)
     const containerRef = useRef(null)
@@ -123,21 +125,27 @@ const Contact = () => {
         if (isSending) return
         setIsSending(true)
         try {
-            await emailjs.sendForm(
-                import.meta.env.VITE_EMAILJS_SERVICE_ID,
-                import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
-                formRef.current,
-                import.meta.env.VITE_EMAILJS_PUBLIC_KEY
-            )
-            toast.success("Message sent successfully!")
+            // The backend emails Satya and sends the sender a confirmation from notifications@
+            const fields = Object.fromEntries(new FormData(formRef.current))
+            const response = await fetch(`${CONTACT_API_URL}/api/contact`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(fields)
+            })
+            if (!response.ok) {
+                const data = await response.json().catch(() => ({}))
+                throw new Error(typeof data.detail === 'string' ? data.detail : t('contact.sent_error'))
+            }
+            trackEvent('contact_form_submitted')
+            toast.success(t('contact.sent_success'))
             formRef.current.reset()
         } catch (error) {
             console.error("Failed to send message:", error)
-            toast.error("Failed to send message. Please try again!")
+            toast.error(error.message || t('contact.sent_error'))
         } finally {
             setIsSending(false)
         }
-    }, [isSending])
+    }, [isSending, t])
 
     const inputVariants = useMemo(() => ({
         idle: { scale: 1, boxShadow: "0 0 0 0 rgba(168, 85, 247, 0)" },
@@ -315,6 +323,15 @@ const Contact = () => {
                         />
                         
                         <div className="space-y-6 relative z-10">
+                            {/* Honeypot: invisible to people, bots fill it in and get silently ignored */}
+                            <input
+                                type="text"
+                                name="website"
+                                tabIndex={-1}
+                                autoComplete="off"
+                                aria-hidden="true"
+                                className="absolute -left-[9999px] w-px h-px opacity-0"
+                            />
                             <motion.div variants={inputVariants} animate={focusedField === 'name' ? 'focused' : 'idle'}>
                                 <label className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2'>
                                     {t('contact.name')} <span className='text-red-500'>*</span>

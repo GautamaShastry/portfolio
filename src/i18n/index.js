@@ -10,6 +10,14 @@ import ja from './locales/ja.json'
 import de from './locales/de.json'
 import fr from './locales/fr.json'
 
+const supportedLanguages = ['en', 'hi', 'te', 'zh', 'ja', 'de', 'fr']
+
+const updateDocumentLanguage = (language) => {
+    const locale = language?.split('-')[0] || 'en'
+    document.documentElement.lang = locale
+    document.documentElement.dir = ['ar', 'fa', 'he', 'ur'].includes(locale) ? 'rtl' : 'ltr'
+}
+
 i18n
     .use(LanguageDetector)
     .use(initReactI18next)
@@ -23,10 +31,15 @@ i18n
             de: { translation: de },
             fr: { translation: fr },
         },
+        supportedLngs: supportedLanguages,
+        nonExplicitSupportedLngs: true,
         fallbackLng: 'en',
         interpolation: {
             escapeValue: false,
         },
     })
+
+updateDocumentLanguage(i18n.language)
+i18n.on('languageChanged', updateDocumentLanguage)
 
 export default i18n

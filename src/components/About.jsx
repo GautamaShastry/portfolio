@@ -1,8 +1,9 @@
 import { useRef, useMemo, useCallback } from 'react'
 import aboutPic from "../assets/projects/image_1.webp"
-import resume from "../assets/projects/Satya_SDE_Amazon.pdf"
+import resume from "../assets/projects/Satya_Bulusu-Walmart.pdf"
+import { trackEvent } from "../lib/analytics"
 import { motion, useScroll, useTransform, useInView } from 'framer-motion'
-import { FaDownload, FaCode, FaServer, FaBrain, FaStar } from 'react-icons/fa6'
+import { FaDownload, FaCode, FaServer, FaBrain, FaStar, FaBolt, FaRobot, FaGraduationCap } from 'react-icons/fa6'
 import { useTranslation } from 'react-i18next'
 
 const About = () => {
@@ -25,12 +26,12 @@ const About = () => {
         { icon: FaBrain, labelKey: "about.stat_ai", value: "LLM, RAG", color: "from-purple-500 to-pink-500" },
     ], [])
 
-    const softSkills = useMemo(() => [
-        t('about.skill_problem'),
-        t('about.skill_team'),
-        t('about.skill_agile'),
-        t('about.skill_clean')
-    ], [t])
+    const highlights = useMemo(() => [
+        { icon: FaBolt, statKey: "about.highlight1_stat", labelKey: "about.highlight1_label", color: "from-amber-500 to-orange-500" },
+        { icon: FaCode, statKey: "about.highlight2_stat", labelKey: "about.highlight2_label", color: "from-blue-500 to-cyan-500" },
+        { icon: FaRobot, statKey: "about.highlight3_stat", labelKey: "about.highlight3_label", color: "from-purple-500 to-pink-500" },
+        { icon: FaGraduationCap, statKey: "about.highlight4_stat", labelKey: "about.highlight4_label", color: "from-green-500 to-emerald-500" },
+    ], [])
 
     // Staggered text reveal animation - memoized
     const textReveal = useMemo(() => ({
@@ -257,37 +258,45 @@ const About = () => {
                         ))}
                     </motion.p>
                     
-                    {/* Animated skill pills with stagger */}
-                    <div className="flex flex-wrap gap-2 mb-8">
-                        {softSkills.map((skill, idx) => (
-                            <motion.span 
-                                key={skill} 
-                                className="px-3 py-1 bg-gray-100 dark:bg-neutral-800 text-gray-700 dark:text-gray-300 rounded-lg text-sm cursor-default relative overflow-hidden group"
-                                initial={{ opacity: 0, scale: 0, rotate: -10 }}
-                                whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
+                    {/* Quantified highlight cards */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
+                        {highlights.map((item, idx) => (
+                            <motion.div
+                                key={item.statKey}
+                                className="relative flex items-start gap-3 p-3 bg-gray-50 dark:bg-neutral-800/60 rounded-xl border border-gray-100 dark:border-neutral-700 overflow-hidden group"
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
-                                transition={{ delay: 0.1 * idx, type: "spring" }}
-                                whileHover={{ 
-                                    scale: 1.1, 
-                                    backgroundColor: "rgba(168, 85, 247, 0.2)",
-                                    color: "#a855f7",
-                                }}
+                                transition={{ delay: 0.1 * idx, duration: 0.5 }}
+                                whileHover={{ y: -3, borderColor: "rgba(168, 85, 247, 0.4)" }}
                             >
-                                <motion.span
-                                    className="absolute inset-0 bg-gradient-to-r from-purple-500/0 via-purple-500/30 to-purple-500/0"
-                                    initial={{ x: "-100%" }}
-                                    whileHover={{ x: "100%" }}
-                                    transition={{ duration: 0.5 }}
-                                />
-                                <span className="relative z-10">{skill}</span>
-                            </motion.span>
+                                <div className={`shrink-0 p-2 rounded-lg bg-gradient-to-r ${item.color}`}>
+                                    <item.icon className="text-white text-sm" />
+                                </div>
+                                <div>
+                                    <p className="text-sm font-bold text-gray-900 dark:text-white leading-tight">{t(item.statKey)}</p>
+                                    <p className="text-xs text-gray-500 dark:text-gray-400 leading-snug">{t(item.labelKey)}</p>
+                                </div>
+                            </motion.div>
                         ))}
                     </div>
-                    
+
+                    {/* Closing CTA line */}
+                    <motion.p
+                        className="text-sm italic text-gray-500 dark:text-gray-400 mb-8"
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.4, duration: 0.6 }}
+                    >
+                        {t('about.closing')}
+                    </motion.p>
+
                     {/* Animated download button with particles */}
                     <motion.a
                         href={resume}
-                        download="Satya_Subrahmanya_BV_Resume.pdf"
+                        download="satya.pdf"
+                        onClick={() => trackEvent("resume_downloaded")}
                         className='relative inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-xl font-medium shadow-lg shadow-purple-500/25 overflow-hidden group'
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}

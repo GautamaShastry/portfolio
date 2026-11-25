@@ -28,3 +28,8 @@ dist-ssr
 chatbot-backend/.env
 chatbot-backend/__pycache__/
 *.pyc
+# Playwright
+/test-results/
+/playwright-report/
+/playwright/.cache/
+/dist-e2e/

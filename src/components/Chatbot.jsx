@@ -2,6 +2,7 @@ import { useRef, useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { FaRobot, FaPaperPlane, FaTimes, FaUser } from 'react-icons/fa'
 import { useTranslation } from 'react-i18next'
+import ReactMarkdown from 'react-markdown'
 import { useAppDispatch, useAppSelector } from '../store/hooks'
 import {
     selectChatbotState,
@@ -9,13 +10,25 @@ import {
     closeChatbot,
     addUserMessage,
     sendMessage,
-    setGreeting
+    setGreeting,
+    openCopyCard,
+    closeCopyCard,
+    addAssistantNote
 } from '../store/slices/chatbotSlice'
+import ConversationCopyCard from './ConversationCopyCard'
+import { endConversation } from '../lib/chatSession'
+import { trackEvent } from '../lib/analytics'
 
 const Chatbot = () => {
     const { t } = useTranslation()
     const dispatch = useAppDispatch()
-    const { isOpen, messages, isLoading } = useAppSelector(selectChatbotState)
+    const { isOpen, messages, isLoading, error, copyCard } = useAppSelector(selectChatbotState)
+    const hasConversation = messages.some((m) => m.role === 'user')
+
+    const finishCopyCard = (result) => {
+        dispatch(closeCopyCard())
+        if (result === 'sent') dispatch(addAssistantNote(t('conversationCopy.sent')))
+    }
     const [input, setInput] = useState('')
     const messagesEndRef = useRef(null)
 
@@ -25,7 +38,17 @@ const Chatbot = () => {
 
     useEffect(() => {
         messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
-    }, [messages])
+    }, [messages, copyCard])
+
+    // Quick replies under the greeting: who is the visitor? (sent as a normal message)
+    const quickReplies = ['chatbot.quick_recruiter', 'chatbot.quick_hiring_manager', 'chatbot.quick_exploring']
+    const showQuickReplies = messages.length === 1 && !isLoading
+
+    const sendText = (text) => {
+        trackEvent('chat_message_sent', { message_number: messages.filter((m) => m.role === 'user').length + 1 })
+        dispatch(addUserMessage(text))
+        dispatch(sendMessage(text))
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -33,14 +56,15 @@ const Chatbot = () => {
 
         const userMessage = input.trim()
         setInput('')
-        dispatch(addUserMessage(userMessage))
-        dispatch(sendMessage(userMessage))
+        sendText(userMessage)
     }
 
     return (
         <>
             <motion.button
-                onClick={() => dispatch(openChatbot())}
+                aria-label={t('chatbot.open')}
+                title={t('chatbot.open')}
+                onClick={() => { dispatch(openChatbot()); trackEvent('chatbot_opened') }}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
                 className={`fixed bottom-6 right-6 z-50 p-4 bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-full shadow-lg shadow-purple-500/30 ${isOpen ? 'hidden' : ''}`}
@@ -63,7 +87,7 @@ const Chatbot = () => {
                                     <p className="text-xs text-white/80">{t('chatbot.subtitle')}</p>
                                 </div>
                             </div>
-                            <button onClick={() => dispatch(closeChatbot())} className="p-2 hover:bg-white/20 rounded-full transition-colors">
+                            <button aria-label={t('chatbot.close')} title={t('chatbot.close')} onClick={() => { dispatch(closeChatbot()); endConversation() }} className="p-2 hover:bg-white/20 rounded-full transition-colors">
                                 <FaTimes size={16} />
                             </button>
                         </div>
@@ -73,11 +97,38 @@ const Chatbot = () => {
                                     <div className={`p-2 rounded-full h-8 w-8 flex items-center justify-center ${msg.role === 'user' ? 'bg-purple-500 text-white' : 'bg-gray-200 dark:bg-neutral-700 text-gray-600 dark:text-gray-300'}`}>
                                         {msg.role === 'user' ? <FaUser size={12} /> : <FaRobot size={12} />}
                                     </div>
-                                    <div className={`max-w-[75%] p-3 rounded-2xl text-sm whitespace-pre-line ${msg.role === 'user' ? 'bg-purple-500 text-white rounded-br-md' : 'bg-gray-100 dark:bg-neutral-800 text-gray-800 dark:text-gray-200 rounded-bl-md'}`}>
-                                        {msg.content}
+                                    <div className={`max-w-[75%] p-3 rounded-2xl text-sm ${msg.role === 'user' ? 'whitespace-pre-line bg-purple-500 text-white rounded-br-md' : 'bg-gray-100 dark:bg-neutral-800 text-gray-800 dark:text-gray-200 rounded-bl-md'}`}>
+                                        {msg.role === 'user' ? msg.content : (
+                                            // Assistant replies may use light Markdown (bold, lists, links)
+                                            <div className="space-y-2 [&_ul]:list-disc [&_ol]:list-decimal [&_ul]:pl-4 [&_ol]:pl-4 [&_li]:mt-1 [&_a]:text-purple-600 dark:[&_a]:text-purple-400 [&_a]:underline [&_strong]:font-semibold">
+                                                <ReactMarkdown
+                                                    components={{ a: (props) => <a {...props} target="_blank" rel="noopener noreferrer" /> }}
+                                                >
+                                                    {msg.content}
+                                                </ReactMarkdown>
+                                            </div>
+                                        )}
                                     </div>
                                 </motion.div>
                             ))}
+                            {showQuickReplies && (
+                                <div className="flex flex-wrap gap-2 pl-11">
+                                    {quickReplies.map((key) => (
+                                        <button
+                                            key={key}
+                                            type="button"
+                                            onClick={() => {
+                                                // e.g. visitor_type: "recruiter" (no personal data)
+                                                trackEvent('visitor_type_selected', { visitor_type: key.replace('chatbot.quick_', '') })
+                                                sendText(t(key))
+                                            }}
+                                            className="px-3 py-1.5 text-xs rounded-full border border-purple-300 dark:border-purple-700 text-purple-700 dark:text-purple-300 hover:bg-purple-50 dark:hover:bg-purple-900/30 transition-colors"
+                                        >
+                                            {t(key)}
+                                        </button>
+                                    ))}
+                                </div>
+                            )}
                             {isLoading && (
                                 <div className="flex gap-3">
                                     <div className="p-2 rounded-full h-8 w-8 flex items-center justify-center bg-gray-200 dark:bg-neutral-700">
@@ -92,8 +143,27 @@ const Chatbot = () => {
                                     </div>
                                 </div>
                             )}
+                            {copyCard && !isLoading && (
+                                <ConversationCopyCard initialEmail={copyCard.email} onDone={finishCopyCard} />
+                            )}
                             <div ref={messagesEndRef} />
                         </div>
+                        {error && <p className="px-4 pt-3 text-xs text-red-600 dark:text-red-400">{error}</p>}
+                        <p className="px-4 pt-2 text-[11px] leading-snug text-gray-500 dark:text-gray-400">
+                            {t('chatbot.transcript_notice')}
+                            {hasConversation && !copyCard && (
+                                <>
+                                    {' '}
+                                    <button
+                                        type="button"
+                                        onClick={() => dispatch(openCopyCard())}
+                                        className="underline text-purple-600 dark:text-purple-400 hover:text-purple-700"
+                                    >
+                                        {t('conversationCopy.link')}
+                                    </button>
+                                </>
+                            )}
+                        </p>
                         <form onSubmit={handleSubmit} className="p-4 border-t border-gray-200 dark:border-neutral-700">
                             <div className="flex gap-2">
                                 <input

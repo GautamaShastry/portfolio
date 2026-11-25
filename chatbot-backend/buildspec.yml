@@ -1,19 +1,31 @@
 version: 0.2
 
+# Backend pipeline: tests -> Docker image -> ECR -> Lambda.
+# Tests run inside the same Lambda Python 3.11 image used in production. CodeBuild runs
+# post_build even after a failure, so the push/update is guarded by CODEBUILD_BUILD_SUCCEEDING.
 phases:
   pre_build:
     commands:
+      - cd chatbot-backend
+      - echo Running backend tests...
+      - >
+        docker run --rm -v "$PWD":/app -w /app --entrypoint /bin/sh public.ecr.aws/lambda/python:3.11
+        -c "pip install -q -r requirements.txt -r requirements-dev.txt && python -m pytest"
       - echo Logging in to Amazon ECR...
       - aws ecr get-login-password --region ${AWS_DEFAULT_REGION} | docker login --username AWS --password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com
   build:
     commands:
       - echo Building the Docker image...
-      - cd chatbot-backend
       - export DOCKER_BUILDKIT=0
       - docker build -t ${IMAGE_REPO_NAME}:${IMAGE_TAG} .
       - docker tag ${IMAGE_REPO_NAME}:${IMAGE_TAG} ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}:${IMAGE_TAG}
   post_build:
     commands:
+      - |
+        if [ "$CODEBUILD_BUILD_SUCCEEDING" != "1" ]; then
+          echo "Tests or build failed - NOT updating the Lambda."
+          exit 1
+        fi
       - echo Pushing the Docker image...
       - docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}:${IMAGE_TAG}
       - echo Updating Lambda function...

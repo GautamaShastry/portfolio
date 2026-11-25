@@ -4,6 +4,9 @@ import chatbotReducer from './slices/chatbotSlice'
 import contactReducer from './slices/contactSlice'
 import uiReducer from './slices/uiSlice'
 import gameReducer from './slices/gameSlice'
+import postsReducer from './slices/postsSlice'
+import adminAuthReducer from './slices/adminAuthSlice'
+import voiceAgentReducer from './slices/voiceAgentSlice'
 
 export const store = configureStore({
     reducer: {
@@ -11,7 +14,10 @@ export const store = configureStore({
         chatbot: chatbotReducer,
         contact: contactReducer,
         ui: uiReducer,
-        game: gameReducer
+        game: gameReducer,
+        posts: postsReducer,
+        adminAuth: adminAuthReducer,
+        voiceAgent: voiceAgentReducer
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({

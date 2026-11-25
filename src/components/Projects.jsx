@@ -1,4 +1,4 @@
-import { useState, useRef, memo, useMemo, useCallback } from 'react'
+import { useState, useRef, memo, useMemo, useCallback, forwardRef } from 'react'
 import { PROJECTS } from '../constants'
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from 'framer-motion'
 import { FaGithub, FaExternalLinkAlt, FaExpand } from 'react-icons/fa'
@@ -26,7 +26,8 @@ const taggedProjects = PROJECTS.map(project => {
 })
 
 // 3D Card component with tilt effect - memoized
-const ProjectCard = memo(({ project, index }) => {
+// forwardRef: AnimatePresence mode="popLayout" attaches a ref to measure each card as it leaves
+const ProjectCard = memo(forwardRef(({ project, index }, ref) => {
     const cardRef = useRef(null)
     const [isHovered, setIsHovered] = useState(false)
     
@@ -53,7 +54,11 @@ const ProjectCard = memo(({ project, index }) => {
 
     return (
         <motion.div
-            ref={cardRef}
+            ref={(node) => {
+                cardRef.current = node
+                if (typeof ref === 'function') ref(node)
+                else if (ref) ref.current = node
+            }}
             layout
             initial={{ opacity: 0, y: 50, rotateX: -15 }}
             animate={{ opacity: 1, y: 0, rotateX: 0 }}
@@ -213,7 +218,7 @@ const ProjectCard = memo(({ project, index }) => {
             </div>
         </motion.div>
     )
-})
+}))
 
 ProjectCard.displayName = 'ProjectCard'
 

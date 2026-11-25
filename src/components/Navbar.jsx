@@ -14,6 +14,8 @@ const navItems = [
     { path: '/', labelKey: 'nav.home' },
     { path: '/projects', labelKey: 'nav.projects' },
     { path: '/experience', labelKey: 'nav.experience' },
+    { path: '/blog', labelKey: 'nav.blog' },
+    { path: '/voice-agent', labelKey: 'nav.voiceAgent' },
     { path: '/contact', labelKey: 'nav.contact' },
 ]
 

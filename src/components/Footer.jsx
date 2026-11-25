@@ -57,7 +57,7 @@ const Footer = () => {
                         ))}
                     </div>
                     <div className='text-center md:text-right'>
-                        <p className='text-sm text-gray-500 dark:text-gray-400'>© {currentYear} Satya Subrahmanya Gautama Shastry Bulusu Venkata. {t('footer.rights')}</p>
+                        <p className='text-sm text-gray-500 dark:text-gray-400'>© {currentYear} Satya Bulusu. {t('footer.rights')}</p>
                         <p className='mt-1 text-xs text-gray-400 dark:text-gray-500 flex items-center justify-center md:justify-end gap-1'>
                             {t('footer.built_with')} <FaHeart className='text-red-500' /> React & Tailwind
                         </p>

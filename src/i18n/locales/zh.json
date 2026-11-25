@@ -76,7 +76,9 @@
         "schedule": "预约会议",
         "find_me": "在这里找到我",
         "location": "位置",
-        "phone": "电话"
+        "phone": "电话",
+        "sent_success": "消息已发送！确认邮件正在发往您的收件箱。",
+        "sent_error": "消息发送失败。请重试，或直接给 Satya 发邮件。"
     },
     "footer": {
         "rights": "版权所有",
@@ -85,8 +87,46 @@
     "chatbot": {
         "title": "Satya的AI助手",
         "subtitle": "随便问！",
-        "greeting": "你好！我是Satya的AI助手。随时询问他的技能、项目或经验！",
+        "greeting": "你好！我是 Satya 的 AI 助手。请问您是招聘人员、招聘经理，还是随便看看？无论如何，欢迎问我关于他的技能、项目或经验的任何问题。",
         "placeholder": "询问技能、项目...",
-        "error": "我现在连接有问题。请直接给Satya发邮件或在GitHub上查看他的项目！"
+        "error": "我现在连接有问题。请直接给Satya发邮件或在GitHub上查看他的项目！",
+        "open": "打开 AI 助手",
+        "close": "关闭 AI 助手",
+        "transcript_notice": "请注意：本次对话将通过电子邮件发送给 Satya，以便他跟进。",
+        "quick_recruiter": "我是招聘人员",
+        "quick_hiring_manager": "我是招聘经理",
+        "quick_exploring": "随便看看"
+    },
+    "command": {
+        "title": "导航",
+        "open": "打开命令面板",
+        "shortcut": "搜索网站（⌘K）",
+        "search": "搜索",
+        "placeholder": "你想去哪里？",
+        "empty": "没有找到匹配的页面。",
+        "home": "前往首页",
+        "projects": "浏览项目",
+        "experience": "查看经历",
+        "blog": "阅读博客",
+        "voice": "打开语音助手",
+        "contact": "联系我"
+    },
+    "notFound": {
+        "title": "页面未找到",
+        "description": "此页面不存在，或者已经被移动。",
+        "home": "返回首页"
+    },
+    "conversationCopy": {
+        "link": "把这段对话发到我的邮箱",
+        "title": "通过邮件获取这段对话的副本",
+        "placeholder": "you@example.com",
+        "confirm": "发送副本",
+        "sending": "发送中...",
+        "cancel": "取消",
+        "sent": "完成！这段对话的副本正在发往您的收件箱。",
+        "failed": "副本发送失败，请重试。"
+    },
+    "voiceAgent": {
+        "english_only": "语音助手仅支持英语。其他语言请使用聊天助手。"
     }
 }

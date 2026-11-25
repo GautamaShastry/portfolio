@@ -1,16 +1,22 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import emailjs from '@emailjs/browser'
 
+const API_URL = (import.meta.env.VITE_CHATBOT_API_URL || (import.meta.env.DEV ? 'http://localhost:8000' : '')).replace(/\/$/, '')
+
+// Posts the contact form to the backend (/api/contact), which emails Satya and sends the
+// sender a confirmation. Takes the <form> element.
 export const sendContactForm = createAsyncThunk(
     'contact/sendForm',
     async (formRef, { rejectWithValue }) => {
         try {
-            await emailjs.sendForm(
-                import.meta.env.VITE_EMAILJS_SERVICE_ID,
-                import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
-                formRef,
-                import.meta.env.VITE_EMAILJS_PUBLIC_KEY
-            )
+            const response = await fetch(`${API_URL}/api/contact`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(Object.fromEntries(new FormData(formRef)))
+            })
+            if (!response.ok) {
+                const data = await response.json().catch(() => ({}))
+                throw new Error(typeof data.detail === 'string' ? data.detail : 'Failed to send message')
+            }
             return true
         } catch (error) {
             return rejectWithValue(error.message || 'Failed to send message')

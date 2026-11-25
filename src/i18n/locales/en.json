@@ -6,6 +6,8 @@
         "education": "Education",
         "projects": "Projects",
         "experience": "Experience",
+        "blog": "Blog",
+        "voiceAgent": "Voice Agent",
         "contact": "Contact"
     },
     "hero": {
@@ -21,11 +23,20 @@
         "title": "About Me",
         "subtitle": "The Developer Behind the Code",
         "passionate": "Building Systems That Scale, Solutions That Matter",
-        "description": "I'm Satya, a Software Engineer who genuinely loves turning complex problems into elegant, working solutions. Fresh out of my Master's at George Mason University, I bring a unique blend of full-stack development and AI engineering that lets me build end-to-end products from scratch. What sets me apart? I don't just write code that works—I build systems designed for real-world chaos: fault-tolerant microservices, cloud-native architectures, and AI agents that actually deliver business value. From optimizing API latency at Backflipt to architecting multi-agent LangGraph pipelines, I've consistently shipped production-ready code that teams can rely on. I thrive in collaborative environments where I can own problems end-to-end, debug the tricky stuff others avoid, and mentor teammates along the way. If you're looking for someone who combines strong CS fundamentals with hands-on experience in React, Spring Boot, AWS, and cutting-edge AI—let's talk.",
+        "description": "I'm Gautam — a software engineer who'd rather ship something reliable than something flashy. I've cut API latency, automated away manual QA, and built AI agents that actually answer real questions. Right now I'm building learning-platform features at KeelWorks and just wrapped up an MS in Computer Science at George Mason University.",
+        "closing": "Always up for a conversation about distributed systems, AI agents, or your gnarliest production bug.",
         "download_cv": "Download Resume",
         "stat_frontend": "Frontend",
         "stat_backend": "Backend",
         "stat_ai": "AI/ML",
+        "highlight1_stat": "35ms",
+        "highlight1_label": "cut from p95 API latency at Backflipt",
+        "highlight2_stat": "40%",
+        "highlight2_label": "faster environment setup at KeelWorks",
+        "highlight3_stat": "Multi-agent",
+        "highlight3_label": "AI pipelines shipped with LangGraph & LangChain",
+        "highlight4_stat": "3.87 GPA",
+        "highlight4_label": "MS in Computer Science, George Mason University",
         "skill_problem": "Problem Solver",
         "skill_team": "Team Player",
         "skill_agile": "Agile Mindset",
@@ -76,7 +87,9 @@
         "schedule": "Schedule a Meeting",
         "find_me": "Find me on",
         "location": "Location",
-        "phone": "Phone"
+        "phone": "Phone",
+        "sent_success": "Message sent! A confirmation is on its way to your inbox.",
+        "sent_error": "Couldn't send your message. Please try again or email Satya directly."
     },
     "footer": {
         "rights": "All rights reserved",
@@ -85,8 +98,69 @@
     "chatbot": {
         "title": "Satya's AI Assistant",
         "subtitle": "Ask me anything!",
-        "greeting": "Hi! I'm Satya's AI assistant. Ask me anything about his skills, projects, or experience!",
+        "greeting": "Hi! I'm Satya's AI assistant. Are you a recruiter, a hiring manager, or just exploring? Either way, ask me anything about his skills, projects, or experience.",
         "placeholder": "Ask about skills, projects...",
-        "error": "I'm having trouble connecting right now. Please email Satya directly or check out his projects on GitHub!"
+        "error": "I'm having trouble connecting right now. Please email Satya directly or check out his projects on GitHub!",
+        "open": "Open AI assistant",
+        "close": "Close AI assistant",
+        "transcript_notice": "Heads up: this conversation is shared with Satya by email so he can follow up.",
+        "quick_recruiter": "I'm a recruiter",
+        "quick_hiring_manager": "I'm a hiring manager",
+        "quick_exploring": "Just exploring"
+    },
+    "blog": {
+        "title": "Blog",
+        "subtitle": "Notes & Writing",
+        "description": "Thoughts on software engineering, AI agents, and what I'm building.",
+        "empty": "No posts yet - check back soon.",
+        "read_more": "Read more",
+        "back": "Back to all posts",
+        "not_found": "Couldn't find that post."
+    },
+    "command": {
+        "title": "Navigate",
+        "open": "Open command palette",
+        "shortcut": "Search the site (⌘K)",
+        "search": "Search",
+        "placeholder": "Where would you like to go?",
+        "empty": "No matching pages found.",
+        "home": "Go to home",
+        "projects": "Browse projects",
+        "experience": "View experience",
+        "blog": "Read the blog",
+        "voice": "Open voice agent",
+        "contact": "Get in touch"
+    },
+    "notFound": {
+        "title": "Page not found",
+        "description": "This page does not exist or may have moved. Let’s get you back on track.",
+        "home": "Return home"
+    },
+    "voiceAgent": {
+        "title": "Voice Agent",
+        "subtitle": "Ask Me Out Loud",
+        "description": "Tap the mic and just talk. My AI assistant listens, answers out loud from my real portfolio and writing, and keeps the conversation going until you tap again.",
+        "tap_to_ask": "Tap the mic to ask a question",
+        "listening": "Listening...",
+        "processing": "Thinking...",
+        "mic_denied": "Microphone access is needed to use the voice agent.",
+        "unsupported": "Your browser doesn't support speech recognition. Try the latest Chrome, Edge, or Safari.",
+        "transcript_notice": "Heads up: this conversation is shared with Satya by email so he can follow up.",
+        "tap_to_start": "Tap the mic to start a conversation",
+        "speaking": "Speaking...",
+        "paused": "Paused: confirm or cancel the card below",
+        "tap_to_end": "Tap the button to end the conversation",
+        "end": "End the conversation",
+        "english_only": "The voice agent works in English only. For other languages, use the chat assistant."
+    },
+    "conversationCopy": {
+        "link": "Email me this conversation",
+        "title": "Email me a copy of this conversation",
+        "placeholder": "you@example.com",
+        "confirm": "Send copy",
+        "sending": "Sending...",
+        "cancel": "Cancel",
+        "sent": "Done! A copy of this conversation is on its way to your inbox.",
+        "failed": "Couldn't send the copy. Please try again."
     }
 }
