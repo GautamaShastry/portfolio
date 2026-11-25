@@ -78,21 +78,21 @@
         "location": "Standort",
         "phone": "Telefon",
         "sent_success": "Nachricht gesendet! Eine Bestätigung ist unterwegs in Ihr Postfach.",
-        "sent_error": "Ihre Nachricht konnte nicht gesendet werden. Bitte versuchen Sie es erneut oder schreiben Sie Satya direkt."
+        "sent_error": "Ihre Nachricht konnte nicht gesendet werden. Bitte versuchen Sie es erneut oder schreiben Sie {{name}} direkt."
     },
     "footer": {
         "rights": "Alle Rechte vorbehalten",
         "built_with": "Erstellt mit"
     },
     "chatbot": {
-        "title": "Satyas KI-Assistent",
+        "title": "{{name}}s KI-Assistent",
         "subtitle": "Fragen Sie mich alles!",
-        "greeting": "Hallo! Ich bin Satyas KI-Assistent. Sind Sie Recruiter, Hiring Manager oder schauen Sie sich nur um? So oder so – fragen Sie mich alles über seine Fähigkeiten, Projekte oder Erfahrung.",
+        "greeting": "Hallo! Ich bin {{name}}s KI-Assistent. Sind Sie Recruiter, Hiring Manager oder schauen Sie sich nur um? So oder so – fragen Sie mich alles über seine Fähigkeiten, Projekte oder Erfahrung.",
         "placeholder": "Fragen zu Fähigkeiten, Projekten...",
-        "error": "Ich habe gerade Verbindungsprobleme. Bitte schreiben Sie Satya direkt eine E-Mail oder schauen Sie sich seine Projekte auf GitHub an!",
+        "error": "Ich habe gerade Verbindungsprobleme. Bitte schreiben Sie {{name}} direkt eine E-Mail oder schauen Sie sich seine Projekte auf GitHub an!",
         "open": "KI-Assistent öffnen",
         "close": "KI-Assistent schließen",
-        "transcript_notice": "Hinweis: Dieses Gespräch wird per E-Mail an Satya gesendet, damit er sich bei Ihnen melden kann.",
+        "transcript_notice": "Hinweis: Dieses Gespräch wird per E-Mail an {{name}} gesendet, damit er sich bei Ihnen melden kann.",
         "quick_recruiter": "Ich bin Recruiter",
         "quick_hiring_manager": "Ich bin Hiring Manager",
         "quick_exploring": "Ich schaue mich nur um"

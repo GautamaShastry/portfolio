@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react'
-import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { TECH_LINKS } from '../constants'
 import { useTranslation } from 'react-i18next'
 import SkillsChart from './SkillsChart'
@@ -9,15 +9,10 @@ const Technologies = () => {
     const containerRef = useRef(null)
     const [hoveredIndex, setHoveredIndex] = useState(null)
     
-    const { scrollYProgress } = useScroll({
-        target: containerRef,
-        offset: ["start end", "end start"]
-    })
     
-    const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "100%"])
 
     // Wave animation for grid items
-    const getWaveDelay = (index, total) => {
+    const getWaveDelay = (index) => {
         const cols = 6
         const row = Math.floor(index / cols)
         const col = index % cols

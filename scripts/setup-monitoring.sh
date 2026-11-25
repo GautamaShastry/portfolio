@@ -2,7 +2,8 @@
 # Sets up monitoring for the portfolio backend in CloudWatch. Safe to re-run (every step
 # creates or updates in place).
 #
-#   ALERT_EMAIL=you@example.com bash scripts/setup-monitoring.sh
+#   ALERT_EMAIL=you@example.com DISTRIBUTION_ID=E123EXAMPLE bash scripts/setup-monitoring.sh
+#   (optional: REGION, FUNCTION, CHAT_MODEL, EMBED_MODEL to override the defaults below)
 #
 # What it creates (region us-east-1):
 #   - SNS topic "portfolio-alerts" with an email subscription (AWS emails a confirmation link
@@ -19,7 +20,7 @@ export MSYS_NO_PATHCONV=1   # Git Bash on Windows: don't rewrite "/aws/lambda/..
 
 REGION="${REGION:-us-east-1}"
 FUNCTION="${FUNCTION:-portfolio-chatbot}"
-DISTRIBUTION_ID="${DISTRIBUTION_ID:-EGHHFDVCQ4X1Q}"
+DISTRIBUTION_ID="${DISTRIBUTION_ID:?Set DISTRIBUTION_ID to your CloudFront distribution ID}"
 CHAT_MODEL="${CHAT_MODEL:-us.anthropic.claude-sonnet-4-5-20250929-v1:0}"
 EMBED_MODEL="${EMBED_MODEL:-cohere.embed-multilingual-v3}"
 LOG_GROUP="/aws/lambda/${FUNCTION}"
@@ -70,7 +71,7 @@ alarm portfolio-chatbot-slow "Chatbot p95 response time above 20s for 10 minutes
 alarm portfolio-ses-bounce-rate "SES bounce rate above 5% (AWS may pause sending above 10%)" \
   --namespace AWS/SES --metric-name Reputation.BounceRate --statistic Average --period 3600 \
   --evaluation-periods 1 --threshold 0.05 --comparison-operator GreaterThanThreshold
-alarm portfolio-website-5xx "gautamportfolio.com: more than 5% of requests failing with 5xx for 15 minutes" \
+alarm portfolio-website-5xx "Website (CloudFront): more than 5% of requests failing with 5xx for 15 minutes" \
   --namespace AWS/CloudFront --metric-name 5xxErrorRate \
   --dimensions Name=DistributionId,Value="$DISTRIBUTION_ID" Name=Region,Value=Global \
   --statistic Average --period 300 --evaluation-periods 3 --threshold 5 --comparison-operator GreaterThanThreshold

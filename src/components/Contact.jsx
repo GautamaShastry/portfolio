@@ -6,6 +6,7 @@ import { MdEmail } from 'react-icons/md'
 import { toast } from 'react-toastify'
 import { useTranslation } from 'react-i18next'
 import { trackEvent } from '../lib/analytics'
+import site from '../../site.config.js'
 
 const socialLinks = [
     { icon: FaLinkedin, href: NAV_LINK.linkedin, label: "LinkedIn", color: "#0077b5" },
@@ -13,7 +14,7 @@ const socialLinks = [
     { icon: FaInstagram, href: NAV_LINK.instagram, label: "Instagram", color: "#e4405f" },
 ]
 
-const CALENDLY_URL = "https://calendly.com/gautamashastry"
+const CALENDLY_URL = site.calendlyUrl
 
 // Memoized floating envelope animation component
 const FloatingEnvelope = memo(({ delay, index }) => (
@@ -125,7 +126,7 @@ const Contact = () => {
         if (isSending) return
         setIsSending(true)
         try {
-            // The backend emails Satya and sends the sender a confirmation from notifications@
+            // The backend emails the site owner and sends the sender a confirmation from notifications@
             const fields = Object.fromEntries(new FormData(formRef.current))
             const response = await fetch(`${CONTACT_API_URL}/api/contact`, {
                 method: 'POST',

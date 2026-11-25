@@ -6,6 +6,7 @@ import { NAV_LINK } from '../constants'
 import { useTranslation } from 'react-i18next'
 import { useAppDispatch } from '../store/hooks'
 import { openGame } from '../store/slices/gameSlice'
+import site from '../../site.config.js'
 
 const Footer = () => {
     const currentYear = new Date().getFullYear()
@@ -27,7 +28,7 @@ const Footer = () => {
             <div className="max-w-6xl mx-auto px-4">
                 <div className='flex flex-col md:flex-row items-center justify-between gap-6'>
                     <motion.div whileHover={{ scale: 1.05 }} onClick={scrollToTop} className="cursor-pointer">
-                        <span className="text-2xl font-bold gradient-text">Satya</span>
+                        <span className="text-2xl font-bold gradient-text">{site.firstName}</span>
                     </motion.div>
                     
                     {/* Secret Game Trigger */}
@@ -57,7 +58,7 @@ const Footer = () => {
                         ))}
                     </div>
                     <div className='text-center md:text-right'>
-                        <p className='text-sm text-gray-500 dark:text-gray-400'>© {currentYear} Satya Bulusu. {t('footer.rights')}</p>
+                        <p className='text-sm text-gray-500 dark:text-gray-400'>© {currentYear} {site.name}. {t('footer.rights')}</p>
                         <p className='mt-1 text-xs text-gray-400 dark:text-gray-500 flex items-center justify-center md:justify-end gap-1'>
                             {t('footer.built_with')} <FaHeart className='text-red-500' /> React & Tailwind
                         </p>

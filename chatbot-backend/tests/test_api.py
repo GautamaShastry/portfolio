@@ -14,7 +14,7 @@ from bedrock_client import ModelRefusalError
 from conftest import TEST_ADMIN_PASSWORD
 
 client = TestClient(main.app)
-ORIGIN = {"Origin": "https://gautamportfolio.com"}
+ORIGIN = {"Origin": "https://alex.example.dev"}  # SITE_URL from conftest: allowed by default
 
 
 def admin_headers(expires_in=timedelta(minutes=5)):
@@ -41,7 +41,7 @@ def test_chat_answers_logs_turn_and_passes_history(monkeypatch, logged_turns):
 
     def fake_answer(message, history=None, language="en", for_speech=False):
         seen.update(message=message, history=history, language=language)
-        return "Satya built Sentinel AI.", None
+        return "Alex built Sentinel AI.", None
 
     monkeypatch.setattr(main, "answer_chat", fake_answer)
     sid = str(uuid.uuid4())
@@ -50,8 +50,8 @@ def test_chat_answers_logs_turn_and_passes_history(monkeypatch, logged_turns):
         "history": [{"role": "user", "content": "hi"}, {"role": "assistant", "content": "hello"}],
     })
     assert r.status_code == 200
-    assert r.json() == {"response": "Satya built Sentinel AI.", "action": None}
-    assert r.headers["access-control-allow-origin"] == "https://gautamportfolio.com"
+    assert r.json() == {"response": "Alex built Sentinel AI.", "action": None}
+    assert r.headers["access-control-allow-origin"] == "https://alex.example.dev"
     assert seen["language"] == "fr" and len(seen["history"]) == 2
     assert logged_turns[0][:2] == (sid, "chat")
 
@@ -234,3 +234,30 @@ def test_insights_summarizes_conversations_and_leads(fake_supabase):
     assert len(data["daily"]) == 7 and data["daily"][-1]["conversations"] == 2
     assert data["leads"][0]["company"] == "Stripe"
     assert [c["source"] for c in data["contacts"]] == ["form"]
+
+
+# --- template: everything visitor-facing uses the configured owner ----------------------------
+
+def test_owner_settings_flow_into_prompts_emails_and_voice(monkeypatch):
+    import leads
+    import mailer
+    import rag
+
+    assert rag.SYSTEM_PROMPT.startswith("You are Alex Rivera's AI assistant on her portfolio website")
+    assert "Satya" not in rag.SYSTEM_PROMPT and " his " not in rag.SYSTEM_PROMPT
+    assert "Alex" in leads.EXTRACT_PROMPT and "Satya" not in leads.EXTRACT_PROMPT
+    subject, text, html_body = mailer._build_ack("Sam", "chat")
+    assert subject == "Thanks for reaching out to Alex Rivera" and "alex.example.dev" in text
+    assert "Alex" in main.REFUSAL_MESSAGE
+
+    monkeypatch.setattr(voice, "synthesize_speech", lambda text, lang: b"a")
+    voice._prompt_audio_cache.clear()
+    greeting_en = client.get("/api/voice/prompt", params={"kind": "greeting", "language": "en"}).json()["text"]
+    greeting_hi = client.get("/api/voice/prompt", params={"kind": "greeting", "language": "hi"}).json()["text"]
+    assert greeting_en.startswith("Hi! I'm Alex's AI assistant") and "{name}" not in greeting_en
+    assert "एलेक्स" in greeting_hi   # localized first name
+
+
+def test_default_cors_allows_the_site_and_www(monkeypatch):
+    assert "https://alex.example.dev" in main.ALLOWED_ORIGINS
+    assert "https://www.alex.example.dev" in main.ALLOWED_ORIGINS

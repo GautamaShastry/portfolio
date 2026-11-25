@@ -1,5 +1,5 @@
 """Conversation transcripts: every chatbot / voice-agent turn is saved to Supabase, and
-when a visitor's conversation ends the full transcript is emailed to Satya via Amazon SES.
+when a visitor's conversation ends the full transcript is emailed to the site owner via Amazon SES.
 
 "Ends" means either the browser reports it (chat closed or page left, POST
 /api/conversations/end) or the scheduled sweep finds the session idle (send_pending_transcripts,
@@ -19,6 +19,7 @@ from pydantic import BaseModel
 from starlette.concurrency import run_in_threadpool
 
 from leads import VISITOR_LABELS, extract_lead, lead_headline
+from owner import OWNER_FIRST_NAME, OWNER_NAME
 from mailer import NOTIFY_EMAIL, SITE_URL, is_valid_email, record_contact, send_acknowledgment, send_email
 from rate_limit import rate_limiter
 from supabase_client import get_supabase_client
@@ -234,11 +235,11 @@ class ConversationCopyRequest(BaseModel):
 
 
 def _build_visitor_copy(messages: list[dict]) -> tuple[str, str, str]:
-    subject = "Your conversation with Satya Bulusu's AI assistant"
+    subject = f"Your conversation with {OWNER_NAME}'s AI assistant"
     started = _format_time(messages[0]["created_at"])
     intro = f"Here's a copy of your conversation on {SITE_URL.replace('https://', '')} ({started})."
     footer = (
-        "Want to reach Satya directly? Just reply to this email.\n\n"
+        f"Want to reach {OWNER_FIRST_NAME} directly? Just reply to this email.\n\n"
         f"(You received this because this address was entered on {SITE_URL.replace('https://', '')}.)"
     )
     text_lines = [intro, ""]
@@ -256,7 +257,7 @@ def _build_visitor_copy(messages: list[dict]) -> tuple[str, str, str]:
     html_body = (
         '<div style="font-family:Arial,sans-serif;max-width:640px;color:#222">'
         f"<p>{html.escape(intro)}</p>" + "".join(rows) +
-        '<p>Want to reach Satya directly? Just reply to this email.</p>'
+        f'<p>Want to reach {OWNER_FIRST_NAME} directly? Just reply to this email.</p>'
         f'<p style="font-size:12px;color:#888">You received this because this address was entered on '
         f'{html.escape(SITE_URL.replace("https://", ""))}.</p></div>'
     )

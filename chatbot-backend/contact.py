@@ -1,4 +1,4 @@
-"""Contact form: saves the message, emails it to Satya (Reply-To: the sender, so he can just
+"""Contact form: saves the message, emails it to the owner (Reply-To: the sender, so they can just
 hit reply), and sends the sender a fixed confirmation from notifications@ (see mailer.py)."""
 import html
 
@@ -6,6 +6,7 @@ from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel, Field
 
 from mailer import NOTIFY_EMAIL, is_valid_email, record_contact, send_acknowledgment, send_email
+from owner import OWNER_FIRST_NAME
 from rate_limit import rate_limiter
 
 router = APIRouter()
@@ -19,7 +20,7 @@ class ContactRequest(BaseModel):
     website: str = ""
 
 
-def _notify_satya(req: ContactRequest) -> None:
+def _notify_owner(req: ContactRequest) -> None:
     subject = f"Portfolio contact form: {req.name[:80]}"
     text = f"New message from your portfolio contact form.\n\nName: {req.name}\nEmail: {req.email}\n\n{req.message}\n\n(Reply to this email to answer them directly.)"
     html_body = (
@@ -42,12 +43,12 @@ def submit_contact(req: ContactRequest):
     if not is_valid_email(req.email):
         raise HTTPException(status_code=422, detail="Please enter a valid email address.")
     if not NOTIFY_EMAIL:
-        raise HTTPException(status_code=500, detail="The contact form isn't configured yet. Please email Satya directly.")
+        raise HTTPException(status_code=500, detail=f"The contact form isn't configured yet. Please email {OWNER_FIRST_NAME} directly.")
     try:
         contact_id = record_contact("form", req.email, req.name, req.message)
-        _notify_satya(req)
+        _notify_owner(req)
     except Exception as e:
         print(f"Contact form error: {e!r}")
-        raise HTTPException(status_code=500, detail="Couldn't send your message. Please try again or email Satya directly.")
+        raise HTTPException(status_code=500, detail=f"Couldn't send your message. Please try again or email {OWNER_FIRST_NAME} directly.")
     acknowledged = send_acknowledgment(contact_id, req.email, req.name, "form")
     return {"status": "sent", "acknowledged": acknowledged}

@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 
 const API_URL = (import.meta.env.VITE_CHATBOT_API_URL || (import.meta.env.DEV ? 'http://localhost:8000' : '')).replace(/\/$/, '')
 
-// Posts the contact form to the backend (/api/contact), which emails Satya and sends the
+// Posts the contact form to the backend (/api/contact), which emails the site owner and sends the
 // sender a confirmation. Takes the <form> element.
 export const sendContactForm = createAsyncThunk(
     'contact/sendForm',

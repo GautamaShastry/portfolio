@@ -78,21 +78,21 @@
         "location": "位置",
         "phone": "电话",
         "sent_success": "消息已发送！确认邮件正在发往您的收件箱。",
-        "sent_error": "消息发送失败。请重试，或直接给 Satya 发邮件。"
+        "sent_error": "消息发送失败。请重试，或直接给 {{name}} 发邮件。"
     },
     "footer": {
         "rights": "版权所有",
         "built_with": "使用以下技术构建"
     },
     "chatbot": {
-        "title": "Satya的AI助手",
+        "title": "{{name}}的AI助手",
         "subtitle": "随便问！",
-        "greeting": "你好！我是 Satya 的 AI 助手。请问您是招聘人员、招聘经理，还是随便看看？无论如何，欢迎问我关于他的技能、项目或经验的任何问题。",
+        "greeting": "你好！我是 {{name}} 的 AI 助手。请问您是招聘人员、招聘经理，还是随便看看？无论如何，欢迎问我关于他的技能、项目或经验的任何问题。",
         "placeholder": "询问技能、项目...",
-        "error": "我现在连接有问题。请直接给Satya发邮件或在GitHub上查看他的项目！",
+        "error": "我现在连接有问题。请直接给{{name}}发邮件或在GitHub上查看他的项目！",
         "open": "打开 AI 助手",
         "close": "关闭 AI 助手",
-        "transcript_notice": "请注意：本次对话将通过电子邮件发送给 Satya，以便他跟进。",
+        "transcript_notice": "请注意：本次对话将通过电子邮件发送给 {{name}}，以便他跟进。",
         "quick_recruiter": "我是招聘人员",
         "quick_hiring_manager": "我是招聘经理",
         "quick_exploring": "随便看看"

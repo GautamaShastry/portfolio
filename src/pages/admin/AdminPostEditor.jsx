@@ -6,6 +6,7 @@ import { toast } from 'react-toastify'
 import { useAppDispatch, useAppSelector } from '../../store/hooks'
 import { fetchAllPostsAdmin, createPost, updatePost, selectPostsState } from '../../store/slices/postsSlice'
 import SEO from '../../components/SEO'
+import site from '../../../site.config.js'
 
 const slugify = (title) =>
     title.toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '')
@@ -79,7 +80,7 @@ const AdminPostEditor = () => {
 
     return (
         <div className="pt-8 max-w-3xl mx-auto pb-20">
-            <SEO title="Admin | Satya Bulusu" description="Blog post editor" path="/admin/posts" />
+            <SEO title={`Admin | ${site.name}`} description="Blog post editor" path="/admin/posts" />
             <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
                 {isEditing ? 'Edit post' : 'New post'}
             </h1>

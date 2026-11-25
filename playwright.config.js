@@ -41,7 +41,7 @@ export default defineConfig({
             VITE_SUPABASE_URL: '',
             VITE_SUPABASE_ANON_KEY: '',
             // Separate cache, so tests don't clash with a dev server you have running
-            VITE_CACHE_DIR: path.join(os.tmpdir(), 'vite-cache-gautam-portfolio-e2e'),
+            VITE_CACHE_DIR: path.join(os.tmpdir(), 'vite-cache-portfolio-e2e'),
         },
     },
 })

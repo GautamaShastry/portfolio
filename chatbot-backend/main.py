@@ -15,6 +15,7 @@ from bedrock_client import ModelRefusalError
 from rag import answer_chat
 from rate_limit import rate_limiter
 from metrics import request_timer
+from owner import OWNER_FIRST_NAME, SITE_URL
 import voice
 import admin
 import transcripts
@@ -23,12 +24,12 @@ import insights
 
 app = FastAPI(title="Portfolio Chatbot API")
 
-# Comma-separated list, e.g. "https://gautamportfolio.com,http://localhost:3001"
+# Comma-separated list, e.g. "https://example.com,http://localhost:3001". Default: SITE_URL + www + local dev
 ALLOWED_ORIGINS = [
     origin.strip()
-    for origin in os.getenv(
-        "ALLOWED_ORIGINS",
-        "https://gautamportfolio.com,https://www.gautamportfolio.com,http://localhost:3001,http://localhost:5173",
+    for origin in (
+        os.getenv("ALLOWED_ORIGINS")  # unset or empty -> default
+        or f"{SITE_URL},{SITE_URL.replace('://', '://www.', 1)},http://localhost:3001,http://localhost:5173"
     ).split(",")
     if origin.strip()
 ]
@@ -41,7 +42,7 @@ app.add_middleware(
     allow_headers=["Content-Type", "Authorization"],
 )
 
-REFUSAL_MESSAGE = "Sorry, I can't help with that. Ask me about Satya's background, skills, or projects."
+REFUSAL_MESSAGE = f"Sorry, I can't help with that. Ask me about {OWNER_FIRST_NAME}'s background, skills, or projects."
 
 
 class HistoryMessage(BaseModel):

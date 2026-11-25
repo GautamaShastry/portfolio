@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { useAppDispatch } from '../store/hooks'
 import { openGame } from '../store/slices/gameSlice'
+import site from '../../site.config.js'
 
 const roles = ['Full Stack Developer', 'AI Engineer', 'Cloud Architect', 'Problem Solver']
 
@@ -110,7 +111,7 @@ const Hero = () => {
                             className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-4"
                         >
                             {t('hero.greeting')}{' '}
-                            <span className="gradient-text">Satya Bulusu</span>
+                            <span className="gradient-text">{site.name}</span>
                         </motion.h1>
 
                         {/* Typewriter role */}
@@ -180,7 +181,7 @@ const Hero = () => {
                             <div className="w-64 h-64 md:w-72 md:h-72 rounded-full overflow-hidden ring-4 ring-purple-500/50 shadow-2xl shadow-purple-500/20 hover:scale-105 transition-transform">
                                 <img 
                                     src={profilePic} 
-                                    alt="Satya Bulusu" 
+                                    alt={site.name} 
                                     className="w-full h-full object-cover" 
                                     width="288" 
                                     height="288" 

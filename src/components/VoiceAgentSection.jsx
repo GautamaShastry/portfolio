@@ -215,7 +215,7 @@ const VoiceAgentSection = () => {
         }
     }, [error, stopConversation])
 
-    // Leaving the page: stop everything and send the conversation transcript to Satya
+    // Leaving the page: stop everything and send the conversation transcript to the site owner
     useEffect(() => () => {
         activeRef.current = false
         clearTimeout(timersRef.current.silence)

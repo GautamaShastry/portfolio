@@ -1,7 +1,7 @@
 import { useState, useRef, memo, useMemo, useCallback, forwardRef } from 'react'
 import { PROJECTS } from '../constants'
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from 'framer-motion'
-import { FaGithub, FaExternalLinkAlt, FaExpand } from 'react-icons/fa'
+import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa'
 import { useTranslation } from 'react-i18next'
 
 const categories = [

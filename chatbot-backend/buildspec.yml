@@ -1,24 +1,32 @@
 version: 0.2
 
 # Backend pipeline: tests -> Docker image -> ECR -> Lambda.
-# Tests run inside the same Lambda Python 3.11 image used in production. CodeBuild runs
-# post_build even after a failure, so the push/update is guarded by CODEBUILD_BUILD_SUCCEEDING.
+# - Tests run inside the same Lambda Python 3.11 image used in production.
+# - Each image is tagged with its commit (git-<sha>) as well as ${IMAGE_TAG} (e.g. latest), and the
+#   Lambda is deployed from the commit tag, so rolling back is one command (see README).
+# - CodeBuild runs post_build even after a failure, so the push/update is guarded by
+#   CODEBUILD_BUILD_SUCCEEDING.
+env:
+  shell: bash
+
 phases:
   pre_build:
     commands:
       - cd chatbot-backend
-      - echo Running backend tests...
+      - echo "Running backend tests..."
       - >
         docker run --rm -v "$PWD":/app -w /app --entrypoint /bin/sh public.ecr.aws/lambda/python:3.11
         -c "pip install -q -r requirements.txt -r requirements-dev.txt && python -m pytest"
-      - echo Logging in to Amazon ECR...
+      - echo "Logging in to Amazon ECR..."
+      - REPO_URI=${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}
+      - COMMIT_TAG=git-$(echo "${CODEBUILD_RESOLVED_SOURCE_VERSION:-build-$CODEBUILD_BUILD_NUMBER}" | cut -c1-12)
+      - echo "Image tags - ${IMAGE_TAG} and ${COMMIT_TAG}"
       - aws ecr get-login-password --region ${AWS_DEFAULT_REGION} | docker login --username AWS --password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com
   build:
     commands:
-      - echo Building the Docker image...
+      - echo "Building the Docker image..."
       - export DOCKER_BUILDKIT=0
-      - docker build -t ${IMAGE_REPO_NAME}:${IMAGE_TAG} .
-      - docker tag ${IMAGE_REPO_NAME}:${IMAGE_TAG} ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}:${IMAGE_TAG}
+      - docker build -t ${REPO_URI}:${COMMIT_TAG} -t ${REPO_URI}:${IMAGE_TAG} .
   post_build:
     commands:
       - |
@@ -26,8 +34,9 @@ phases:
           echo "Tests or build failed - NOT updating the Lambda."
           exit 1
         fi
-      - echo Pushing the Docker image...
-      - docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}:${IMAGE_TAG}
-      - echo Updating Lambda function...
-      - aws lambda update-function-code --function-name ${LAMBDA_FUNCTION_NAME} --image-uri ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}:${IMAGE_TAG}
-      - echo Build completed!
+      - echo "Pushing the Docker image..."
+      - docker push ${REPO_URI}:${COMMIT_TAG}
+      - docker push ${REPO_URI}:${IMAGE_TAG}
+      - echo "Updating Lambda function to ${COMMIT_TAG}..."
+      - aws lambda update-function-code --function-name ${LAMBDA_FUNCTION_NAME} --image-uri ${REPO_URI}:${COMMIT_TAG}
+      - echo "Build completed - deployed ${REPO_URI}:${COMMIT_TAG}"

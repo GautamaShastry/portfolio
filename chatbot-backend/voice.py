@@ -7,13 +7,14 @@ from pydantic import BaseModel, Field
 
 from bedrock_client import ModelRefusalError, synthesize_speech
 from rag import answer_chat
+from owner import OWNER_FIRST_NAME, first_name
 from rate_limit import rate_limiter
 from metrics import request_timer, stage
 import transcripts
 
 router = APIRouter()
 
-REFUSAL_MESSAGE = "Sorry, I can't help with that. Ask me about Satya's background, skills, or projects."
+REFUSAL_MESSAGE = f"Sorry, I can't help with that. Ask me about {OWNER_FIRST_NAME}'s background, skills, or projects."
 
 
 class HistoryMessage(BaseModel):
@@ -23,7 +24,7 @@ class HistoryMessage(BaseModel):
 
 class VoiceAskRequest(BaseModel):
     transcript: str = Field(min_length=1, max_length=2000)
-    # Earlier turns of this voice conversation, so follow-ups ("and his company?") work
+    # Earlier turns of this voice conversation, so follow-ups ("and which company was that?") work
     history: list[HistoryMessage] = Field(default_factory=list, max_length=20)
     language: str = "en"
     session_id: str | None = None
@@ -79,13 +80,14 @@ def _voice_ask(request: VoiceAskRequest):
 # Fixed texts only (never caller-supplied), synthesized once per language and cached, so this
 # can't be used as a free text-to-speech service. Telugu has no Polly voice, so it uses English.
 VOICE_PROMPTS = {
+    # {name} = the owner's first name (per language, see owner.py); pronoun-free on purpose
     "greeting": {
-        "en": "Hi! I'm Satya's AI assistant. Are you a recruiter, a hiring manager, or just exploring? Ask me anything about his experience.",
-        "de": "Hallo! Ich bin Satyas KI-Assistent. Sind Sie Recruiter, Hiring Manager oder schauen Sie sich nur um? Fragen Sie mich alles über seine Erfahrung.",
-        "fr": "Bonjour ! Je suis l'assistant IA de Satya. Êtes-vous recruteur, responsable du recrutement, ou simplement curieux ? Posez-moi vos questions sur son expérience.",
-        "hi": "नमस्ते! मैं सत्या का AI सहायक हूँ। क्या आप रिक्रूटर हैं, हायरिंग मैनेजर हैं, या बस देख रहे हैं? उनके अनुभव के बारे में कुछ भी पूछिए।",
-        "ja": "こんにちは！Satya の AI アシスタントです。採用担当者の方ですか？採用マネージャーの方ですか？それとも見学中ですか？彼の経験について何でも聞いてください。",
-        "zh": "你好！我是 Satya 的 AI 助手。请问您是招聘人员、招聘经理，还是随便看看？欢迎问我关于他经历的任何问题。",
+        "en": "Hi! I'm {name}'s AI assistant. Are you a recruiter, a hiring manager, or just exploring? Ask me anything about {name}'s experience.",
+        "de": "Hallo! Ich bin {name}s KI-Assistent. Sind Sie Recruiter, Hiring Manager oder schauen Sie sich nur um? Fragen Sie mich alles über {name}s Erfahrung.",
+        "fr": "Bonjour ! Je suis l'assistant IA de {name}. Êtes-vous recruteur, responsable du recrutement, ou simplement curieux ? Posez-moi vos questions sur l'expérience de {name}.",
+        "hi": "नमस्ते! मैं {name} का AI सहायक हूँ। क्या आप रिक्रूटर हैं, हायरिंग मैनेजर हैं, या बस देख रहे हैं? {name} के अनुभव के बारे में कुछ भी पूछिए।",
+        "ja": "こんにちは！{name} の AI アシスタントです。採用担当者の方ですか？採用マネージャーの方ですか？それとも見学中ですか？{name} の経験について何でも聞いてください。",
+        "zh": "你好！我是 {name} 的 AI 助手。请问您是招聘人员、招聘经理，还是随便看看？欢迎问我关于 {name} 经历的任何问题。",
     },
     "checkin": {
         "en": "Are there any other questions? I'm still listening.",
@@ -117,7 +119,7 @@ def voice_prompt(kind: str, language: str = "en"):
     lang = language if language in VOICE_PROMPTS[kind] else "en"
     key = (kind, lang)
     if key not in _prompt_audio_cache:
-        text = VOICE_PROMPTS[kind][lang]
+        text = VOICE_PROMPTS[kind][lang].replace("{name}", first_name(lang))
         try:
             audio = synthesize_speech(text, lang)
         except Exception as e:

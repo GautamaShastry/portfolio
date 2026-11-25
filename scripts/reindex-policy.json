@@ -11,7 +11,7 @@
       "Sid": "ReadBuildSecrets",
       "Effect": "Allow",
       "Action": ["ssm:GetParameters"],
-      "Resource": "arn:aws:ssm:us-east-1:717279721246:parameter/CodeBuild/portfolio/*"
+      "Resource": "arn:aws:ssm:*:*:parameter/CodeBuild/portfolio/*"
     },
     {
       "Sid": "DecryptBuildSecrets",

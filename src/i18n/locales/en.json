@@ -89,21 +89,21 @@
         "location": "Location",
         "phone": "Phone",
         "sent_success": "Message sent! A confirmation is on its way to your inbox.",
-        "sent_error": "Couldn't send your message. Please try again or email Satya directly."
+        "sent_error": "Couldn't send your message. Please try again or email {{name}} directly."
     },
     "footer": {
         "rights": "All rights reserved",
         "built_with": "Built with"
     },
     "chatbot": {
-        "title": "Satya's AI Assistant",
+        "title": "{{name}}'s AI Assistant",
         "subtitle": "Ask me anything!",
-        "greeting": "Hi! I'm Satya's AI assistant. Are you a recruiter, a hiring manager, or just exploring? Either way, ask me anything about his skills, projects, or experience.",
+        "greeting": "Hi! I'm {{name}}'s AI assistant. Are you a recruiter, a hiring manager, or just exploring? Either way, ask me anything about his skills, projects, or experience.",
         "placeholder": "Ask about skills, projects...",
-        "error": "I'm having trouble connecting right now. Please email Satya directly or check out his projects on GitHub!",
+        "error": "I'm having trouble connecting right now. Please email {{name}} directly or check out {{possessive}} projects on GitHub!",
         "open": "Open AI assistant",
         "close": "Close AI assistant",
-        "transcript_notice": "Heads up: this conversation is shared with Satya by email so he can follow up.",
+        "transcript_notice": "Heads up: this conversation is shared with {{name}} by email so {{subject}} can follow up.",
         "quick_recruiter": "I'm a recruiter",
         "quick_hiring_manager": "I'm a hiring manager",
         "quick_exploring": "Just exploring"
@@ -145,7 +145,7 @@
         "processing": "Thinking...",
         "mic_denied": "Microphone access is needed to use the voice agent.",
         "unsupported": "Your browser doesn't support speech recognition. Try the latest Chrome, Edge, or Safari.",
-        "transcript_notice": "Heads up: this conversation is shared with Satya by email so he can follow up.",
+        "transcript_notice": "Heads up: this conversation is shared with {{name}} by email so {{subject}} can follow up.",
         "tap_to_start": "Tap the mic to start a conversation",
         "speaking": "Speaking...",
         "paused": "Paused: confirm or cancel the card below",

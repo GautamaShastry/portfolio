@@ -1,5 +1,5 @@
-"""Outbound email via Amazon SES: notifications to Satya, and acknowledgments to people who
-contact him (contact form, or an email address left with the chat assistant).
+"""Outbound email via Amazon SES: notifications to the site owner, and acknowledgments to people
+who get in touch (contact form, or an email address left with the chat assistant).
 
 Acknowledgments go to addresses typed by strangers, so they're built to be useless for abuse:
 a fixed message that never echoes what the sender wrote, a sanitized first name only, and at
@@ -15,12 +15,12 @@ from functools import lru_cache
 import boto3
 
 from bedrock_client import AWS_REGION
+from owner import OWNER_FIRST_NAME, OWNER_NAME, SITE_HOST, SITE_URL
 from supabase_client import get_supabase_client
 
-NOTIFY_EMAIL = os.getenv("TRANSCRIPT_NOTIFY_EMAIL")                  # Satya's inbox
+NOTIFY_EMAIL = os.getenv("TRANSCRIPT_NOTIFY_EMAIL")                  # the owner's inbox
 SENDER_EMAIL = os.getenv("TRANSCRIPT_SENDER_EMAIL") or NOTIFY_EMAIL   # SES-verified sender
 SES_REGION = os.getenv("SES_REGION") or AWS_REGION
-SITE_URL = os.getenv("SITE_URL", "https://gautamportfolio.com")
 ACK_COOLDOWN = timedelta(hours=24)
 
 EMAIL_RE = re.compile(r"^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$")
@@ -37,7 +37,7 @@ def is_valid_email(value: str | None) -> bool:
 
 def send_email(to: str, subject: str, text_body: str, html_body: str, reply_to: str | None = None) -> None:
     request = {
-        "FromEmailAddress": f"Satya Bulusu <{SENDER_EMAIL}>",
+        "FromEmailAddress": f"{OWNER_NAME} <{SENDER_EMAIL}>",
         "Destination": {"ToAddresses": [to]},
         "Content": {"Simple": {
             "Subject": {"Data": subject, "Charset": "UTF-8"},
@@ -60,8 +60,8 @@ def _first_name(name: str | None) -> str:
 
 
 ACK_BODIES = {
-    "form": "thanks for getting in touch. Satya has received your message and will get back to you soon.",
-    "chat": "thanks for chatting with Satya's AI assistant. Satya has received your conversation and will follow up with you soon.",
+    "form": f"thanks for getting in touch. {OWNER_FIRST_NAME} has received your message and will get back to you soon.",
+    "chat": f"thanks for chatting with {OWNER_FIRST_NAME}'s AI assistant. {OWNER_FIRST_NAME} has received your conversation and will follow up with you soon.",
 }
 
 
@@ -69,22 +69,22 @@ def _build_ack(name: str | None, source: str) -> tuple[str, str, str]:
     first = _first_name(name)
     greeting = f"Hi {first}," if first else "Hi,"
     body = ACK_BODIES.get(source, ACK_BODIES["form"])
-    subject = "Thanks for reaching out to Satya Bulusu"
+    subject = f"Thanks for reaching out to {OWNER_NAME}"
     text = (
         f"{greeting}\n\n{body[0].upper() + body[1:]}\n\n"
         "If you need to add anything, just reply to this email.\n\n"
-        f"Satya Bulusu\n{SITE_URL}\n\n"
+        f"{OWNER_NAME}\n{SITE_URL}\n\n"
         "(This is an automatic confirmation. You received it because this address was "
-        f"entered on {SITE_URL}.)"
+        f"entered on {SITE_HOST}.)"
     )
     html_body = (
         '<div style="font-family:Arial,sans-serif;max-width:560px;color:#222;line-height:1.5">'
         f"<p>{html.escape(greeting)}</p>"
         f"<p>{html.escape(body[0].upper() + body[1:])}</p>"
         "<p>If you need to add anything, just reply to this email.</p>"
-        f'<p>Satya Bulusu<br><a href="{SITE_URL}">{html.escape(SITE_URL.replace("https://", ""))}</a></p>'
+        f'<p>{html.escape(OWNER_NAME)}<br><a href="{SITE_URL}">{html.escape(SITE_HOST)}</a></p>'
         '<p style="font-size:12px;color:#888">This is an automatic confirmation. You received it because '
-        f"this address was entered on {html.escape(SITE_URL.replace('https://', ''))}.</p>"
+        f"this address was entered on {html.escape(SITE_HOST)}.</p>"
         "</div>"
     )
     return subject, text, html_body

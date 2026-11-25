@@ -5,10 +5,11 @@ import re
 
 from bedrock_client import chat
 from mailer import is_valid_email
+from owner import OWNER_FIRST_NAME, OWNER_NAME
 
 VISITOR_TYPES = {"recruiter", "hiring_manager", "exploring", "unknown"}
 
-EXTRACT_PROMPT = """You read a conversation between a visitor and the AI assistant on Satya Bulusu's portfolio site, and summarize it for Satya.
+EXTRACT_PROMPT = f"""You read a conversation between a visitor and the AI assistant on {OWNER_NAME}'s portfolio site, and summarize it for {OWNER_FIRST_NAME}.
 
 Return only a JSON object with these keys:
 - "visitor_type": "recruiter", "hiring_manager", "exploring", or "unknown"
@@ -17,9 +18,9 @@ Return only a JSON object with these keys:
 - "role": the job or role they're hiring for, or null
 - "email": the visitor's own email address, exactly as they wrote it, or null
 - "summary": one or two sentences on what the visitor wanted
-- "next_step": one short suggestion for how Satya should follow up, or null
+- "next_step": one short suggestion for how {OWNER_FIRST_NAME} should follow up, or null
 
-Use only what the visitor themselves said; don't guess. The assistant's own messages may mention Satya's email: that is never the visitor's email."""
+Use only what the visitor themselves said; don't guess. The assistant's own messages may mention {OWNER_FIRST_NAME}'s email: that is never the visitor's email."""
 
 
 def _visitor_text(messages: list[dict]) -> str:

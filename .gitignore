@@ -33,3 +33,8 @@ chatbot-backend/__pycache__/
 /playwright-report/
 /playwright/.cache/
 /dist-e2e/
+
+# Local tool data and crash dumps
+.freebuff/
+*.stackdump
+*.bak

@@ -1,19 +1,21 @@
 version: 0.2
 
-# Frontend pipeline: install -> build -> browser tests -> deploy to S3/CloudFront -> reindex.
+# Frontend pipeline: install -> lint -> browser tests -> build -> deploy to S3/CloudFront -> reindex.
 # CodeBuild runs post_build even when the build phase fails, so the deploy is guarded by
 # CODEBUILD_BUILD_SUCCEEDING: failing tests never reach the live site.
 phases:
   install:
     runtime-versions:
-      nodejs: 20
+      nodejs: 22
     commands:
       - echo Installing dependencies...
       - npm ci
       - npx playwright install --with-deps chromium
   build:
     commands:
-      - echo Running browser tests against a production build...
+      - echo "Checking code (ESLint)..."
+      - npm run lint
+      - echo "Running browser tests against a production build..."
       - CI=1 npm run test:e2e
       - echo Building frontend...
       - npm run build

@@ -5,6 +5,7 @@ import { FaLock } from 'react-icons/fa6'
 import { useAppDispatch, useAppSelector } from '../../store/hooks'
 import { login, selectAdminAuthState, selectIsAdminAuthenticated } from '../../store/slices/adminAuthSlice'
 import SEO from '../../components/SEO'
+import site from '../../../site.config.js'
 
 const AdminLogin = () => {
     const [password, setPassword] = useState('')
@@ -25,7 +26,7 @@ const AdminLogin = () => {
 
     return (
         <div className="pt-8 min-h-[60vh] flex items-center justify-center">
-            <SEO title="Admin | Satya Bulusu" description="Admin login" path="/admin/login" />
+            <SEO title={`Admin | ${site.name}`} description="Admin login" path="/admin/login" />
             <motion.form
                 onSubmit={handleSubmit}
                 initial={{ opacity: 0, y: 20 }}

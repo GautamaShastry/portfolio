@@ -1,13 +1,15 @@
 import { Helmet } from 'react-helmet-async'
+import site from '../../site.config.js'
 
-const SITE_URL = 'https://gautamportfolio.com'
+const SITE_URL = site.siteUrl
 
 const SEO = ({ title, description, path = '/' }) => {
     const url = `${SITE_URL}${path}`
 
     return (
         <Helmet>
-            <title>Satya</title>
+            {/* site.config.js: one tab title for every page, or each page's own title */}
+            <title>{site.pageTitles ? title : site.title}</title>
             <meta name="description" content={description} />
             <link rel="canonical" href={url} />
             <meta property="og:title" content={title} />

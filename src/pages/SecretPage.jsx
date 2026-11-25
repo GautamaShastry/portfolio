@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { Helmet } from 'react-helmet-async'
 import { FaTrophy, FaRocket, FaHeart, FaCode, FaCoffee, FaGamepad, FaMusic, FaBook, FaGlobe } from 'react-icons/fa'
+import site from '../../site.config.js'
 
 const SecretPage = () => {
 
@@ -97,7 +98,7 @@ const SecretPage = () => {
                         </p>
                         
                         <p>
-                            I'm <strong>Satya Bulusu</strong>, and I don't just write code—I build systems that scale, ship features that matter, and solve problems that keep teams up at night.
+                            I'm <strong>{site.name}</strong>, and I don't just write code—I build systems that scale, ship features that matter, and solve problems that keep teams up at night.
                         </p>
 
                         <div className="my-6 p-4 bg-white dark:bg-neutral-800/50 rounded-xl border-l-4 border-purple-500">
@@ -168,13 +169,13 @@ const SecretPage = () => {
 
                         <div className="flex gap-4 pt-6">
                             <a
-                                href="mailto:gautamashastry@gmail.com"
+                                href={`mailto:${site.email}`}
                                 className="px-6 py-3 bg-purple-600 text-white rounded-xl font-medium hover:bg-purple-700 transition-colors shadow-lg"
                             >
                                 📧 Email Me
                             </a>
                             <a
-                                href="https://calendly.com/gautamashastry"
+                                href={site.calendlyUrl}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="px-6 py-3 border-2 border-purple-600 text-purple-600 dark:text-purple-400 rounded-xl font-medium hover:bg-purple-50 dark:hover:bg-purple-900/20 transition-colors"
@@ -182,7 +183,7 @@ const SecretPage = () => {
                                 📅 Schedule a Call
                             </a>
                             <a
-                                href="https://www.linkedin.com/in/satya2603/"
+                                href={site.socials.linkedin}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="px-6 py-3 bg-blue-600 text-white rounded-xl font-medium hover:bg-blue-700 transition-colors"

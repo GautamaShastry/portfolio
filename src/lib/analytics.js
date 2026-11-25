@@ -19,7 +19,6 @@ let initialized = false
 
 function gtag() {
     // gtag.js expects the arguments object itself, not an array
-    // eslint-disable-next-line prefer-rest-params
     window.dataLayer.push(arguments)
 }
 

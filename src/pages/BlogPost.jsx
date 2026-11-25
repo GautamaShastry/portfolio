@@ -8,6 +8,7 @@ import { useTranslation } from 'react-i18next'
 import { useAppDispatch, useAppSelector } from '../store/hooks'
 import { fetchPostBySlug, clearCurrentPost, selectPostsState } from '../store/slices/postsSlice'
 import SEO from '../components/SEO'
+import site from '../../site.config.js'
 
 const formatDate = (iso) => {
     if (!iso) return ''
@@ -28,8 +29,8 @@ const BlogPost = () => {
     return (
         <div className="pt-8 max-w-3xl mx-auto pb-20">
             <SEO
-                title={post ? `${post.title} | Satya Bulusu` : 'Blog | Satya Bulusu'}
-                description={post?.excerpt || 'A post from Satya Bulusu\'s blog.'}
+                title={post ? `${post.title} | ${site.name}` : `Blog | ${site.name}`}
+                description={post?.excerpt || `A post from ${site.name}'s blog.`}
                 path={`/blog/${slug}`}
             />
 

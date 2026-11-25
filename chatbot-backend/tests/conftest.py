@@ -11,14 +11,20 @@ import pytest
 # Test configuration, set before the app modules are imported (load_dotenv never overrides
 # variables that are already set, so a developer's real .env can't leak in).
 TEST_ADMIN_PASSWORD = "correct-horse-battery-staple"
+# The tests run as a different owner than the defaults in owner.py, so any place that still
+# hard-codes the real owner's name, pronouns or site shows up as a failure (template check).
 os.environ.update({
+    "OWNER_NAME": "Alex Rivera",
+    "OWNER_PRONOUNS": "she/her/her",
+    "OWNER_LOCALIZED_NAMES": '{"hi": "एलेक्स"}',
+    "SITE_URL": "https://alex.example.dev",
+    "ALLOWED_ORIGINS": "",          # empty = use the default (SITE_URL + www + local dev)
     "ADMIN_JWT_SECRET": "test-secret-" + "x" * 32,
     "ADMIN_PASSWORD_HASH": bcrypt.hashpw(TEST_ADMIN_PASSWORD.encode(), bcrypt.gensalt(4)).decode(),
     "SUPABASE_URL": "https://example.supabase.co",
     "SUPABASE_SERVICE_ROLE_KEY": "test-service-role-key",
     "TRANSCRIPT_NOTIFY_EMAIL": "owner@example.com",
     "TRANSCRIPT_SENDER_EMAIL": "notifications@example.com",
-    "ALLOWED_ORIGINS": "https://gautamportfolio.com,http://localhost:3001",
     "BEDROCK_REGION": "us-east-1",
 })
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))

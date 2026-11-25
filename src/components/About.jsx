@@ -1,15 +1,14 @@
-import { useRef, useMemo, useCallback } from 'react'
+import { useRef, useMemo } from 'react'
 import aboutPic from "../assets/projects/image_1.webp"
-import resume from "../assets/projects/Satya_Bulusu-Walmart.pdf"
 import { trackEvent } from "../lib/analytics"
-import { motion, useScroll, useTransform, useInView } from 'framer-motion'
+import { motion, useScroll, useTransform } from 'framer-motion'
 import { FaDownload, FaCode, FaServer, FaBrain, FaStar, FaBolt, FaRobot, FaGraduationCap } from 'react-icons/fa6'
 import { useTranslation } from 'react-i18next'
+import site from '../../site.config.js'
 
 const About = () => {
     const { t } = useTranslation()
     const containerRef = useRef(null)
-    const isInView = useInView(containerRef, { once: true, margin: "-100px" })
     
     const { scrollYProgress } = useScroll({
         target: containerRef,
@@ -18,7 +17,6 @@ const About = () => {
     
     const y = useTransform(scrollYProgress, [0, 1], [100, -100])
     const rotate = useTransform(scrollYProgress, [0, 1], [0, 10])
-    const scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.8, 1, 0.8])
     
     const stats = useMemo(() => [
         { icon: FaCode, labelKey: "about.stat_frontend", value: "React, JS", color: "from-blue-500 to-cyan-500" },
@@ -294,8 +292,8 @@ const About = () => {
 
                     {/* Animated download button with particles */}
                     <motion.a
-                        href={resume}
-                        download="satya.pdf"
+                        href={`/${site.resume.file}`}
+                        download={site.resume.downloadName}
                         onClick={() => trackEvent("resume_downloaded")}
                         className='relative inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-xl font-medium shadow-lg shadow-purple-500/25 overflow-hidden group'
                         whileHover={{ scale: 1.05 }}

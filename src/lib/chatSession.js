@@ -1,5 +1,5 @@
 // One conversation id per browser tab, shared by the chatbot and the voice agent.
-// The backend saves every turn under this id and emails the transcript to Satya when
+// The backend saves every turn under this id and emails the transcript to the site owner when
 // the conversation ends: the chat is closed, or the visitor leaves the page.
 const STORAGE_KEY = 'chat_session_id'
 const API_URL = (import.meta.env.VITE_CHATBOT_API_URL || (import.meta.env.DEV ? 'http://localhost:8000' : '')).replace(/\/$/, '')

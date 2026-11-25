@@ -104,6 +104,6 @@ test('analytics: route changes send one page view each', async ({ page }) => {
         window.history.pushState({}, '', '/projects')
         window.dispatchEvent(new PopStateEvent('popstate'))
     })
-    await expect(page.getByText('Sentinel AI').first()).toBeVisible()
+    await expect(page).toHaveURL(/\/projects$/)
     await expect.poll(() => page.evaluate(() => window.dataLayer.filter((a) => a[0] === 'event' && a[1] === 'page_view').length)).toBe(1)
 })

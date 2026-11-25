@@ -6,6 +6,7 @@ import { useAppDispatch, useAppSelector } from '../../store/hooks'
 import { fetchAllPostsAdmin, deletePost, selectPostsState } from '../../store/slices/postsSlice'
 import { logout } from '../../store/slices/adminAuthSlice'
 import SEO from '../../components/SEO'
+import site from '../../../site.config.js'
 
 const AdminDashboard = () => {
     const dispatch = useAppDispatch()
@@ -23,7 +24,7 @@ const AdminDashboard = () => {
 
     return (
         <div className="pt-8 max-w-4xl mx-auto pb-20">
-            <SEO title="Admin | Satya Bulusu" description="Blog admin dashboard" path="/admin" />
+            <SEO title={`Admin | ${site.name}`} description="Blog admin dashboard" path="/admin" />
 
             <div className="flex items-center justify-between mb-8">
                 <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Posts</h1>

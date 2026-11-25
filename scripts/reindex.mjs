@@ -32,8 +32,9 @@ loadDotEnv(path.join(rootDir, '.env'))
 const BEDROCK_REGION = process.env.BEDROCK_REGION || process.env.AWS_REGION || 'us-east-1'
 // Must produce 1024-dim vectors: vector(1024) in supabase/schema.sql, same model as bedrock_client.py
 const EMBED_MODEL = process.env.BEDROCK_EMBED_MODEL || 'cohere.embed-multilingual-v3'
-// The resume the chatbot answers from (keep in sync with the download link in src/components/About.jsx)
-const RESUME_PDF = path.join(rootDir, 'src/assets/projects/Satya_Bulusu-Walmart.pdf')
+// The resume the chatbot answers from: the same file the site offers for download (site.config.js)
+const { default: site } = await import(pathToFileURL(path.join(rootDir, 'site.config.js')).href)
+const RESUME_PDF = path.join(rootDir, 'public', site.resume.file)
 const SUPABASE_URL = process.env.SUPABASE_URL
 const SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY
 

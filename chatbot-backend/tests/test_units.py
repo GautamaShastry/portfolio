@@ -77,7 +77,7 @@ def test_retrieve_chunks_skips_profile_rows(fake_supabase, monkeypatch):
 @pytest.fixture
 def stub_pipeline(monkeypatch):
     monkeypatch.setattr(rag, "retrieve_chunks", lambda q: [])
-    monkeypatch.setattr(rag, "load_profile", lambda: "## About\nSatya is an engineer.")
+    monkeypatch.setattr(rag, "load_profile", lambda: "## About\nAlex is an engineer.")
 
 
 def test_answer_chat_returns_copy_action_when_tool_called(stub_pipeline, monkeypatch):
@@ -144,7 +144,7 @@ def test_acknowledgment_never_echoes_visitor_text():
     subject, text, html_body = mailer._build_ack("Priya Visit http://evil.example now", "form")
     assert "evil" not in text and "evil" not in html_body
     assert text.startswith("Hi Priya,")
-    assert "Satya" in subject
+    assert "Alex Rivera" in subject
 
 
 def test_acknowledgment_skips_owner_and_invalid_addresses(monkeypatch):
